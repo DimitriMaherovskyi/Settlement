@@ -1,6 +1,6 @@
 ﻿(function (angular) {
     angular
-        .module('equizModule', ['ngRoute'])
+        .module('settlementModule', ['ngRoute'])
         .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {

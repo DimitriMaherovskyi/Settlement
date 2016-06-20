@@ -1,5 +1,5 @@
 ﻿(function (angular) {
-    angular.module('equizModule').directive('autoHeight', function () {
+    angular.module('settlementModule').directive('autoHeight', function () {
         return {
             restrict: 'A',
             link: function (scope, elem, attrs) {

@@ -1,5 +1,5 @@
 ﻿(function (angular) {
-    angular.module('equizModule').controller('ReviewController', ReviewController);
+    angular.module('settlementModule').controller('ReviewController', ReviewController);
 
     ReviewController.$inject = ['$scope', '$filter', 'reviewDataService', 'studentsList'];
 

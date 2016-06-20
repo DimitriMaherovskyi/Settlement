@@ -1,6 +1,6 @@
 ﻿(function (angular) {
     angular
-        .module('equizModule')
+        .module('settlementModule')
         .filter('questionStatusFilter', QuestionStatusFilter);
 
     function QuestionStatusFilter() {

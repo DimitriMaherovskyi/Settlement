@@ -1,5 +1,5 @@
 ﻿(function (angular) {
-    angular.module('equizModule').controller('QuizzesController', QuizzesController);
+    angular.module('settlementModule').controller('QuizzesController', QuizzesController);
 
     QuizzesController.$inject = ['$scope', 'quizzesDataService', '$filter', 'quizzesList'];
 

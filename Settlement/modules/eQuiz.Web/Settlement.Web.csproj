@@ -133,7 +133,7 @@
     <Content Include="Areas\Admin\Scripts\student\student.controller.js" />
     <Content Include="Areas\Admin\Scripts\student\student-data.service.js" />
     <Content Include="Areas\Admin\Scripts\student.html" />
-    <Content Include="Areas\Admin\Styles\equiz-temp.css" />
+    <Content Include="Areas\Admin\Styles\settlement-temp.css" />
     <Content Include="Areas\Admin\Scripts\review.html" />
     <Content Include="Areas\Moderator\Scripts\app\pages\quiz-schedule\quiz.controller.js" />
     <Content Include="Areas\Moderator\Scripts\app\pages\quizzes-list\quizzes.controller.js" />
@@ -176,7 +176,7 @@
     <Content Include="Areas\Student\Scripts\app\pages\quizInRun\quizInRun.html" />
     <Content Include="Areas\Student\Styles\equiz-temp.css" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\shared\equiz.module.js" />
+    <Content Include="Scripts\app\shared\settlement.module.js" />
     <Content Include="Scripts\libs\angularjs\angular-messages.js" />
     <Content Include="Scripts\libs\angularjs\angular-route.js" />
     <Content Include="Scripts\libs\angularjs\angular.js" />
