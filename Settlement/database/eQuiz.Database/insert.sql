@@ -2,10 +2,10 @@
 GO
 
 SET IDENTITY_INSERT [tblHostel] ON;
-INSERT INTO [tblHostel]([Id], [Number])
-VALUES (1, 1),
-		(2, 2),
-		(3, 3);
+INSERT INTO [tblHostel]([Id], [Number], [MonthPaymentSum])
+VALUES (1, 1, 100),
+		(2, 2, 100),
+		(3, 3, 150);
 SET IDENTITY_INSERT [tblHostel] OFF;
 
 SET IDENTITY_INSERT [tblRoomType] ON;
@@ -46,26 +46,48 @@ VALUES (1, 'Alex', 'Alexeyevich', 'Flesh', 1, 'IKNI', 'KN-17', 1),
 		(12, 'Vanko', 'Georgeivich', 'Pirelli', 1, 'IPPT', 'KT-42', 1);
 SET IDENTITY_INSERT [tblStudent] OFF;
 
+SET IDENTITY_INSERT [tblResidence] ON;
 INSERT INTO [tblResidence] ([Id], [Name], [Distance])
 VALUES (1, 'Rudno', 25),
 		(2, 'Rivne', 200),
 		(3, 'Frankove', 140),
-		(4, 'Rudno', 25),
-		(5, 'Ostrig', 250),
-		(6, 'Rivne', 200),
-		(7, 'Vynnyky', 15),
-		(8, 'Slavske', 160),
-		(9, 'Slavske', 160),
-		(10, 'Truskavets', 100),
-		(11, 'Lutzk', 150),
-		(12, 'Odessa', 700)
+		(4, 'Ostrig', 250),
+		(5, 'Vynnyky', 15),
+		(6, 'Slavske', 160),
+		(7, 'Truskavets', 100),
+		(8, 'Lutzk', 150),
+		(9, 'Odessa', 700)
+SET IDENTITY_INSERT [tblResidence] OFF;
+
+SET IDENTITY_INSERT [tblStudentResidence] ON;
+INSERT INTO [tblStudentResidence] ([Id], [StudentId], [ResidenceId])
+VALUES (1, 1, 1),
+		(2, 2, 2),
+		(3, 3, 3),
+		(4, 4, 1),
+		(5, 5, 4),
+		(6, 6, 2),
+		(7, 7, 5),
+		(8, 8, 6),
+		(9, 9, 6),
+		(10, 10, 7),
+		(11, 11, 8),
+		(12, 12, 9)
+SET IDENTITY_INSERT [tblStudentResidence] OFF;
 
 SET IDENTITY_INSERT [tblViolation] ON;
-INSERT INTO [tblViolation] ([Id], [StudentId], [Name], [Penalty])
-VALUES (1, 1, 'Smoking weed', 10),
-		(2, 1, 'Drunk', 5),
-		(3, 7, 'Fight', 5)
+INSERT INTO [tblViolation] ([Id], [Name], [Penalty])
+VALUES (1, 'Smoking weed', 10),
+		(2, 'Drunk', 5),
+		(3, 'Fight', 5)
 SET IDENTITY_INSERT [tblViolation] OFF;
+
+SET IDENTITY_INSERT [tblStudentViolation] ON;
+INSERT INTO [tblStudentViolation] ([Id], [StudentId], [ViolationId], [Time])
+VALUES (1, 1, 1, '2016-06-06'),
+		(2, 1, 2, '2016-07-06'),
+		(3, 7, 3, '2016-08-06')
+SET IDENTITY_INSERT [tblStudentViolation] OFF;
 
 SET IDENTITY_INSERT [tblBenefit] ON;
 INSERT INTO [tblBenefit] ([Id], [Name])
@@ -90,9 +112,5 @@ VALUES (1, 1, 1, '2016-03-03', '2016-04-04'),
 		(5, 5, 5, '2016-03-03', '2016-04-04'),
 		(6, 6, 6, '2016-03-03', '2016-04-04'),
 		(7, 7, 7, '2016-03-03', '2016-04-04'),
-		(8, 8, 7, '2016-03-03', '2016-04-04'),
-		(9, 9, 9, '2016-03-03', '2016-04-04'),
-		(10, 10, 10, '2016-03-03', '2016-04-04'),
-		(11, 11, 11, '2016-03-03', '2016-04-04'),
-		(12, 12, 11, '2016-03-03', '2016-04-04');
+		(8, 8, 7, '2016-03-03', '2016-04-04')
 SET IDENTITY_INSERT [tblStudentRoom] OFF;

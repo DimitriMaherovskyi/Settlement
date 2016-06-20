@@ -32,8 +32,17 @@ namespace eQuiz.Web.Controllers
         public JsonResult GetStudentsList()
         {
             var students = _repository.Get<Student>();
+
             var studentRooms = _repository.Get<StudentRoom>();
             var rooms = _repository.Get<Room>();
+
+            var studentBenefits = _repository.Get<StudentBenefit>();
+            var benefits = _repository.Get<Benefit>();
+
+            var studentViolations = _repository.Get<StudentViolation>();
+
+
+
 
             return Json(null, JsonRequestBehavior.AllowGet);
         }
