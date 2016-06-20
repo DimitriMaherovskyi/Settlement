@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="eQuizModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblBenefit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblHostel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="TillDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblResidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HostelId" Type="int" Nullable="false" />
+          <Property Name="RoomTypeId" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="AmountPlaces" Type="int" Nullable="false" />
+          <Property Name="RoomFloor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRoomType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblStudent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fathername" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GenderType" Type="bit" Nullable="false" />
+          <Property Name="Insitute" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudyGroup" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblStudentBenefit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BenefitId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblStudentRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="RoomId" Type="int" Nullable="false" />
+          <Property Name="DateIn" Type="datetime" Nullable="false" />
+          <Property Name="DateOut" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblViolation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Penalty" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblPayment_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblPayment" Type="Self.tblPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPayment">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblResidence_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblResidence" Type="Self.tblResidence" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblResidence">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRoom_tblHostel">
+          <End Role="tblHostel" Type="Self.tblHostel" Multiplicity="1" />
+          <End Role="tblRoom" Type="Self.tblRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHostel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblRoom">
+              <PropertyRef Name="HostelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRoom_tblRoomType">
+          <End Role="tblRoomType" Type="Self.tblRoomType" Multiplicity="1" />
+          <End Role="tblRoom" Type="Self.tblRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoomType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblRoom">
+              <PropertyRef Name="RoomTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentBenefit_tblBenefit">
+          <End Role="tblBenefit" Type="Self.tblBenefit" Multiplicity="1" />
+          <End Role="tblStudentBenefit" Type="Self.tblStudentBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBenefit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentBenefit">
+              <PropertyRef Name="BenefitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentBenefit_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblStudentBenefit" Type="Self.tblStudentBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentBenefit">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentRoom_tblRoom">
+          <End Role="tblRoom" Type="Self.tblRoom" Multiplicity="1" />
+          <End Role="tblStudentRoom" Type="Self.tblStudentRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentRoom">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentRoom_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblStudentRoom" Type="Self.tblStudentRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentRoom">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblViolation_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblViolation" Type="Self.tblViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblViolation">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="eQuizModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBenefit" EntityType="Self.tblBenefit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHostel" EntityType="Self.tblHostel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPayment" EntityType="Self.tblPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblResidence" EntityType="Self.tblResidence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRoom" EntityType="Self.tblRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRoomType" EntityType="Self.tblRoomType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStudent" EntityType="Self.tblStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStudentBenefit" EntityType="Self.tblStudentBenefit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStudentRoom" EntityType="Self.tblStudentRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblViolation" EntityType="Self.tblViolation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblPayment_tblStudent" Association="Self.FK_tblPayment_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblPayment" EntitySet="tblPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblResidence_tblStudent" Association="Self.FK_tblResidence_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblResidence" EntitySet="tblResidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRoom_tblHostel" Association="Self.FK_tblRoom_tblHostel">
+            <End Role="tblHostel" EntitySet="tblHostel" />
+            <End Role="tblRoom" EntitySet="tblRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRoom_tblRoomType" Association="Self.FK_tblRoom_tblRoomType">
+            <End Role="tblRoomType" EntitySet="tblRoomType" />
+            <End Role="tblRoom" EntitySet="tblRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentBenefit_tblBenefit" Association="Self.FK_tblStudentBenefit_tblBenefit">
+            <End Role="tblBenefit" EntitySet="tblBenefit" />
+            <End Role="tblStudentBenefit" EntitySet="tblStudentBenefit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentBenefit_tblStudent" Association="Self.FK_tblStudentBenefit_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblStudentBenefit" EntitySet="tblStudentBenefit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentRoom_tblRoom" Association="Self.FK_tblStudentRoom_tblRoom">
+            <End Role="tblRoom" EntitySet="tblRoom" />
+            <End Role="tblStudentRoom" EntitySet="tblStudentRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentRoom_tblStudent" Association="Self.FK_tblStudentRoom_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblStudentRoom" EntitySet="tblStudentRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblViolation_tblStudent" Association="Self.FK_tblViolation_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblViolation" EntitySet="tblViolation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eQuizModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="eQuizEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Benefits" EntityType="eQuizModel.Benefit" />
+          <EntitySet Name="tblPayments" EntityType="eQuizModel.tblPayment" />
+          <EntitySet Name="tblResidences" EntityType="eQuizModel.tblResidence" />
+          <EntitySet Name="Rooms" EntityType="eQuizModel.Room" />
+          <EntitySet Name="RoomTypes" EntityType="eQuizModel.RoomType" />
+          <EntitySet Name="Students" EntityType="eQuizModel.Student" />
+          <EntitySet Name="StudentBenefits" EntityType="eQuizModel.StudentBenefit" />
+          <EntitySet Name="StudentRooms" EntityType="eQuizModel.StudentRoom" />
+          <EntitySet Name="tblViolations" EntityType="eQuizModel.tblViolation" />
+          <AssociationSet Name="FK_tblStudentBenefit_tblBenefit" Association="eQuizModel.FK_tblStudentBenefit_tblBenefit">
+            <End Role="tblBenefit" EntitySet="Benefits" />
+            <End Role="tblStudentBenefit" EntitySet="StudentBenefits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPayment_tblStudent" Association="eQuizModel.FK_tblPayment_tblStudent">
+            <End Role="tblStudent" EntitySet="Students" />
+            <End Role="tblPayment" EntitySet="tblPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblResidence_tblStudent" Association="eQuizModel.FK_tblResidence_tblStudent">
+            <End Role="tblStudent" EntitySet="Students" />
+            <End Role="tblResidence" EntitySet="tblResidences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblRoom_tblRoomType" Association="eQuizModel.FK_tblRoom_tblRoomType">
+            <End Role="tblRoomType" EntitySet="RoomTypes" />
+            <End Role="tblRoom" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentRoom_tblRoom" Association="eQuizModel.FK_tblStudentRoom_tblRoom">
+            <End Role="tblRoom" EntitySet="Rooms" />
+            <End Role="tblStudentRoom" EntitySet="StudentRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentBenefit_tblStudent" Association="eQuizModel.FK_tblStudentBenefit_tblStudent">
+            <End Role="tblStudent" EntitySet="Students" />
+            <End Role="tblStudentBenefit" EntitySet="StudentBenefits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentRoom_tblStudent" Association="eQuizModel.FK_tblStudentRoom_tblStudent">
+            <End Role="tblStudent" EntitySet="Students" />
+            <End Role="tblStudentRoom" EntitySet="StudentRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblViolation_tblStudent" Association="eQuizModel.FK_tblViolation_tblStudent">
+            <End Role="tblStudent" EntitySet="Students" />
+            <End Role="tblViolation" EntitySet="tblViolations" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="eQuizModel.sysdiagram" />
+          <EntitySet Name="Hostels" EntityType="eQuizModel.Hostel" />
+          <AssociationSet Name="FK_tblRoom_tblHostel" Association="eQuizModel.FK_tblRoom_tblHostel">
+            <End Role="tblHostel" EntitySet="Hostels" />
+            <End Role="tblRoom" EntitySet="Rooms" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Benefit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblStudentBenefits" Relationship="eQuizModel.FK_tblStudentBenefit_tblBenefit" FromRole="tblBenefit" ToRole="tblStudentBenefit" />
+        </EntityType>
+        <EntityType Name="tblPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="TillDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblPayment_tblStudent" FromRole="tblPayment" ToRole="tblStudent" />
+        </EntityType>
+        <EntityType Name="tblResidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblResidence_tblStudent" FromRole="tblResidence" ToRole="tblStudent" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HostelId" Type="Int32" Nullable="false" />
+          <Property Name="RoomTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="AmountPlaces" Type="Int32" Nullable="false" />
+          <Property Name="RoomFloor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblRoomType" Relationship="eQuizModel.FK_tblRoom_tblRoomType" FromRole="tblRoom" ToRole="tblRoomType" />
+          <NavigationProperty Name="tblStudentRooms" Relationship="eQuizModel.FK_tblStudentRoom_tblRoom" FromRole="tblRoom" ToRole="tblStudentRoom" />
+          <NavigationProperty Name="tblHostel" Relationship="eQuizModel.FK_tblRoom_tblHostel" FromRole="tblRoom" ToRole="tblHostel" />
+        </EntityType>
+        <EntityType Name="RoomType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblRooms" Relationship="eQuizModel.FK_tblRoom_tblRoomType" FromRole="tblRoomType" ToRole="tblRoom" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fathername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenderType" Type="Boolean" Nullable="false" />
+          <Property Name="Insitute" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudyGroup" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblPayments" Relationship="eQuizModel.FK_tblPayment_tblStudent" FromRole="tblStudent" ToRole="tblPayment" />
+          <NavigationProperty Name="tblResidence" Relationship="eQuizModel.FK_tblResidence_tblStudent" FromRole="tblStudent" ToRole="tblResidence" />
+          <NavigationProperty Name="tblStudentBenefits" Relationship="eQuizModel.FK_tblStudentBenefit_tblStudent" FromRole="tblStudent" ToRole="tblStudentBenefit" />
+          <NavigationProperty Name="tblStudentRooms" Relationship="eQuizModel.FK_tblStudentRoom_tblStudent" FromRole="tblStudent" ToRole="tblStudentRoom" />
+          <NavigationProperty Name="tblViolations" Relationship="eQuizModel.FK_tblViolation_tblStudent" FromRole="tblStudent" ToRole="tblViolation" />
+        </EntityType>
+        <EntityType Name="StudentBenefit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BenefitId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblBenefit" Relationship="eQuizModel.FK_tblStudentBenefit_tblBenefit" FromRole="tblStudentBenefit" ToRole="tblBenefit" />
+          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblStudentBenefit_tblStudent" FromRole="tblStudentBenefit" ToRole="tblStudent" />
+        </EntityType>
+        <EntityType Name="StudentRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="RoomId" Type="Int32" Nullable="false" />
+          <Property Name="DateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOut" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblRoom" Relationship="eQuizModel.FK_tblStudentRoom_tblRoom" FromRole="tblStudentRoom" ToRole="tblRoom" />
+          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblStudentRoom_tblStudent" FromRole="tblStudentRoom" ToRole="tblStudent" />
+        </EntityType>
+        <EntityType Name="tblViolation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Penalty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblViolation_tblStudent" FromRole="tblViolation" ToRole="tblStudent" />
+        </EntityType>
+        <Association Name="FK_tblStudentBenefit_tblBenefit">
+          <End Type="eQuizModel.Benefit" Role="tblBenefit" Multiplicity="1" />
+          <End Type="eQuizModel.StudentBenefit" Role="tblStudentBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBenefit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentBenefit">
+              <PropertyRef Name="BenefitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPayment_tblStudent">
+          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
+          <End Type="eQuizModel.tblPayment" Role="tblPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPayment">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblResidence_tblStudent">
+          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
+          <End Type="eQuizModel.tblResidence" Role="tblResidence" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblResidence">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblRoom_tblRoomType">
+          <End Type="eQuizModel.RoomType" Role="tblRoomType" Multiplicity="1" />
+          <End Type="eQuizModel.Room" Role="tblRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoomType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblRoom">
+              <PropertyRef Name="RoomTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentRoom_tblRoom">
+          <End Type="eQuizModel.Room" Role="tblRoom" Multiplicity="1" />
+          <End Type="eQuizModel.StudentRoom" Role="tblStudentRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentRoom">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentBenefit_tblStudent">
+          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
+          <End Type="eQuizModel.StudentBenefit" Role="tblStudentBenefit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentBenefit">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentRoom_tblStudent">
+          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
+          <End Type="eQuizModel.StudentRoom" Role="tblStudentRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentRoom">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblViolation_tblStudent">
+          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
+          <End Type="eQuizModel.tblViolation" Role="tblViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblViolation">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Hostel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblRooms" Relationship="eQuizModel.FK_tblRoom_tblHostel" FromRole="tblHostel" ToRole="tblRoom" />
+        </EntityType>
+        <Association Name="FK_tblRoom_tblHostel">
+          <End Type="eQuizModel.Hostel" Role="tblHostel" Multiplicity="1" />
+          <End Type="eQuizModel.Room" Role="tblRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHostel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblRoom">
+              <PropertyRef Name="HostelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eQuizModelStoreContainer" CdmEntityContainer="eQuizEntities">
+          <EntitySetMapping Name="Benefits">
+            <EntityTypeMapping TypeName="eQuizModel.Benefit">
+              <MappingFragment StoreEntitySet="tblBenefit">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPayments">
+            <EntityTypeMapping TypeName="eQuizModel.tblPayment">
+              <MappingFragment StoreEntitySet="tblPayment">
+                <ScalarProperty Name="TillDate" ColumnName="TillDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblResidences">
+            <EntityTypeMapping TypeName="eQuizModel.tblResidence">
+              <MappingFragment StoreEntitySet="tblResidence">
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="eQuizModel.Room">
+              <MappingFragment StoreEntitySet="tblRoom">
+                <ScalarProperty Name="RoomFloor" ColumnName="RoomFloor" />
+                <ScalarProperty Name="AmountPlaces" ColumnName="AmountPlaces" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="RoomTypeId" ColumnName="RoomTypeId" />
+                <ScalarProperty Name="HostelId" ColumnName="HostelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomTypes">
+            <EntityTypeMapping TypeName="eQuizModel.RoomType">
+              <MappingFragment StoreEntitySet="tblRoomType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="eQuizModel.Student">
+              <MappingFragment StoreEntitySet="tblStudent">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StudyGroup" ColumnName="StudyGroup" />
+                <ScalarProperty Name="Insitute" ColumnName="Insitute" />
+                <ScalarProperty Name="GenderType" ColumnName="GenderType" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Fathername" ColumnName="Fathername" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentBenefits">
+            <EntityTypeMapping TypeName="eQuizModel.StudentBenefit">
+              <MappingFragment StoreEntitySet="tblStudentBenefit">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="BenefitId" ColumnName="BenefitId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentRooms">
+            <EntityTypeMapping TypeName="eQuizModel.StudentRoom">
+              <MappingFragment StoreEntitySet="tblStudentRoom">
+                <ScalarProperty Name="DateOut" ColumnName="DateOut" />
+                <ScalarProperty Name="DateIn" ColumnName="DateIn" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblViolations">
+            <EntityTypeMapping TypeName="eQuizModel.tblViolation">
+              <MappingFragment StoreEntitySet="tblViolation">
+                <ScalarProperty Name="Penalty" ColumnName="Penalty" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="eQuizModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hostels">
+            <EntityTypeMapping TypeName="eQuizModel.Hostel">
+              <MappingFragment StoreEntitySet="tblHostel">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
