@@ -1,6 +1,6 @@
 ﻿(function (angular) {
     angular
-        .module("equizModule")
+        .module("settlementModule")
         .controller('QuizReviewController', quizReviewController);
 
     quizReviewController.$inject = ['$scope', 'quizReviewDataService', '$location', 'student', 'getQuizTests', 'getQuizPassInfo', '$timeout'];

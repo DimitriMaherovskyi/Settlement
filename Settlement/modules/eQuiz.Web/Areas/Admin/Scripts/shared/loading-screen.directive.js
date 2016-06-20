@@ -1,5 +1,5 @@
 ﻿(function(angular) {
-    angular.module('equizModule')
+    angular.module('settlementModule')
     .directive('loading', ['$http', '$timeout', function ($http, $timeout) {
         return {
             restrict: 'A',

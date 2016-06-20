@@ -1,6 +1,6 @@
 ﻿(function (angular) {
     angular
-        .module("equizModule")
+        .module("settlementModule")
         .filter('highlight', HighlightFilter);
 
     HighlightFilter.$inject = ['$sce'];

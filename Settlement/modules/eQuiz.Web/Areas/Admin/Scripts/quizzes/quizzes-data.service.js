@@ -1,7 +1,7 @@
 ﻿(function (angular) {
 
     angular
-        .module("equizModule")
+        .module("settlementModule")
         .factory("quizzesDataService", quizzesDataService);
 
     quizzesDataService.$inject = ["$http"];

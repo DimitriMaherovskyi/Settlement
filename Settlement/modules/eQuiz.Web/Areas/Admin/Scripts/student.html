@@ -3,74 +3,45 @@
     <h2>{{sc.studentInfo.firstName + ' ' + sc.studentInfo.lastName}}</h2>
     <div>
         <ul class="tabLabels">
-            <li><a href="#Profile" ng-class="sc.currentTab=='Profile'&&'selected'" ng-click="sc.currentTab='Profile'">Profile</a></li>
-            <li><a href="#Quizzes" ng-class="sc.currentTab=='Quizzes'&&'selected'" ng-click="sc.currentTab='Quizzes'">Quizzes ({{sc.getPassedQuizzes()}})</a></li>
-            <li><a href="#Comments" ng-class="sc.currentTab=='Comments'&&'selected'"ng-click="sc.currentTab='Comments'">Comments ({{sc.studentComments.length}})</a></li>
+            <li><a href="#Student" ng-class="sc.currentTab=='Student'&&'selected'" ng-click="sc.currentTab='Student'">Student</a></li>
+            <li><a href="#Payment" ng-class="sc.currentTab=='Payment'&&'selected'" ng-click="sc.currentTab='Payment'">Payment</a></li>
+            <li><a href="#Violations" ng-class="sc.currentTab=='Violations'&&'selected'"ng-click="sc.currentTab='Violations'">Violations</a></li>
         </ul>
     </div>
   
     <div id="tabContainer">
-        <div id="profileTab" ng-show="sc.currentTab=='Profile'">
+        <div id="studentTab" ng-show="sc.currentTab=='Student'">
             <form name='profileInfo' style="width:auto; max-width:700px" novalidate>
                 <div style="float:left; position:relative; margin-right:40px">
-                    <label>First Name</label>
+                    <label>Name:</label>
                     <input type="text" name="firstName" ng-model="sc.studentInfo.firstName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-                    <label>Last Name</label>
+                    <label>Surname:</label>
                     <input type="text" name="lastName" ng-model="sc.studentInfo.lastName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-                    <label>Phone</label>
-                    <input type="tel" name="phone" style="width:200px" ng-model="sc.studentInfo.phone" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-                </div>
+                    <label>Institute:</label>
+                    <input type="text" name="institute" style="width:200px" ng-model="sc.studentInfo.institute" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <label>Study Group:</label>
+                    <input type="text" name="studyGroup" style="width:200px" ng-model="sc.studentInfo.studyGroup" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+
+                 </div>
                 <div position:relative">
-                    <label>E-Mail</label>
-                    <input type="text" style="width:{{(sc.studentInfo.email.toString().length) * 7}}px" ng-model="sc.studentInfo.email" readonly /><br /><br />
-                    <label>User group</label>
-                    <input type="text" style="width:{{(sc.studentInfo.userGroup.toString().length) * 7}}px" ng-model="sc.studentInfo.userGroup" readonly /><br /><br />
+                    <label>Payment till:</label>
+                    <input type="date" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
                 </div>
             </form>
         </div>
 
-        <div id="quizzesTab" ng-show="sc.currentTab=='Quizzes'">
-            <div style="height:300px; overflow:auto">
-                <table class="reviewTable">
-                <thead>
-                    <tr>
-                        <th ng-repeat="h in sc.studentQuizzesHeaders">
-                            <a href="#" class="link" ng-click="sc.refreshPredicate(h.predicateIndex); sc.order(sc.myPredicate[h.predicateIndex],null)">
-                                <span class="sortorder" ng-show="sc.direction(h.predicateIndex) !== null" ng-class="{direction:sc.direction(h.predicateIndex)}"></span>
-                                {{h.name}}
-                            </a>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="q in sc.studentQuizzes | startFrom: sc.tablePage*sc.resultsPerPage | limitTo:sc.resultsPerPage" style="height: 50px">
-                        <td><a href="Index/Quiz?Student={{sc.studentInfo.id}}&Quiz={{q.id}}" class="link" ng-click="sc.setQuizLink(q.id)">{{q.name}}</a></td>
-                        <td>{{q.state}}</td>
-                        <td>{{q.questions}}</td>
-                        <td>{{q.verificationType}}</td>
-                        <td>{{q.otherDetails}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-            <div layout="row">
-                <span>
-                    Rows on the page:
-                    <select class="md-primary" ng-model="sc.resultsPerPage" ng-change="sc.tablePage=0" ng-options="p for p in sc.resultsCount"></select>
-                </span>
-                <span ng-show="sc.numberOfPages() &gt; 1">
-                    Rows on the page:
-                    <select style="margin:5px" ng-model="sc.resultsPerPage" ng-change="sc.tablePage=0" ng-options="p for p in sc.resultsCount"></select>
-                    <button ng-disabled="sc.tablePage==0" ng-click="sc.tablePage=sc.tablePage-1">Previous page</button>
-                    <span ng-repeat="i in sc.getNumber(sc.numberOfPages()) track by $index">
-                        <button ng-click="sc.goToPage($index)"><span ng-class="{ 'table-active-page' : sc.tablePage==$index}">{{$index+1}}</span></button>
-                    </span>
-                    <button ng-disabled="sc.tablePage==sc.numberOfPages()-1" ng-click="sc.tablePage=sc.tablePage+1">Next page</button>
-                </span>
-            </div>
+        <div id="paymentTab" ng-show="sc.currentTab=='Payment'">
+            <label>Paid sum:</label>
+            <input type="text" name="paidSum" ng-model="sc.studentInfo.paidSum" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <label>Hostel:</label>
+            <input type="text" name="hostel" ng-model="sc.studentInfo.hostel" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <label>Room:</label>
+            <input type="text" name="room" style="width:200px" ng-model="sc.studentInfo.room" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <label>Paid till</label>
+            <input type="date" name="paidTill" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
         </div>
 
-        <div id="commentsTab" ng-show="sc.currentTab=='Comments'">
+        <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
             <div style="float:left; position:relative; margin-right:40px; width:550px">
                 <div style="height:300px; overflow:auto" width:auto>
                     <div ng-repeat="comment in sc.studentComments | startFrom: sc.commentsPage*sc.resultsPerCommentsPage | limitTo:sc.resultsPerCommentsPage">
@@ -107,7 +78,7 @@
         </div>
     </div>
     <br />
-    <div class="footerButtons" ng-show="sc.currentTab=='Profile'" layout="row">
+    <div class="footerButtons" ng-show="sc.currentTab=='Student'" layout="row">
         <button ng-click="sc.saveProfile()" ng-disabled="!sc.validationCheck()">Save</button>
         <div></div>
         <button ng-click="sc.cancelProfile()">Cancel</button>

@@ -1,5 +1,5 @@
 ﻿(function (angular) {
-    angular.module('equizModule')
+    angular.module('settlementModule')
     .directive('popUpWindow', function () {
         return {
             restrict: 'EA',

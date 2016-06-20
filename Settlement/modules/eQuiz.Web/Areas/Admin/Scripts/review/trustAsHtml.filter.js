@@ -1,6 +1,6 @@
 ﻿(function (angular) {
     angular
-        .module('equizModule')
+        .module('settlementModule')
         .filter('trustAsHtml', trustAsHtml);
 
     trustAsHtml.$inject = ['$sce'];
