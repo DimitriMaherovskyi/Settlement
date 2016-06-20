@@ -69,9 +69,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eQuiz.Entities\eQuiz.Entities.csproj">
+    <ProjectReference Include="..\eQuiz.Entities\Settlement.Entities.csproj">
       <Project>{58e400b0-2222-4854-abd9-2887fc12fb9c}</Project>
-      <Name>eQuiz.Entities</Name>
+      <Name>Settlement.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

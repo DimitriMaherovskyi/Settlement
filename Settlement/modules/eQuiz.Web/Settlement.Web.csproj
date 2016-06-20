@@ -255,13 +255,13 @@
     <Folder Include="Scripts\app\pages\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eQuiz.Entities\eQuiz.Entities.csproj">
+    <ProjectReference Include="..\eQuiz.Entities\Settlement.Entities.csproj">
       <Project>{58e400b0-2222-4854-abd9-2887fc12fb9c}</Project>
-      <Name>eQuiz.Entities</Name>
+      <Name>Settlement.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eQuiz.Repositories\eQuiz.Repositories.csproj">
+    <ProjectReference Include="..\eQuiz.Repositories\Settlement.Repositories.csproj">
       <Project>{d0cfad94-9121-4666-9b6d-f01733a74c02}</Project>
-      <Name>eQuiz.Repositories</Name>
+      <Name>Settlement.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

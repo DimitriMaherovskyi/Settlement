@@ -90,13 +90,13 @@
     <Folder Include="Areas\Student\Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\eQuiz.Repositories\eQuiz.Repositories.csproj">
+    <ProjectReference Include="..\..\modules\eQuiz.Repositories\Settlement.Repositories.csproj">
       <Project>{d0cfad94-9121-4666-9b6d-f01733a74c02}</Project>
-      <Name>eQuiz.Repositories</Name>
+      <Name>Settlement.Repositories</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\modules\eQuiz.Web\eQuiz.Web.csproj">
+    <ProjectReference Include="..\..\modules\eQuiz.Web\Settlement.Web.csproj">
       <Project>{da383d80-9cae-4dae-a143-1923bd6f1931}</Project>
-      <Name>eQuiz.Web</Name>
+      <Name>Settlement.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
