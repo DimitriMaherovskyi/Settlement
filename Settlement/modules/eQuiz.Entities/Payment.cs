@@ -12,12 +12,13 @@ namespace eQuiz.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Payment
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public int StudentId { get; set; }
+        public int Amount { get; set; }
+        public System.DateTime TillDate { get; set; }
+    
+        public virtual Student tblStudent { get; set; }
     }
 }

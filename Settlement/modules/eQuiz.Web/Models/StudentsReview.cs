@@ -5,7 +5,7 @@ using System.Web;
 
 namespace eQuiz.Web.Models
 {
-    public class StudentsReview
+    public class Student
     {
         public int Id { get; set; }
         public string Name { get; set; }

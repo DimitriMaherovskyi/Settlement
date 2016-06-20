@@ -27,9 +27,9 @@ namespace eQuiz.Entities
         public int AmountPlaces { get; set; }
         public int RoomFloor { get; set; }
     
+        public virtual Hostel tblHostel { get; set; }
         public virtual RoomType tblRoomType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentRoom> tblStudentRooms { get; set; }
-        public virtual Hostel tblHostel { get; set; }
     }
 }

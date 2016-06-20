@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="eQuizModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="tblBenefit">
           <Key>
             <PropertyRef Name="Id" />
@@ -29,6 +19,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Number" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="MonthPaymentSum" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblPayment">
           <Key>
@@ -43,7 +34,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Distance" Type="int" Nullable="false" />
         </EntityType>
@@ -86,6 +77,14 @@
           <Property Name="BenefitId" Type="int" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblStudentResidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="ResidenceId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblStudentRoom">
           <Key>
             <PropertyRef Name="Id" />
@@ -96,12 +95,20 @@
           <Property Name="DateIn" Type="datetime" Nullable="false" />
           <Property Name="DateOut" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblStudentViolation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ViolationId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblViolation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Penalty" Type="int" Nullable="false" />
         </EntityType>
@@ -114,18 +121,6 @@
             </Principal>
             <Dependent Role="tblPayment">
               <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblResidence_tblStudent">
-          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
-          <End Role="tblResidence" Type="Self.tblResidence" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tblStudent">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tblResidence">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -177,6 +172,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblStudentResidence_tblResidence">
+          <End Role="tblResidence" Type="Self.tblResidence" Multiplicity="1" />
+          <End Role="tblStudentResidence" Type="Self.tblStudentResidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblResidence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentResidence">
+              <PropertyRef Name="ResidenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStudentResidence_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblStudentResidence" Type="Self.tblStudentResidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentResidence">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblStudentRoom_tblRoom">
           <End Role="tblRoom" Type="Self.tblRoom" Multiplicity="1" />
           <End Role="tblStudentRoom" Type="Self.tblStudentRoom" Multiplicity="*" />
@@ -201,20 +220,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblViolation_tblStudent">
+        <Association Name="FK_tblStudentViolation_tblStudent">
           <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
-          <End Role="tblViolation" Type="Self.tblViolation" Multiplicity="*" />
+          <End Role="tblStudentViolation" Type="Self.tblStudentViolation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblStudent">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblViolation">
+            <Dependent Role="tblStudentViolation">
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblStudentViolation_tblViolation">
+          <End Role="tblViolation" Type="Self.tblViolation" Multiplicity="1" />
+          <End Role="tblStudentViolation" Type="Self.tblStudentViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblViolation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentViolation">
+              <PropertyRef Name="ViolationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="eQuizModelStoreContainer">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBenefit" EntityType="Self.tblBenefit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHostel" EntityType="Self.tblHostel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPayment" EntityType="Self.tblPayment" Schema="dbo" store:Type="Tables" />
@@ -223,15 +253,13 @@
           <EntitySet Name="tblRoomType" EntityType="Self.tblRoomType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudent" EntityType="Self.tblStudent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentBenefit" EntityType="Self.tblStudentBenefit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStudentResidence" EntityType="Self.tblStudentResidence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentRoom" EntityType="Self.tblStudentRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStudentViolation" EntityType="Self.tblStudentViolation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblViolation" EntityType="Self.tblViolation" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tblPayment_tblStudent" Association="Self.FK_tblPayment_tblStudent">
             <End Role="tblStudent" EntitySet="tblStudent" />
             <End Role="tblPayment" EntitySet="tblPayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblResidence_tblStudent" Association="Self.FK_tblResidence_tblStudent">
-            <End Role="tblStudent" EntitySet="tblStudent" />
-            <End Role="tblResidence" EntitySet="tblResidence" />
           </AssociationSet>
           <AssociationSet Name="FK_tblRoom_tblHostel" Association="Self.FK_tblRoom_tblHostel">
             <End Role="tblHostel" EntitySet="tblHostel" />
@@ -249,6 +277,14 @@
             <End Role="tblStudent" EntitySet="tblStudent" />
             <End Role="tblStudentBenefit" EntitySet="tblStudentBenefit" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblStudentResidence_tblResidence" Association="Self.FK_tblStudentResidence_tblResidence">
+            <End Role="tblResidence" EntitySet="tblResidence" />
+            <End Role="tblStudentResidence" EntitySet="tblStudentResidence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentResidence_tblStudent" Association="Self.FK_tblStudentResidence_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblStudentResidence" EntitySet="tblStudentResidence" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblStudentRoom_tblRoom" Association="Self.FK_tblStudentRoom_tblRoom">
             <End Role="tblRoom" EntitySet="tblRoom" />
             <End Role="tblStudentRoom" EntitySet="tblStudentRoom" />
@@ -257,9 +293,13 @@
             <End Role="tblStudent" EntitySet="tblStudent" />
             <End Role="tblStudentRoom" EntitySet="tblStudentRoom" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblViolation_tblStudent" Association="Self.FK_tblViolation_tblStudent">
+          <AssociationSet Name="FK_tblStudentViolation_tblStudent" Association="Self.FK_tblStudentViolation_tblStudent">
             <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblStudentViolation" EntitySet="tblStudentViolation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStudentViolation_tblViolation" Association="Self.FK_tblStudentViolation_tblViolation">
             <End Role="tblViolation" EntitySet="tblViolation" />
+            <End Role="tblStudentViolation" EntitySet="tblStudentViolation" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -268,25 +308,31 @@
       <Schema Namespace="eQuizModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="eQuizEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Benefits" EntityType="eQuizModel.Benefit" />
-          <EntitySet Name="tblPayments" EntityType="eQuizModel.tblPayment" />
-          <EntitySet Name="tblResidences" EntityType="eQuizModel.tblResidence" />
+          <EntitySet Name="Hostels" EntityType="eQuizModel.Hostel" />
+          <EntitySet Name="Payments" EntityType="eQuizModel.Payment" />
+          <EntitySet Name="Residences" EntityType="eQuizModel.Residence" />
           <EntitySet Name="Rooms" EntityType="eQuizModel.Room" />
           <EntitySet Name="RoomTypes" EntityType="eQuizModel.RoomType" />
           <EntitySet Name="Students" EntityType="eQuizModel.Student" />
           <EntitySet Name="StudentBenefits" EntityType="eQuizModel.StudentBenefit" />
+          <EntitySet Name="StudentResidences" EntityType="eQuizModel.StudentResidence" />
           <EntitySet Name="StudentRooms" EntityType="eQuizModel.StudentRoom" />
-          <EntitySet Name="tblViolations" EntityType="eQuizModel.tblViolation" />
+          <EntitySet Name="Violations" EntityType="eQuizModel.Violation" />
           <AssociationSet Name="FK_tblStudentBenefit_tblBenefit" Association="eQuizModel.FK_tblStudentBenefit_tblBenefit">
             <End Role="tblBenefit" EntitySet="Benefits" />
             <End Role="tblStudentBenefit" EntitySet="StudentBenefits" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblRoom_tblHostel" Association="eQuizModel.FK_tblRoom_tblHostel">
+            <End Role="tblHostel" EntitySet="Hostels" />
+            <End Role="tblRoom" EntitySet="Rooms" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblPayment_tblStudent" Association="eQuizModel.FK_tblPayment_tblStudent">
             <End Role="tblStudent" EntitySet="Students" />
-            <End Role="tblPayment" EntitySet="tblPayments" />
+            <End Role="tblPayment" EntitySet="Payments" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblResidence_tblStudent" Association="eQuizModel.FK_tblResidence_tblStudent">
-            <End Role="tblStudent" EntitySet="Students" />
-            <End Role="tblResidence" EntitySet="tblResidences" />
+          <AssociationSet Name="FK_tblStudentResidence_tblResidence" Association="eQuizModel.FK_tblStudentResidence_tblResidence">
+            <End Role="tblResidence" EntitySet="Residences" />
+            <End Role="tblStudentResidence" EntitySet="StudentResidences" />
           </AssociationSet>
           <AssociationSet Name="FK_tblRoom_tblRoomType" Association="eQuizModel.FK_tblRoom_tblRoomType">
             <End Role="tblRoomType" EntitySet="RoomTypes" />
@@ -300,21 +346,24 @@
             <End Role="tblStudent" EntitySet="Students" />
             <End Role="tblStudentBenefit" EntitySet="StudentBenefits" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblStudentResidence_tblStudent" Association="eQuizModel.FK_tblStudentResidence_tblStudent">
+            <End Role="tblStudent" EntitySet="Students" />
+            <End Role="tblStudentResidence" EntitySet="StudentResidences" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblStudentRoom_tblStudent" Association="eQuizModel.FK_tblStudentRoom_tblStudent">
             <End Role="tblStudent" EntitySet="Students" />
             <End Role="tblStudentRoom" EntitySet="StudentRooms" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblViolation_tblStudent" Association="eQuizModel.FK_tblViolation_tblStudent">
-            <End Role="tblStudent" EntitySet="Students" />
-            <End Role="tblViolation" EntitySet="tblViolations" />
+          <EntitySet Name="StudentViolations" EntityType="eQuizModel.StudentViolation" />
+          <AssociationSet Name="FK_tblStudentViolation_tblStudent" Association="eQuizModel.FK_tblStudentViolation_tblStudent">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="tblStudentViolation" EntitySet="StudentViolations" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="eQuizModel.sysdiagram" />
-          <EntitySet Name="Hostels" EntityType="eQuizModel.Hostel" />
-          <AssociationSet Name="FK_tblRoom_tblHostel" Association="eQuizModel.FK_tblRoom_tblHostel">
-            <End Role="tblHostel" EntitySet="Hostels" />
-            <End Role="tblRoom" EntitySet="Rooms" />
+          <AssociationSet Name="FK_tblStudentViolation_tblViolation" Association="eQuizModel.FK_tblStudentViolation_tblViolation">
+            <End Role="Violation" EntitySet="Violations" />
+            <End Role="tblStudentViolation" EntitySet="StudentViolations" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Benefit">
           <Key>
             <PropertyRef Name="Id" />
@@ -323,7 +372,17 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblStudentBenefits" Relationship="eQuizModel.FK_tblStudentBenefit_tblBenefit" FromRole="tblBenefit" ToRole="tblStudentBenefit" />
         </EntityType>
-        <EntityType Name="tblPayment">
+        <EntityType Name="Hostel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MonthPaymentSum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblRooms" Relationship="eQuizModel.FK_tblRoom_tblHostel" FromRole="tblHostel" ToRole="tblRoom" />
+        </EntityType>
+        <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -333,14 +392,14 @@
           <Property Name="TillDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblPayment_tblStudent" FromRole="tblPayment" ToRole="tblStudent" />
         </EntityType>
-        <EntityType Name="tblResidence">
+        <EntityType Name="Residence">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Distance" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblResidence_tblStudent" FromRole="tblResidence" ToRole="tblStudent" />
+          <NavigationProperty Name="tblStudentResidences" Relationship="eQuizModel.FK_tblStudentResidence_tblResidence" FromRole="tblResidence" ToRole="tblStudentResidence" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -352,9 +411,9 @@
           <Property Name="Number" Type="Int32" Nullable="false" />
           <Property Name="AmountPlaces" Type="Int32" Nullable="false" />
           <Property Name="RoomFloor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblHostel" Relationship="eQuizModel.FK_tblRoom_tblHostel" FromRole="tblRoom" ToRole="tblHostel" />
           <NavigationProperty Name="tblRoomType" Relationship="eQuizModel.FK_tblRoom_tblRoomType" FromRole="tblRoom" ToRole="tblRoomType" />
           <NavigationProperty Name="tblStudentRooms" Relationship="eQuizModel.FK_tblStudentRoom_tblRoom" FromRole="tblRoom" ToRole="tblStudentRoom" />
-          <NavigationProperty Name="tblHostel" Relationship="eQuizModel.FK_tblRoom_tblHostel" FromRole="tblRoom" ToRole="tblHostel" />
         </EntityType>
         <EntityType Name="RoomType">
           <Key>
@@ -377,10 +436,10 @@
           <Property Name="StudyGroup" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblPayments" Relationship="eQuizModel.FK_tblPayment_tblStudent" FromRole="tblStudent" ToRole="tblPayment" />
-          <NavigationProperty Name="tblResidence" Relationship="eQuizModel.FK_tblResidence_tblStudent" FromRole="tblStudent" ToRole="tblResidence" />
           <NavigationProperty Name="tblStudentBenefits" Relationship="eQuizModel.FK_tblStudentBenefit_tblStudent" FromRole="tblStudent" ToRole="tblStudentBenefit" />
+          <NavigationProperty Name="tblStudentResidences" Relationship="eQuizModel.FK_tblStudentResidence_tblStudent" FromRole="tblStudent" ToRole="tblStudentResidence" />
           <NavigationProperty Name="tblStudentRooms" Relationship="eQuizModel.FK_tblStudentRoom_tblStudent" FromRole="tblStudent" ToRole="tblStudentRoom" />
-          <NavigationProperty Name="tblViolations" Relationship="eQuizModel.FK_tblViolation_tblStudent" FromRole="tblStudent" ToRole="tblViolation" />
+          <NavigationProperty Name="tblStudentViolations" Relationship="eQuizModel.FK_tblStudentViolation_tblStudent" FromRole="Student" ToRole="tblStudentViolation" />
         </EntityType>
         <EntityType Name="StudentBenefit">
           <Key>
@@ -391,6 +450,16 @@
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblBenefit" Relationship="eQuizModel.FK_tblStudentBenefit_tblBenefit" FromRole="tblStudentBenefit" ToRole="tblBenefit" />
           <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblStudentBenefit_tblStudent" FromRole="tblStudentBenefit" ToRole="tblStudent" />
+        </EntityType>
+        <EntityType Name="StudentResidence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="ResidenceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblResidence" Relationship="eQuizModel.FK_tblStudentResidence_tblResidence" FromRole="tblStudentResidence" ToRole="tblResidence" />
+          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblStudentResidence_tblStudent" FromRole="tblStudentResidence" ToRole="tblStudent" />
         </EntityType>
         <EntityType Name="StudentRoom">
           <Key>
@@ -404,15 +473,14 @@
           <NavigationProperty Name="tblRoom" Relationship="eQuizModel.FK_tblStudentRoom_tblRoom" FromRole="tblStudentRoom" ToRole="tblRoom" />
           <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblStudentRoom_tblStudent" FromRole="tblStudentRoom" ToRole="tblStudent" />
         </EntityType>
-        <EntityType Name="tblViolation">
+        <EntityType Name="Violation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Penalty" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblViolation_tblStudent" FromRole="tblViolation" ToRole="tblStudent" />
+          <NavigationProperty Name="tblStudentViolations" Relationship="eQuizModel.FK_tblStudentViolation_tblViolation" FromRole="Violation" ToRole="tblStudentViolation" />
         </EntityType>
         <Association Name="FK_tblStudentBenefit_tblBenefit">
           <End Type="eQuizModel.Benefit" Role="tblBenefit" Multiplicity="1" />
@@ -426,9 +494,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblRoom_tblHostel">
+          <End Type="eQuizModel.Hostel" Role="tblHostel" Multiplicity="1" />
+          <End Type="eQuizModel.Room" Role="tblRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHostel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblRoom">
+              <PropertyRef Name="HostelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblPayment_tblStudent">
           <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
-          <End Type="eQuizModel.tblPayment" Role="tblPayment" Multiplicity="*" />
+          <End Type="eQuizModel.Payment" Role="tblPayment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblStudent">
               <PropertyRef Name="Id" />
@@ -438,15 +518,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblResidence_tblStudent">
-          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
-          <End Type="eQuizModel.tblResidence" Role="tblResidence" Multiplicity="0..1" />
+        <Association Name="FK_tblStudentResidence_tblResidence">
+          <End Type="eQuizModel.Residence" Role="tblResidence" Multiplicity="1" />
+          <End Type="eQuizModel.StudentResidence" Role="tblStudentResidence" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblStudent">
+            <Principal Role="tblResidence">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblResidence">
-              <PropertyRef Name="Id" />
+            <Dependent Role="tblStudentResidence">
+              <PropertyRef Name="ResidenceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -486,6 +566,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblStudentResidence_tblStudent">
+          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
+          <End Type="eQuizModel.StudentResidence" Role="tblStudentResidence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentResidence">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblStudentRoom_tblStudent">
           <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
           <End Type="eQuizModel.StudentRoom" Role="tblStudentRoom" Multiplicity="*" />
@@ -498,50 +590,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblViolation_tblStudent">
-          <End Type="eQuizModel.Student" Role="tblStudent" Multiplicity="1" />
-          <End Type="eQuizModel.tblViolation" Role="tblViolation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblStudent">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tblViolation">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Hostel">
+        <EntityType Name="StudentViolation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblRooms" Relationship="eQuizModel.FK_tblRoom_tblHostel" FromRole="tblHostel" ToRole="tblRoom" />
+          <Property Name="ViolationId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblStudent" Relationship="eQuizModel.FK_tblStudentViolation_tblStudent" FromRole="tblStudentViolation" ToRole="Student" />
+          <NavigationProperty Name="tblViolation" Relationship="eQuizModel.FK_tblStudentViolation_tblViolation" FromRole="tblStudentViolation" ToRole="Violation" />
         </EntityType>
-        <Association Name="FK_tblRoom_tblHostel">
-          <End Type="eQuizModel.Hostel" Role="tblHostel" Multiplicity="1" />
-          <End Type="eQuizModel.Room" Role="tblRoom" Multiplicity="*" />
+        <Association Name="FK_tblStudentViolation_tblStudent">
+          <End Type="eQuizModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="eQuizModel.StudentViolation" Role="tblStudentViolation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblHostel">
+            <Principal Role="Student">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="tblRoom">
-              <PropertyRef Name="HostelId" />
+            <Dependent Role="tblStudentViolation">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_tblStudentViolation_tblViolation">
+          <End Type="eQuizModel.Violation" Role="Violation" Multiplicity="1" />
+          <End Type="eQuizModel.StudentViolation" Role="tblStudentViolation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Violation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblStudentViolation">
+              <PropertyRef Name="ViolationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -555,8 +639,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblPayments">
-            <EntityTypeMapping TypeName="eQuizModel.tblPayment">
+          <EntitySetMapping Name="Hostels">
+            <EntityTypeMapping TypeName="eQuizModel.Hostel">
+              <MappingFragment StoreEntitySet="tblHostel">
+                <ScalarProperty Name="MonthPaymentSum" ColumnName="MonthPaymentSum" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="eQuizModel.Payment">
               <MappingFragment StoreEntitySet="tblPayment">
                 <ScalarProperty Name="TillDate" ColumnName="TillDate" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -565,8 +659,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblResidences">
-            <EntityTypeMapping TypeName="eQuizModel.tblResidence">
+          <EntitySetMapping Name="Residences">
+            <EntityTypeMapping TypeName="eQuizModel.Residence">
               <MappingFragment StoreEntitySet="tblResidence">
                 <ScalarProperty Name="Distance" ColumnName="Distance" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -617,6 +711,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="StudentResidences">
+            <EntityTypeMapping TypeName="eQuizModel.StudentResidence">
+              <MappingFragment StoreEntitySet="tblStudentResidence">
+                <ScalarProperty Name="ResidenceId" ColumnName="ResidenceId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="StudentRooms">
             <EntityTypeMapping TypeName="eQuizModel.StudentRoom">
               <MappingFragment StoreEntitySet="tblStudentRoom">
@@ -628,32 +731,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblViolations">
-            <EntityTypeMapping TypeName="eQuizModel.tblViolation">
+          <EntitySetMapping Name="Violations">
+            <EntityTypeMapping TypeName="eQuizModel.Violation">
               <MappingFragment StoreEntitySet="tblViolation">
                 <ScalarProperty Name="Penalty" ColumnName="Penalty" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="eQuizModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Hostels">
-            <EntityTypeMapping TypeName="eQuizModel.Hostel">
-              <MappingFragment StoreEntitySet="tblHostel">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
+          <EntitySetMapping Name="StudentViolations">
+            <EntityTypeMapping TypeName="eQuizModel.StudentViolation">
+              <MappingFragment StoreEntitySet="tblStudentViolation">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ViolationId" ColumnName="ViolationId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -198,6 +198,7 @@
     <Compile Include="Code\BaseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentReviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -253,6 +254,7 @@
     <Folder Include="Areas\Student\Scripts\libs\" />
     <Folder Include="Areas\Student\Views\Shared\" />
     <Folder Include="Scripts\app\pages\" />
+    <Folder Include="Views\StudentReview\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eQuiz.Entities\Settlement.Entities.csproj">

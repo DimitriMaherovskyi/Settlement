@@ -7,7 +7,8 @@ CREATE TABLE [tblHostel]
 (
 [Id] INT NOT NULL IDENTITY (1, 1),
 [Number] INT NOT NULL,
-[Address] NVARCHAR(50) NULL
+[Address] NVARCHAR(50) NULL,
+[MonthPaymentSum] INT NOT NULL
 CONSTRAINT [PK_tblHostel_ID] PRIMARY KEY ([Id])
 );
 
@@ -55,19 +56,34 @@ GO
 
 CREATE TABLE [tblResidence]
 (
-[Id] INT NOT NULL,
+[Id] INT NOT NULL IDENTITY (1, 1),
 [Name] NVARCHAR(50) NOT NULL,
 [Distance] INT NOT NULL
 CONSTRAINT [PK_tblResidence_ID] PRIMARY KEY ([Id])
 );
 
-CREATE TABLE [tblViolation]
+CREATE TABLE [tblStudentResidence]
 (
 [Id] INT NOT NULL IDENTITY (1, 1),
 [StudentId] INT NOT NULL,
+[ResidenceId] INT NOT NULL
+CONSTRAINT [PK_tblStudentResidence_ID] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [tblViolation]
+(
+[Id] INT NOT NULL IDENTITY (1, 1),
 [Name] NVARCHAR(50) NOT NULL,
 [Penalty] INT NOT NULL
 CONSTRAINT [PK_tblViolation_ID] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [tblStudentViolation]
+(
+[Id] INT NOT NULL IDENTITY (1, 1),
+[ViolationId] INT NOT NULL,
+[StudentId] INT NOT NULL,
+[Time] DATETIME NULL
 );
 
 CREATE TABLE [tblPayment]
@@ -106,9 +122,13 @@ ALTER TABLE [tblStudentRoom] ADD CONSTRAINT [FK_tblStudentRoom_tblStudent] FOREI
 
 ALTER TABLE [tblStudentRoom] ADD CONSTRAINT [FK_tblStudentRoom_tblRoom] FOREIGN KEY ([RoomId]) REFERENCES [tblRoom]([Id]); 
 
-ALTER TABLE [tblViolation] ADD CONSTRAINT [FK_tblViolation_tblStudent] FOREIGN KEY ([StudentId]) REFERENCES [tblStudent]([Id]);
+ALTER TABLE [tblStudentViolation] ADD CONSTRAINT [FK_tblStudentViolation_tblStudent] FOREIGN KEY ([StudentId]) REFERENCES [tblStudent]([Id]);
 
-ALTER TABLE [tblResidence] ADD CONSTRAINT [FK_tblResidence_tblStudent] FOREIGN KEY ([Id]) REFERENCES [tblStudent]([Id]);
+ALTER TABLE [tblStudentViolation] ADD CONSTRAINT [FK_tblStudentViolation_tblViolation] FOREIGN KEY ([ViolationId]) REFERENCES [tblViolation]([Id]);
+
+ALTER TABLE [tblStudentResidence] ADD CONSTRAINT [FK_tblStudentResidence_tblStudent] FOREIGN KEY ([StudentId]) REFERENCES [tblStudent]([Id]);
+
+ALTER TABLE [tblStudentResidence] ADD CONSTRAINT [FK_tblStudentResidence_tblResidence] FOREIGN KEY ([ResidenceId]) REFERENCES [tblResidence]([Id]);
 
 ALTER TABLE [tblPayment] ADD CONSTRAINT [FK_tblPayment_tblStudent] FOREIGN KEY ([StudentId]) REFERENCES [tblStudent]([Id]);
 

@@ -12,13 +12,14 @@ namespace eQuiz.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class tblPayment
+    public partial class StudentViolation
     {
         public int Id { get; set; }
+        public int ViolationId { get; set; }
         public int StudentId { get; set; }
-        public int Amount { get; set; }
-        public System.DateTime TillDate { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
     
         public virtual Student tblStudent { get; set; }
+        public virtual Violation tblViolation { get; set; }
     }
 }

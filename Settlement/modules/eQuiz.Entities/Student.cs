@@ -17,10 +17,11 @@ namespace eQuiz.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.tblPayments = new HashSet<tblPayment>();
+            this.tblPayments = new HashSet<Payment>();
             this.tblStudentBenefits = new HashSet<StudentBenefit>();
+            this.tblStudentResidences = new HashSet<StudentResidence>();
             this.tblStudentRooms = new HashSet<StudentRoom>();
-            this.tblViolations = new HashSet<tblViolation>();
+            this.tblStudentViolations = new HashSet<StudentViolation>();
         }
     
         public int Id { get; set; }
@@ -33,13 +34,14 @@ namespace eQuiz.Entities
         public bool Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblPayment> tblPayments { get; set; }
-        public virtual tblResidence tblResidence { get; set; }
+        public virtual ICollection<Payment> tblPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentBenefit> tblStudentBenefits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentResidence> tblStudentResidences { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentRoom> tblStudentRooms { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblViolation> tblViolations { get; set; }
+        public virtual ICollection<StudentViolation> tblStudentViolations { get; set; }
     }
 }

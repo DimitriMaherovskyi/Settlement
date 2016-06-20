@@ -26,15 +26,16 @@ namespace eQuiz.Entities
         }
     
         public virtual DbSet<Benefit> Benefits { get; set; }
-        public virtual DbSet<tblPayment> tblPayments { get; set; }
-        public virtual DbSet<tblResidence> tblResidences { get; set; }
+        public virtual DbSet<Hostel> Hostels { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Residence> Residences { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentBenefit> StudentBenefits { get; set; }
+        public virtual DbSet<StudentResidence> StudentResidences { get; set; }
         public virtual DbSet<StudentRoom> StudentRooms { get; set; }
-        public virtual DbSet<tblViolation> tblViolations { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Hostel> Hostels { get; set; }
+        public virtual DbSet<Violation> Violations { get; set; }
+        public virtual DbSet<StudentViolation> StudentViolations { get; set; }
     }
 }
