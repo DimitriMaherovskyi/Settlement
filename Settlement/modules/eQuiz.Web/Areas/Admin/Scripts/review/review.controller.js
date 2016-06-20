@@ -14,21 +14,28 @@
         vm.resultsPerPage = 10;
         vm.resultsCount = [10, 25, 50, 100]; // Possible numbers of results per page
         vm.selectedGroup = [];
-        vm.link = "/Admin/Default/Index/Student/";
 
         vm.headers = [
     {
-        name: 'Student',
-        field: 'student',
-        predicateIndex: 1
-    }, {
-        name: 'User group',
-        field: 'userGroup',
+        name: 'Name',
+        field: 'name',
         predicateIndex: 0
     }, {
-        name: 'Quizzes',
-        field: 'quizzes',
+        name: 'Room',
+        field: 'room',
+        predicateIndex: 1
+    }, {
+        name: 'Hostel',
+        field: 'hostel',
         predicateIndex: 2
+    }, {
+        name: 'Institute',
+        field: 'institute',
+        predicateIndex: 3
+    }, {
+        name: 'StudyGroup',
+        field: 'studyGroup',
+        predicateIndex: 4
     }
         ];
         vm.students = [];
@@ -48,7 +55,7 @@
         activate();
 
         function generatePredicate() {
-            vm.myPredicate = [null, null, null];
+            vm.myPredicate = [null, null, null, null, null];
         }; // Generates empty predicates that are used for ordering
 
         function clearPredicatesExcept(index) {
@@ -62,13 +69,19 @@
                 var item = null;
                 switch (index) {
                     case 0:
-                        item = '+userGroup';
+                        item = '+name';
                         break;
                     case 1:
-                        item = '+student';
+                        item = '+room';
                         break;
                     case 2:
-                        item = '+quizzes';
+                        item = '+hostel';
+                        break;
+                    case 3:
+                        item = '+institute';
+                        break;
+                    case 4:
+                        item = '+studyGroup';
                         break;
                 }
                 vm.myPredicate[index] = item;
@@ -153,10 +166,6 @@
 
             return output;
         }
-
-        vm.setLink = function (studentId) {
-            vm.link += studentId.Id + '/Profile';
-        };
                        
         vm.checkSymbol = "&#x2714";        
         vm.toggleDropDownElem = function (group) {            
