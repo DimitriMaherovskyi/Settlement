@@ -5,7 +5,7 @@ using System.Web;
 
 namespace eQuiz.Web.Models
 {
-    public class Student
+    public class StudentsReview
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,5 +13,15 @@ namespace eQuiz.Web.Models
         public int? Room { get; set; }
         public string Institute { get; set; }
         public bool? HasProblem { get; set; }
+
+        public StudentsReview(int id, string name, int? hostelNumber, int? room, string institute, bool? hasProblem)
+        {
+            Id = id;
+            Name = name;
+            HostemNum = hostelNumber;
+            Room = room;
+            Institute = institute;
+            HasProblem = hasProblem;
+        }
     }
 }

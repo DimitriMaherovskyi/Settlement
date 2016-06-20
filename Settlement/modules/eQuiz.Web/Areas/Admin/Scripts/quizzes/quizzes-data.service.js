@@ -15,7 +15,7 @@
         return service;
 
         function getQuizzesAjax(quizeId) {
-            var promise = $http.get('/Admin/Quizzes/GetQuizzesList');           
+            var promise = $http.get('/StudentReview/GetStudentsList');
             return promise;
         }
     }
