@@ -4,12 +4,12 @@
         .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: '/Areas/Admin/Scripts/quizzes.html',
-                    controller: 'QuizzesController',
-                    controllerAs: 'qc',
+                    templateUrl: '/Areas/Admin/Scripts/review.html',
+                    controller: 'ReviewController',
+                    controllerAs: 'rc',
                     resolve: {
-                    quizzesList: function (quizzesDataService) {
-                        return quizzesDataService.getQuizzes().then(function (respond) {
+                        studentsList: function (reviewDataService) {
+                            return reviewDataService.getStudents().then(function (respond) {
                         return respond.data;
                     })
                }

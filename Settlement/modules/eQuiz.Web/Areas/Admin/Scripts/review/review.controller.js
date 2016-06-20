@@ -21,21 +21,17 @@
         field: 'name',
         predicateIndex: 0
     }, {
-        name: 'Room',
-        field: 'room',
-        predicateIndex: 1
-    }, {
         name: 'Hostel',
         field: 'hostel',
+        predicateIndex: 1
+    }, {
+        name: 'Room',
+        field: 'room',
         predicateIndex: 2
     }, {
         name: 'Institute',
         field: 'institute',
         predicateIndex: 3
-    }, {
-        name: 'StudyGroup',
-        field: 'studyGroup',
-        predicateIndex: 4
     }
         ];
         vm.students = [];
@@ -43,10 +39,11 @@
         function activate() {
             vm.students = studentsList;
             vm.students.forEach(function (currVal, index, array) {
-                currVal.id = currVal.id.Id.toString();
-                currVal.student = currVal.student.toString();
-                currVal.userGroup = currVal.userGroup.toString();
-                currVal.quizzes = currVal.quizzes.toString();
+                currVal.Id = currVal.Id.toString();
+                currVal.Name = currVal.Name.toString();
+             //   currVal.HostelNum = currVal.HostelNum.toString();
+             //   currVal.Room = currVal.Room.toString();
+                currVal.Institute = currVal.Institute.toString();
             }); // Converts received data to string values
             vm.groupList = GetUniquePropertyValues(vm.students, 'userGroup'); // Property user group needs to be changed manualy    
             generatePredicate();
@@ -55,7 +52,7 @@
         activate();
 
         function generatePredicate() {
-            vm.myPredicate = [null, null, null, null, null];
+            vm.myPredicate = [null, null, null, null];
         }; // Generates empty predicates that are used for ordering
 
         function clearPredicatesExcept(index) {
@@ -69,19 +66,16 @@
                 var item = null;
                 switch (index) {
                     case 0:
-                        item = '+name';
+                        item = '+firstName';
                         break;
                     case 1:
-                        item = '+room';
+                        item = '+surname';
                         break;
                     case 2:
                         item = '+hostel';
                         break;
                     case 3:
                         item = '+institute';
-                        break;
-                    case 4:
-                        item = '+studyGroup';
                         break;
                 }
                 vm.myPredicate[index] = item;
