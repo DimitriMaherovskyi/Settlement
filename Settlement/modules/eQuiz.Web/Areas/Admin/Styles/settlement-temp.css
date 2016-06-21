@@ -1,4 +1,17 @@
-﻿.notifyPopUpMessage {
+﻿.hostelsList {
+    text-decoration:solid;
+    font-size:20px;
+    border-style:groove;
+    border-width:2px;
+    width:auto;
+    min-width:100px;
+    align-content:center;
+    padding:3px;
+    margin:10px;
+    border-color:black;
+}
+
+.notifyPopUpMessage {
     border:solid;
     border-color:forestgreen;
     background-color:lightgreen;
