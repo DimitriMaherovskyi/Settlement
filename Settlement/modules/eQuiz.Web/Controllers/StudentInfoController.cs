@@ -68,6 +68,16 @@ namespace Settlement.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetViolationsList()
+        {
+            var violations = _repository.Get<Violation>();
+
+            return Json(violations, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         #endregion
     }
 }
