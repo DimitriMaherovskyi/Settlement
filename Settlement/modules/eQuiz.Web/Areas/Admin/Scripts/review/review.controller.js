@@ -45,7 +45,7 @@
              //   currVal.Room = currVal.Room.toString();
                 currVal.Institute = currVal.Institute.toString();
             }); // Converts received data to string values
-            vm.groupList = GetUniquePropertyValues(vm.students, 'userGroup'); // Property user group needs to be changed manualy    
+            vm.groupList = GetUniquePropertyValues(vm.students, 'Institute'); // Property user group needs to be changed manualy    
             generatePredicate();
         };
 
