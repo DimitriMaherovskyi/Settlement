@@ -32,13 +32,14 @@
             studentDataService.saveProfileInfo(vm.studentInfo)
             .success(function (res) {
                 $scope.showNotifyPopUp('Student data was sucessfully saved!')
+                vm.modelChanged = false;
                 $timeout($scope.closePopUp, 4000);
             })
             .error(function (res) {
                 $scope.showNotifyPopUp('Error: student data was not saved!')
                 $timeout($scope.closePopUp, 4000);
             });
-            vm.modelChanged = false;
+            
         };
 
         vm.addViolation = function () {
@@ -55,11 +56,9 @@
         }; // Cancel unsaved changes in the profile
 
         vm.validationCheck = function () {
-            return true; //$scope.studentInfo.firstName.$valid && $scope.studentInfo.lastName.$valid && $scope.Info.phone.$valid && vm.modelChanged;
+            return vm.studentInfo.firstName && vm.studentInfo.lastName && vm.studentInfo.institute && vm.modelChanged == true
+            vm.studentInfo.studyGroup;
         };
 
-        vm.toggleAddViolationFrame = function () {
-
-        }
     };
 })(angular);
