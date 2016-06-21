@@ -32,7 +32,7 @@
         name: 'Institute',
         field: 'institute',
         predicateIndex: 3
-    }
+    },
         ];
         vm.students = [];
 
@@ -103,7 +103,7 @@
         }; // Gets the order direction of the predicate with specified index
 
         vm.order = function (predicate, reverse) {
-            vm.students = orderBy(vm.students, predicate, reverse);
+            vm.studentsList = orderBy(vm.studentsList, predicate, reverse);
             vm.predicate = predicate;
         }; // Orders the data based on the specified predicate
 

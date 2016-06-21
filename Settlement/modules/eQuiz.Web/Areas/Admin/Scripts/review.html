@@ -51,7 +51,7 @@
             <tbody>
                 <tr ng-repeat="c in rc.contents = ((rc.searchFiltered = (rc.students | groupFilter: rc.selectedGroup:'Institute' | filter: {Name:rc.search})) | startFrom: rc.tablePage*rc.resultsPerPage | limitTo:rc.resultsPerPage)" style="height: 50px">
                     <td><a href="Index/Student?Id={{c.Id}}#Student" class="link" ng-bind-html="c.Name | highlight: rc.search">{{c.Name}}</a></td>
-                    <td>{{c.Surname}}</td>
+                    <td>{{c.HostelNum}}</td>
                     <td>{{c.Room}}</td>
                     <td>{{c.Institute}}</td>
                 </tr>

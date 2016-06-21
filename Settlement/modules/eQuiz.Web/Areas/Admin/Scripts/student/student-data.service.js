@@ -9,16 +9,16 @@
     function studentDataService($http) {
 
         var service = {
-            getStudentInfo: getStudentInfoMock,
+            getStudentInfo: getStudentInfo,
             saveProfileInfo: saveProfileInfo,
-            getViolations: getViolationsMock
+            getViolations: getViolations
         };
 
         return service;
 
         function getStudentInfo(studentId) {
             var promise = $http({
-                url: '/Admin/Student/GetStudentInfo',
+                url: '/StudentInfo/GetStudentInfo',
                 method: "GET",
                 params: { id: studentId }
             });
@@ -40,7 +40,7 @@
 
         function getViolations() {
             var promise = $http({
-                url: '/Admin/Student/GetVoilations',
+                url: '/StudentInfo/GetVoilationsList',
                 method: "GET",
             });
             return promise;

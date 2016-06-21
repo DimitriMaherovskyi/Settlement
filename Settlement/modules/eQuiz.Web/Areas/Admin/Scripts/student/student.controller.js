@@ -43,11 +43,11 @@
         };
 
         vm.addViolation = function () {
-            vm.currentViolation && vm.studentInfo.violations.push(vm.currentViolation);
+            vm.currentViolation && vm.studentInfo.Violations.push(vm.currentViolation);
         }
 
         vm.clearViolations = function () {
-            vm.studentInfo.violations = [];
+            vm.studentInfo.Violations = [];
         }
 
         vm.cancelProfile = function () {
@@ -56,8 +56,8 @@
         }; // Cancel unsaved changes in the profile
 
         vm.validationCheck = function () {
-            return vm.studentInfo.firstName && vm.studentInfo.lastName && vm.studentInfo.institute && vm.modelChanged == true
-            vm.studentInfo.studyGroup;
+            return vm.studentInfo.Name && vm.studentInfo.Surname && vm.studentInfo.Institute && vm.modelChanged == true
+            vm.studentInfo.Group;
         };
 
     };

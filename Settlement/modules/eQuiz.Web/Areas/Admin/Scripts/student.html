@@ -14,15 +14,15 @@
             <div name='profileInfo' style="width:auto; max-width:600px" novalidate>
                 <div style="margin-right:40px;">
                     <label class="profileLabel">Name:</label>
-                    <input type="text" name="firstName" class="profileField" ng-model="sc.studentInfo.firstName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="firstName" class="profileField" ng-model="sc.studentInfo.Name" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
                     <label class="profileLabel">Surname:</label>
-                    <input type="text" name="lastName" class="profileField" ng-model="sc.studentInfo.lastName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="lastName" class="profileField" ng-model="sc.studentInfo.Surname" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
                     <label class="profileLabel">Institute:</label>
-                    <input type="text" name="institute" class="profileField" ng-model="sc.studentInfo.institute" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="institute" class="profileField" ng-model="sc.studentInfo.Institute" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
                     <label class="profileLabel">Study Group:</label>
-                    <input type="text" name="studyGroup" class="profileField" ng-model="sc.studentInfo.studyGroup" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="studyGroup" class="profileField" ng-model="sc.studentInfo.Group" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
                     <label class="profileLabel">Payment till:</label>
-                    <input type="text" class="profileField" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
+                    <input type="text" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
                 </div>
             </div>
         </div>
@@ -31,18 +31,18 @@
             <label class="profileLabel">Paid sum:</label>
             <input type="text" name="paidSum" class="profileField" ng-model="sc.studentInfo.paidSum" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
             <label class="profileLabel">Hostel:</label>
-            <input type="text" name="hostel" class="profileField" ng-model="sc.studentInfo.hostel" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <input type="text" name="hostel" class="profileField" ng-model="sc.studentInfo.Hostel" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
             <label class="profileLabel">Room:</label>
-            <input type="text" name="room" class="profileField" ng-model="sc.studentInfo.room" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <input type="text" name="room" class="profileField" ng-model="sc.studentInfo.Room" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
             <label class="profileLabel">Paid till:</label>
-            <input type="text" name="paidTill" class="profileField" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
+            <input type="text" name="paidTill" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
             <button class="profileButton" >Add pay</button>
             <button class="profileButton" >Add quote</button>
         </div>
 
         <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
                <h3>Violations:</h3>
-                <div class="violation" ng-repeat="v in sc.studentInfo.violations track by $index">
+                <div class="violation" ng-repeat="v in sc.studentInfo.Violations track by $index">
                     {{v}}
                 </div>
             <br />
