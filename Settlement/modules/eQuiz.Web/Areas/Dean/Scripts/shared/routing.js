@@ -29,19 +29,6 @@
                     },
                     reloadOnSearch: false
                 })
-                 .when('/Index/Rooms', {
-                     templateUrl: '/Areas/Admin/Scripts/rooms-review.html',
-                     controller: 'RoomsReviewController',
-                     controllerAs: 'rrc',
-                     resolve: {
-                         hostels: function (roomsReviewDataService) {
-                             return roomsReviewDataService.getHostels();//.then(function (respond) {
-                             // return respond.data;
-                             //})
-                         },
-                     },
-                     reloadOnSearch: false
-                 })
 
                 .otherwise({ redirectTo: '/' });
 

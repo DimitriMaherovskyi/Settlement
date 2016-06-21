@@ -126,8 +126,6 @@
     <Content Include="Areas\Admin\Scripts\student\student-data.service.js" />
     <Content Include="Areas\Admin\Scripts\student.html" />
     <Content Include="Areas\Admin\Scripts\user-management.html" />
-    <Content Include="Areas\Admin\Scripts\userManagement\user-management-data.service.js" />
-    <Content Include="Areas\Admin\Scripts\userManagement\user-management.controller.js" />
     <Content Include="Areas\Admin\Styles\settlement-temp.css" />
     <Content Include="Areas\Admin\Scripts\review.html" />
     <Content Include="Areas\Dean\Scripts\review.html" />
@@ -138,9 +136,6 @@
     <Content Include="Areas\Dean\Scripts\review\start-from.filter.js" />
     <Content Include="Areas\Dean\Scripts\review\table-height.directive.js" />
     <Content Include="Areas\Dean\Scripts\review\trustAsHtml.filter.js" />
-    <Content Include="Areas\Dean\Scripts\rooms-review.html" />
-    <Content Include="Areas\Dean\Scripts\roomsReview\rooms-review-data.service.js" />
-    <Content Include="Areas\Dean\Scripts\roomsReview\rooms-review.controller.js" />
     <Content Include="Areas\Dean\Scripts\shared\loading-screen.directive.js" />
     <Content Include="Areas\Dean\Scripts\shared\pop-up-window.directive.js" />
     <Content Include="Areas\Dean\Scripts\shared\routing.js" />
@@ -148,8 +143,6 @@
     <Content Include="Areas\Dean\Scripts\student\student-data.service.js" />
     <Content Include="Areas\Dean\Scripts\student\student.controller.js" />
     <Content Include="Areas\Dean\Scripts\user-management.html" />
-    <Content Include="Areas\Dean\Scripts\userManagement\user-management-data.service.js" />
-    <Content Include="Areas\Dean\Scripts\userManagement\user-management.controller.js" />
     <Content Include="Areas\Dean\Styles\settlement-temp.css" />
     <Content Include="Areas\Warden\Scripts\review.html" />
     <Content Include="Areas\Warden\Scripts\review\group.filter.js" />
@@ -228,11 +221,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\QuizDetails\" />
-    <Folder Include="Areas\Admin\Views\Quizzes\" />
-    <Folder Include="Areas\Admin\Views\Review\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Admin\Views\Student\" />
     <Folder Include="Areas\Dean\Models\" />
     <Folder Include="Areas\Dean\Views\Shared\" />
     <Folder Include="Areas\Warden\Models\" />

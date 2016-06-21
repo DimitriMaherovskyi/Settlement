@@ -9,80 +9,61 @@
         </ul>
     </div>
   
-    <div id="tabContainer">
+    <div id="tabContainer" style="height:auto; width:auto">
         <div id="studentTab" ng-show="sc.currentTab=='Student'">
-            <form name='profileInfo' style="width:auto; max-width:700px" novalidate>
-                <div style="float:left; position:relative; margin-right:40px">
-                    <label>Name:</label>
-                    <input type="text" name="firstName" ng-model="sc.studentInfo.firstName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-                    <label>Surname:</label>
-                    <input type="text" name="lastName" ng-model="sc.studentInfo.lastName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-                    <label>Institute:</label>
-                    <input type="text" name="institute" style="width:200px" ng-model="sc.studentInfo.institute" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-                    <label>Study Group:</label>
-                    <input type="text" name="studyGroup" style="width:200px" ng-model="sc.studentInfo.studyGroup" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-
-                 </div>
-                <div position:relative">
-                    <label>Payment till:</label>
-                    <input type="text" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
+            <div name='profileInfo' style="width:auto; max-width:600px" novalidate>
+                <div style="margin-right:40px;">
+                    <label class="profileLabel">Name:</label>
+                    <input type="text" name="firstName" class="profileField" ng-model="sc.studentInfo.firstName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <label class="profileLabel">Surname:</label>
+                    <input type="text" name="lastName" class="profileField" ng-model="sc.studentInfo.lastName" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <label class="profileLabel">Institute:</label>
+                    <input type="text" name="institute" class="profileField" ng-model="sc.studentInfo.institute" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <label class="profileLabel">Study Group:</label>
+                    <input type="text" name="studyGroup" class="profileField" ng-model="sc.studentInfo.studyGroup" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <label class="profileLabel">Payment till:</label>
+                    <input type="text" class="profileField" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
                 </div>
-            </form>
+            </div>
         </div>
 
         <div id="paymentTab" ng-show="sc.currentTab=='Payment'">
-            <label>Paid sum:</label>
-            <input type="text" name="paidSum" ng-model="sc.studentInfo.paidSum" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-            <label>Hostel:</label>
-            <input type="text" name="hostel" ng-model="sc.studentInfo.hostel" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-            <label>Room:</label>
-            <input type="text" name="room" style="width:200px" ng-model="sc.studentInfo.room" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
-            <label>Paid till</label>
-            <input type="text" name="paidTill" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
+            <label class="profileLabel">Paid sum:</label>
+            <input type="text" name="paidSum" class="profileField" ng-model="sc.studentInfo.paidSum" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <label class="profileLabel">Hostel:</label>
+            <input type="text" name="hostel" class="profileField" ng-model="sc.studentInfo.hostel" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <label class="profileLabel">Room:</label>
+            <input type="text" name="room" class="profileField" ng-model="sc.studentInfo.room" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <label class="profileLabel">Paid till:</label>
+            <input type="text" name="paidTill" class="profileField" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
+            <button class="profileButton" >Add pay</button>
+            <button class="profileButton" >Add quote</button>
         </div>
 
         <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
-            <div style="float:left; position:relative; margin-right:40px; width:550px">
-                <div style="height:300px; overflow:auto" width:auto>
-                    <div ng-repeat="comment in sc.studentComments | startFrom: sc.commentsPage*sc.resultsPerCommentsPage | limitTo:sc.resultsPerCommentsPage">
-                        <label>{{comment.date + ' by ' + 'Admin' }}</label>
-                        <div style="border:1px solid grey; width:500px; height:auto">
-                            {{comment.text}}
-                        </div>
-                    </div>
+               <h3>Violations:</h3>
+                <div class="violation" ng-repeat="v in sc.studentInfo.violations track by $index">
+                    {{v}}
                 </div>
-                <span>
-                    Rows on the page:
-                    <select style="margin:5px" ng-model="sc.resultsPerCommentsPage" ng-change="sc.commentsPage=0" ng-options="p for p in sc.resultsCount"></select>
-                </span>
-                <span ng-show="sc.numberOfCommentsPages() &gt; 1">
-                    <button ng-disabled="sc.commentsPage==0" ng-click="sc.commentsPage=sc.commentsPage-1">Previous page</button>
-                    <span ng-repeat="i in sc.getNumber(sc.numberOfCommentsPages()) track by $index">
-                        <button ng-click="sc.goToCommentsPage($index)"><span ng-class="{ 'table-active-page' : sc.commentsPage==$index}">{{$index+1}}</span></button>
-                    </span>
-                    <button ng-disabled="sc.commentsPage==sc.numberOfCommentsPages()-1" ng-click="sc.commentsPage=sc.commentsPage+1">Next page</button>
-                </span>
-            </div>
-            <a class="link" style="font-size:large" ng-click="sc.toggleNewCommentFrame()">Add new</a>
-            <div style="position:relative" ng-show="sc.newCommentFrame">
-                <label>Text:</label>
-                <form name="addNewCommentForm"  novalidate>
+            <br />
+                <div style="border-style:inset; border-width:1px;border-color:black; width:500px">
                     <span>
-                        <textarea ng-keydown="sc.addCommentKeyDown()" ng-keyup="sc.addCommentKeyUp()" class="commentTextBox" name="commentText" ng-model="sc.newComment.text" cols="80" rows="5" required></textarea>
+                        <select style="margin:15px; font-size:17px " ng-model="sc.currentViolation" ng-options="v for v in sc.violationsList"></select>
                     </span>
                     <br />
-                    <button ng-click="sc.addComment()" ng-disabled="addNewCommentForm.commentAuthor.$error.required || addNewCommentForm.commentText.$error.required">Add comment</button>
-                    <button ng-click="sc.toggleNewCommentFrame()">Close</button>
-                </form>
+                    <br />
+                    <button class="profileButton" ng-click="sc.addViolation()" >Add violation</button>
+                    <button class="profileButton" ng-click="sc.clearViolations()">Clear all violations</button>
+                </div>
             </div>
         </div>
     </div>
 
     <br />
     <div class="footerButtons" ng-show="sc.currentTab=='Student'" layout="row">
-        <button ng-click="sc.saveProfile()" ng-disabled="!sc.validationCheck()">Save</button>
+        <button class="profileButton" ng-click="sc.saveProfile()" ng-disabled="!sc.validationCheck()">Save</button>
         <div></div>
-        <button ng-click="sc.cancelProfile()">Cancel</button>
+        <button class="profileButton" ng-click="sc.cancelProfile()">Cancel</button>
     </div>
 
     <script src="~/Scripts/app/admin/student/equiz.studentController.js"></script>

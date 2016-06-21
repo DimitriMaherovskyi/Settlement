@@ -1,4 +1,31 @@
-﻿.hostelsList {
+﻿.profileButton
+{
+    font-size:17px;
+    margin:20px;
+}
+
+.profileField {
+    font-size:17px; 
+    width:200px
+}
+
+.violation {
+    font-size:17px;
+    color:red;
+    border-color:red;
+    border-width:1px;
+    border-style:inset; 
+    width:500px; 
+    margin:10px;
+}
+
+.profileLabel {
+    display:block;
+    width:200px;
+    font-size:17px;
+}
+
+.hostelsList {
     text-decoration:solid;
     font-size:20px;
     border-style:groove;

@@ -22,11 +22,15 @@
                     resolve: {
                         studentInfo: function (studentDataService, $location) {
                             var Id = $location.search().Id;
-                            return studentDataService.getStudentInfo(Id);//.then(function (respond) {
+                            return studentDataService.getStudentInfo(Id);
+                            },
+
+                        violations: function (studentDataService) {
+                            return studentDataService.getViolations();//.then(function (respond) {
                             // return respond.data;
                             //})
+                            }
                         },
-                    },
                     reloadOnSearch: false
                 })
                  .when('/Index/Rooms', {

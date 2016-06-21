@@ -1,16 +1,16 @@
 ﻿(function (angular) {
     angular.module('settlementModule').controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$scope', '$filter', 'studentDataService', '$routeParams', 'studentInfo', '$location', '$timeout'];
+    StudentController.$inject = ['$scope', '$filter', 'studentDataService', '$routeParams', 'studentInfo', 'violations', '$location', '$timeout'];
 
-    function StudentController($scope, $filter, studentDataService, $routeParams, studentInfo, $location, $timeout) {
+    function StudentController($scope, $filter, studentDataService, $routeParams, studentInfo, violations, $location, $timeout) {
         var vm = this;
 
         vm.studentInfo = studentInfo;
-        var map = { 17: false, 13: false };
+        vm.violationsList = violations;
+        
         $scope.showNotification = false;
         $scope.showWarning = false;
-
  
         vm.currentTab = $location.hash();
         vm.modelChanged = false; // Indicates whether data in the model was changed
@@ -21,21 +21,33 @@
                 vm.studentInfo = response.data;
                 return vm.studentInfo;
             });
-            generatePredicate();
+            studentDataService.getViolations().then(function (response) {
+                vm.violationsList = response.data;
+                return vm.violationsList;
+            });
+
             }
 
         vm.saveProfile = function () {
-            studentDataService.saveProfileInfo(vm.studentInfo.id, vm.studentInfo.firstName, vm.studentInfo.lastName, vm.studentInfo.phone)
+            studentDataService.saveProfileInfo(vm.studentInfo)
             .success(function (res) {
-                $scope.showNotifyPopUp('Profile data was sucessfully saved!')
-                $timeout($scope.closePopUp, 5000);
+                $scope.showNotifyPopUp('Student data was sucessfully saved!')
+                $timeout($scope.closePopUp, 4000);
             })
             .error(function (res) {
-                $scope.showNotifyPopUp('Error: profile data was not saved!')
-                $timeout($scope.closePopUp, 5000);
+                $scope.showNotifyPopUp('Error: student data was not saved!')
+                $timeout($scope.closePopUp, 4000);
             });
             vm.modelChanged = false;
         };
+
+        vm.addViolation = function () {
+            vm.currentViolation && vm.studentInfo.violations.push(vm.currentViolation);
+        }
+
+        vm.clearViolations = function () {
+            vm.studentInfo.violations = [];
+        }
 
         vm.cancelProfile = function () {
             activate();
@@ -43,7 +55,11 @@
         }; // Cancel unsaved changes in the profile
 
         vm.validationCheck = function () {
-            return $scope.profileInfo.firstName.$valid && $scope.profileInfo.lastName.$valid && $scope.profileInfo.phone.$valid && vm.modelChanged;
-        }; 
+            return true; //$scope.studentInfo.firstName.$valid && $scope.studentInfo.lastName.$valid && $scope.Info.phone.$valid && vm.modelChanged;
+        };
+
+        vm.toggleAddViolationFrame = function () {
+
+        }
     };
 })(angular);

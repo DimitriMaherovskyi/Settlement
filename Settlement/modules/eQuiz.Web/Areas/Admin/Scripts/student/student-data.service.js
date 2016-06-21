@@ -9,21 +9,22 @@
     function studentDataService($http) {
 
         var service = {
-            getStudentInfo: getStudentInfo,
-            saveProfileInfo: saveProfileInfo
+            getStudentInfo: getStudentInfoMock,
+            saveProfileInfo: saveProfileInfo,
+            getViolations: getViolationsMock
         };
 
         return service;
 
-        //function getStudentInfo(studentId) {
-        //    var promise = $http({
-        //        url: '/Admin/Student/GetStudentInfo',
-        //        method: "GET",
-        //        params: { id: studentId }
-        //    });
-        //    return promise;
-        //}
         function getStudentInfo(studentId) {
+            var promise = $http({
+                url: '/Admin/Student/GetStudentInfo',
+                method: "GET",
+                params: { id: studentId }
+            });
+            return promise;
+        }
+        function getStudentInfoMock(studentId) {
             return {
                 firstName : 'John',
                 lastName : 'Smith',
@@ -32,15 +33,34 @@
                 paymentTill: '15.08.2017',
                 paidSum: 200,
                 hostel: 8,
-                room: 217
+                room: 217,
+                violations: ['Smoking', 'Unappropriate behavoir']
             }
         }
 
-        function saveProfileInfo(id, firstName, lastName, phone) {
+        function getViolations() {
+            var promise = $http({
+                url: '/Admin/Student/GetVoilations',
+                method: "GET",
+            });
+            return promise;
+        }
+
+        function getViolationsMock() {
+
+            return [
+                'Smoking',
+                'Drinking',
+                'Unappropriate behavior',
+                'Affray'
+            ];
+        }
+
+        function saveProfileInfo(studentInfo) {
             var promise = $http({
                 url: '/Admin/Student/UpdateUserInfo',
                 method: "POST",
-                params: { id: id, firstName: firstName, lastName: lastName, phone: phone }
+                params: { studentInfo: studentInfo }
             });
             //var promise = $http.post("/Admin/Student/UpdateUserInfo", { Id: id, firstName: firstName, lastName: lastName, phone: phone });
             return promise;
