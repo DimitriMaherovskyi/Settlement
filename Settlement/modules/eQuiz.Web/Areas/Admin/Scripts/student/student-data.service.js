@@ -9,51 +9,31 @@
     function studentDataService($http) {
 
         var service = {
-            addComment:addComment,
             getStudentInfo: getStudentInfo,
-            getStudentQuizzes: getStudentQuizzes,
-            getStudentComments: getStudentComments,
             saveProfileInfo: saveProfileInfo
         };
 
         return service;
 
+        //function getStudentInfo(studentId) {
+        //    var promise = $http({
+        //        url: '/Admin/Student/GetStudentInfo',
+        //        method: "GET",
+        //        params: { id: studentId }
+        //    });
+        //    return promise;
+        //}
         function getStudentInfo(studentId) {
-            var promise = $http({
-                url: '/Admin/Student/GetStudentInfo',
-                method: "GET",
-                params: { id: studentId }
-            });
-            return promise;
-        }
-
-        function getStudentQuizzes(studentId) {
-            var promise = $http({
-                url: '/Admin/Student/GetStudentQuizzes',
-                method: "GET",
-                params: { id: studentId }
-            });
-            return promise;
-        }
-
-        function addComment(studentId, adminId, commentText) {
-            var promise = $http({
-                url: '/Admin/Student/AddComment',
-                method: "POST",
-                params: {studentId: studentId, adminId: adminId, comment: commentText}
-            });
-
-            return promise;
-        }
-
-        function getStudentComments(studentId) {
-            var promise = $http({
-                url: '/Admin/Student/GetStudentComments',
-                method: "GET",
-                params: { id: studentId }
-            });
-            //var promise = $http.get("/Admin/Default/GetStudentComments", studentId);
-            return promise;
+            return {
+                firstName : 'John',
+                lastName : 'Smith',
+                institute: 'IKTA',
+                studyGroup: 'ZI-31',
+                paymentTill: '15.08.2017',
+                paidSum: 200,
+                hostel: 8,
+                room: 217
+            }
         }
 
         function saveProfileInfo(id, firstName, lastName, phone) {

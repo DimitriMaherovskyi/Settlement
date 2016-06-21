@@ -56,20 +56,10 @@
                     resolve: {
                         studentInfo: function (studentDataService, $location) {
                             var Id = $location.search().Id;
-                            return studentDataService.getStudentInfo(Id).then(function (respond) {
-                                return respond.data;
-                            })
+                            return studentDataService.getStudentInfo(Id);//.then(function (respond) {
+                               // return respond.data;
+                            //})
                         },
-                        studentQuizzes: function (studentDataService, $location) {
-                            return studentDataService.getStudentQuizzes($location.search().Id).then(function (respond) {
-                                return respond.data;
-                            })
-                        },
-                        studentComments: function (studentDataService, $location) {
-                            return studentDataService.getStudentComments($location.search().Id).then(function (respond) {
-                                return respond.data;
-                            })
-                        }
                     },
                     reloadOnSearch: false
                 })

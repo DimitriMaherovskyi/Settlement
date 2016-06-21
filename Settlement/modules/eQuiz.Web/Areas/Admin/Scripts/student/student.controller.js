@@ -1,14 +1,12 @@
 ﻿(function (angular) {
     angular.module('settlementModule').controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$scope', '$filter', 'studentDataService', '$routeParams', 'studentInfo', 'studentQuizzes', 'studentComments', '$location', '$timeout'];
+    StudentController.$inject = ['$scope', '$filter', 'studentDataService', '$routeParams', 'studentInfo', '$location', '$timeout'];
 
-    function StudentController($scope, $filter, studentDataService, $routeParams, studentInfo, studentQuizzes, studentComments, $location, $timeout) {
+    function StudentController($scope, $filter, studentDataService, $routeParams, studentInfo, $location, $timeout) {
         var vm = this;
 
         vm.studentInfo = studentInfo;
-        vm.studentQuizzes = studentQuizzes;        
-        vm.studentComments = studentComments;
         var map = { 17: false, 13: false };
         $scope.showNotification = false;
         $scope.showWarning = false;
@@ -23,16 +21,6 @@
                 vm.studentInfo = response.data;
                 return vm.studentInfo;
             });
-            studentDataService.getStudentQuizzes($location.search().Id).then(function (response) {
-                vm.studentQuizzes = response.data;
-                return vm.studentQuizzes;
-            });
-            studentDataService.getStudentComments($location.search().Id).then(function (response) {
-                vm.studentComments = response.data;
-                vm.studentComments = sortByDate(vm.studentComments);
-                    return vm.studentComments;
-                });
-
             generatePredicate();
             }
 

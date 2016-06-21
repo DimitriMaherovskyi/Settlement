@@ -25,7 +25,7 @@
                  </div>
                 <div position:relative">
                     <label>Payment till:</label>
-                    <input type="date" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
+                    <input type="text" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
                 </div>
             </form>
         </div>
@@ -38,7 +38,7 @@
             <label>Room:</label>
             <input type="text" name="room" style="width:200px" ng-model="sc.studentInfo.room" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
             <label>Paid till</label>
-            <input type="date" name="paidTill" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
+            <input type="text" name="paidTill" style="width:200px" ng-model="sc.studentInfo.paymentTill" readonly /><br /><br />
         </div>
 
         <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
