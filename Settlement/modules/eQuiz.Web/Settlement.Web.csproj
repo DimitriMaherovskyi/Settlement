@@ -116,6 +116,7 @@
     <Content Include="Areas\Admin\Scripts\review\start-from.filter.js" />
     <Content Include="Areas\Admin\Scripts\review\table-height.directive.js" />
     <Content Include="Areas\Admin\Scripts\review\trustAsHtml.filter.js" />
+    <Content Include="Areas\Admin\Scripts\rooms-review.html" />
     <Content Include="Areas\Admin\Scripts\roomsReview\rooms-review-data.service.js" />
     <Content Include="Areas\Admin\Scripts\roomsReview\rooms-review.controller.js" />
     <Content Include="Areas\Admin\Scripts\shared\loading-screen.directive.js" />

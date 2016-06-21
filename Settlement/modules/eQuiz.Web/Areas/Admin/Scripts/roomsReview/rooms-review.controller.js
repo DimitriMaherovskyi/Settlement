@@ -12,9 +12,6 @@
                 vm.roomsList = result;
             })
         }
-
-
-  
     };
 
 })(angular);
