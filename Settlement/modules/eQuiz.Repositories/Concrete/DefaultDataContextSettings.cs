@@ -1,11 +1,11 @@
-﻿using eQuiz.Repositories.Abstract;
+﻿using Settlement.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eQuiz.Repositories.Concrete
+namespace Settlement.Repositories.Concrete
 {
     public class DefaultDataContextSettings : IDataContextSettings
     {

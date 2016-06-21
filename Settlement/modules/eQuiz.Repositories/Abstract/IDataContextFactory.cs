@@ -1,4 +1,4 @@
-﻿namespace eQuiz.Repositories.Abstract
+﻿namespace Settlement.Repositories.Abstract
 {
     public interface IDataContextFactory
     {

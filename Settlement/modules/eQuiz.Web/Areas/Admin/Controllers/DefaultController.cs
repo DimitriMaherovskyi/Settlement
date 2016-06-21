@@ -1,11 +1,11 @@
-﻿using eQuiz.Web.Code;
+﻿using Settlement.Web.Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace eQuiz.Web.Areas.Admin.Controllers
+namespace Settlement.Web.Areas.Admin.Controllers
 {
     public class DefaultController : BaseController
     {

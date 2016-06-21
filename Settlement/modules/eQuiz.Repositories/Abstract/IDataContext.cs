@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace eQuiz.Repositories.Abstract
+namespace Settlement.Repositories.Abstract
 {
     public interface IDataContext : IDisposable
     {

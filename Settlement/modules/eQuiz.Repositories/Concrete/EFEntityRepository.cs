@@ -1,10 +1,10 @@
-﻿using eQuiz.Repositories.Abstract;
+﻿using Settlement.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace eQuiz.Repositories.Concrete
+namespace Settlement.Repositories.Concrete
 {
     public class EFEntityRepository<TKey, TEntity>: BaseRepository, IEntityRepository<TKey, TEntity> where TEntity: class                                                                                 
     {

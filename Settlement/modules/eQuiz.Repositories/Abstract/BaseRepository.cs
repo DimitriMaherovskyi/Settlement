@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using eQuiz.Repositories.Extentions;
+using Settlement.Repositories.Extentions;
 
-namespace eQuiz.Repositories.Abstract
+namespace Settlement.Repositories.Abstract
 {
     public abstract class BaseRepository
     {

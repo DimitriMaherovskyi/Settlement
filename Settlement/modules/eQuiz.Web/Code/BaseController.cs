@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace eQuiz.Web.Code
+namespace Settlement.Web.Code
 {
     public abstract class BaseController: Controller
     {

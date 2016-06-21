@@ -1,13 +1,13 @@
-﻿using eQuiz.Repositories.Abstract;
+﻿using Settlement.Repositories.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using eQuiz.Entities;
-using eQuiz.Web.Models;
+using Settlement.Entities;
+using Settlement.Web.Models;
 
-namespace eQuiz.Web.Controllers
+namespace Settlement.Web.Controllers
 {
     public class StudentReviewController : Controller
     {

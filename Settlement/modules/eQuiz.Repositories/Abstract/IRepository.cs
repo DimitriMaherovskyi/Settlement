@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace eQuiz.Repositories.Abstract
+namespace Settlement.Repositories.Abstract
 {
     public interface IRepository
     {

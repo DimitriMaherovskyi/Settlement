@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace eQuiz.Web
+namespace Settlement.Web
 {
     public class RouteConfig
     {
@@ -17,7 +17,7 @@ namespace eQuiz.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new [] {"eQuiz.Web.Controllers" }
+                namespaces: new [] {"Settlement.Web.Controllers" }
             );
         }
     }

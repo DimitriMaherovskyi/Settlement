@@ -1,6 +1,6 @@
-﻿using eQuiz.Repositories.Abstract;
+﻿using Settlement.Repositories.Abstract;
 
-namespace eQuiz.Repositories.Concrete
+namespace Settlement.Repositories.Concrete
 {
     public class EFDataContextFactory : IDataContextFactory
     {

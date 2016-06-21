@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eQuiz.Repositories.Abstract
+namespace Settlement.Repositories.Abstract
 {
     public interface IDataContextSettings
     {

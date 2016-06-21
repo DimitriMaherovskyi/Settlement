@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace eQuiz.Web.Areas.Admin
+namespace Settlement.Web.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration 
     {

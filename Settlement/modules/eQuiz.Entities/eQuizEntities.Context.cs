@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eQuiz.Entities
+namespace Settlement.Entities
 {
     using System;
     using System.Data.Entity;

@@ -1,4 +1,4 @@
-﻿using eQuiz.Web.Controllers;
+﻿using Settlement.Web.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace eQuiz.Web.Tests.Controllers
+namespace Settlement.Web.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using eQuiz.Repositories.Abstract;
-using eQuiz.Repositories.Concrete;
+using Settlement.Repositories.Abstract;
+using Settlement.Repositories.Concrete;
 
-namespace eQuiz.Repositories
+namespace Settlement.Repositories
 {
     public class AutofacModule: Module
     {

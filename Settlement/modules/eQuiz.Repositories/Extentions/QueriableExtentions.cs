@@ -7,7 +7,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
-namespace eQuiz.Repositories.Extentions
+namespace Settlement.Repositories.Extentions
 {
     public static class QueriableExtentions
     {

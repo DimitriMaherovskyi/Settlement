@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using eQuiz.Repositories.Abstract;
-using eQuiz.Repositories.Concrete;
+using Settlement.Repositories.Abstract;
+using Settlement.Repositories.Concrete;
 using System.Configuration;
 
 
-namespace eQuiz.Web
+namespace Settlement.Web
 {
 	public class AutofacModule: Module
     {

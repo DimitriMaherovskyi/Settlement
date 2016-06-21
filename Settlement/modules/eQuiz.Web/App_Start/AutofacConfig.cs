@@ -2,7 +2,7 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 
-namespace eQuiz.Web
+namespace Settlement.Web
 {
     public static class AutofacConfig
     {
@@ -10,8 +10,8 @@ namespace eQuiz.Web
         {
             var builder = new ContainerBuilder();            
 
-            builder.RegisterModule<eQuiz.Web.AutofacModule>();            
-            builder.RegisterModule<eQuiz.Repositories.AutofacModule>();
+            builder.RegisterModule<Settlement.Web.AutofacModule>();            
+            builder.RegisterModule<Settlement.Repositories.AutofacModule>();
 
             //builder.Register(c => ServiceLocator.Current).As<IServiceLocator>();
 

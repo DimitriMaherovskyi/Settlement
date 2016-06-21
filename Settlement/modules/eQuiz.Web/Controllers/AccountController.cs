@@ -1,11 +1,11 @@
-﻿using eQuiz.Web.Code;
+﻿using Settlement.Web.Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace eQuiz.Web.Controllers
+namespace Settlement.Web.Controllers
 {
     public class AccountController : BaseController
     {
@@ -20,10 +20,10 @@ namespace eQuiz.Web.Controllers
         {
             switch(role)
             {
-                case "moderator":
-                    return RedirectToAction("Index", "Default", new { area = "Moderator" });
-                case "student":
-                    return RedirectToAction("Dashboard", "Default", new { area = "Student" });                    
+                case "dean":
+                    return RedirectToAction("Index", "Default", new { area = "Dean" });
+                case "warden":
+                    return RedirectToAction("Index", "Default", new { area = "Warden" });                    
                 case "admin":
                     return RedirectToAction("Index", "Default", new { area = "Admin" });                    
                 default:
