@@ -23,14 +23,31 @@
                         studentInfo: function (studentDataService, $location) {
                             var Id = $location.search().Id;
                             return studentDataService.getStudentInfo(Id);
-                            },
+                        },
 
                         violations: function (studentDataService) {
-                            return studentDataService.getViolations();//.then(function (respond) {
+                            return studentDataService.getViolations();
+                        },
+                        hostels: function (studentDataService) {
+                            return studentDataService.getHostels();
+                        },
+                        rooms: function (studentDataService) {
+                            return studentDataService.getRooms();
+                        }
+                    },
+                    reloadOnSearch: false
+                })
+                .when('/Index/Quotes', {
+                    templateUrl: '/Areas/Admin/Scripts/quotes-review.html',
+                    controller: 'QuotesReviewController',
+                    controllerAs: 'qrc',
+                    resolve: {
+                        quotesList: function (quotesReviewDataService) {
+                            return roomsReviewDataService.getQuotes();//.then(function (respond) {
                             // return respond.data;
                             //})
-                            }
                         },
+                    },
                     reloadOnSearch: false
                 })
                  .when('/Index/Rooms', {

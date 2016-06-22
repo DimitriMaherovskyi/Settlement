@@ -28,16 +28,30 @@
         </div>
 
         <div id="paymentTab" ng-show="sc.currentTab=='Payment'">
-            <label class="profileLabel">Paid sum:</label>
-            <input type="text" name="paidSum" class="profileField" ng-model="sc.studentInfo.paidSum" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
             <label class="profileLabel">Hostel:</label>
-            <input type="text" name="hostel" class="profileField" ng-model="sc.studentInfo.Hostel" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <input type="text" name="hostel" class="profileField" ng-model="sc.studentInfo.Hostel" ng-change="sc.modelChanged = true;" class="showValidation" readonly required /><br /><br />
             <label class="profileLabel">Room:</label>
-            <input type="text" name="room" class="profileField" ng-model="sc.studentInfo.Room" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+            <input type="text" name="room" class="profileField" ng-model="sc.studentInfo.Room" ng-change="sc.modelChanged = true;" class="showValidation" readonly required /><br /><br />
             <label class="profileLabel">Paid till:</label>
             <input type="text" name="paidTill" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
-            <button class="profileButton" >Add pay</button>
-            <button class="profileButton" >Add quote</button>
+            <button class="profileButton" ng-click="sc.checkInBoxOpened = !sc.checkInBoxOpened">Check in</button>
+            <button class="profileButton" ng-click="sc.checkOut()">Check out</button>
+            <button class="profileButton" ng-click="sc.addPayBoxOpened = !sc.addPayBoxOpened">Add pay</button>
+
+            <div id="checkInBox" ng-show="sc.checkInBoxOpened == true">
+                Choose hostel:
+                <span>
+                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenHostel" ng-options="h for h in sc.hostels"></select>
+                </span>
+                <span>
+                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenRoom" ng-options="r for r in sc.rooms"></select>
+                </span>
+                <button ng-click="sc.checkIn()">Check in</button>
+            </div>
+
+            <div id="addPayBox" ng-show="sc.addPayBoxOpened == true">
+                ADD PAY HERE
+            </div>
         </div>
 
         <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
