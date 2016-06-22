@@ -86,6 +86,7 @@ namespace Settlement.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public JsonResult GetRooms()
         {
             var result = new List<object>();
@@ -97,6 +98,41 @@ namespace Settlement.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region Post methods
+
+        [HttpPost]
+        public void SaveStudentProfileInfo(int id, string name, string surname, string studyGroup, string institute)
+        {
+            var student = _repository.GetSingle<Student>(s => s.Id == id);
+
+            student.Firstname = name;
+            student.Surname = surname;
+            student.StudyGroup = studyGroup;
+            student.Insitute = institute;
+
+            _repository.Update<Student>(student);
+        }
+
+        [HttpPost]
+        public void AddViolation(int studentId, int violationId, DateTime time)
+        {
+            var violation = new StudentViolation();
+            violation.StudentId = studentId;
+            violation.ViolationId = violationId;
+            violation.Time = time;
+
+            _repository.Insert<StudentViolation>(violation);
+        }
+
+        //To do tomorrow
+        [HttpPost]
+        public void AddPayment()
+        {
+
         }
 
         #endregion
