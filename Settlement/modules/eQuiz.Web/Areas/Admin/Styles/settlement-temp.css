@@ -1,4 +1,8 @@
-﻿.profileButton
+﻿.student-with-problems {
+    background-color:pink;
+}
+
+.profileButton
 {
     font-size:17px;
     margin:20px;
