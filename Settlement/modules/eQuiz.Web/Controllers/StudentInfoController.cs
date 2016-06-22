@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Settlement.Entities;
+using Settlement.Web.Models;
 
 namespace Settlement.Web.Controllers
 {
@@ -30,20 +31,18 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetStudentInfo(int id)
         {
-            var result = new object();
-
             var student = _repository.GetSingle<Student>(s => s.Id == id);
             var studentRoom = _repository.GetSingle<StudentRoom>(sr => sr.StudentId == id);
 
-            var room = _repository.GetSingle<Room>(r => r.Id == studentRoom.RoomId);
+            var room = _repository.GetSingle<Entities.Room>(r => r.Id == studentRoom.RoomId);
             var hostel = _repository.GetSingle<Hostel>(h => h.Id == room.HostelId);
 
             var studentViolations = _repository.Get<StudentViolation>(sv => sv.StudentId == id);
-            var violations = _repository.Get<Violation>();
+            var violations = _repository.Get<Entities.Violation>();
 
             var query = from v in violations
                         join sv in studentViolations on v.Id equals sv.ViolationId
-                        select v;
+                        select new Models.Violation(v.Id, v.Name, v.Penalty);
 
             var vv = new List<object>();
 
@@ -52,18 +51,7 @@ namespace Settlement.Web.Controllers
                 vv.Add(item);
             }
 
-            result = new
-            {
-                Id = id,
-                Name = student.Firstname,
-                Surname = student.Surname,
-                Institute = student.Insitute,
-                Group = student.StudyGroup,
-                LivingTill = studentRoom.DateOut,
-                Room = room.Number,
-                Hostel = hostel.Number,
-                Violations = vv
-            };
+            var result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut, room.Number, hostel.Number, vv);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -71,12 +59,45 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetViolationsList()
         {
-            var violations = _repository.Get<Violation>();
+            var result = new List<object>();
+            var violations = _repository.Get<Entities.Violation>();
 
-            return Json(violations, JsonRequestBehavior.AllowGet);
+            foreach(var item in violations)
+            {
+                result.Add(new Models.Violation(item.Id, item.Name, item.Penalty));
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
+        [HttpGet]
+        public JsonResult GetHostels()
+        {
+            var result = new List<Test>();
+            var hostels = _repository.Get<Hostel>();
+
+            foreach (var item in hostels)
+            {
+                var t = new Test(item.Id);
+                result.Add(t);
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetRooms()
+        {
+            var result = new List<object>();
+            var rooms = _repository.Get<Entities.Room>();
+
+            foreach (var item in rooms)
+            {
+                result.Add(new Models.Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor));
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
     }

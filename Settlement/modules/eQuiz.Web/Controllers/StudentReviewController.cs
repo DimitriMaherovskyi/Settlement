@@ -37,7 +37,7 @@ namespace Settlement.Web.Controllers
             var students = _repository.Get<Student>();
 
             var studentRooms = _repository.Get<StudentRoom>();
-            var rooms = _repository.Get<Room>();
+            var rooms = _repository.Get<Entities.Room>();
             var hostels = _repository.Get<Hostel>();
 
             var studentBenefits = _repository.Get<StudentBenefit>();
@@ -79,7 +79,7 @@ namespace Settlement.Web.Controllers
             var students = _repository.Get<Student>();
 
             var studentRooms = _repository.Get<StudentRoom>();
-            var rooms = _repository.Get<Room>();
+            var rooms = _repository.Get<Entities.Room>();
             var hostels = _repository.Get<Hostel>();
 
             var studentBenefits = _repository.Get<StudentBenefit>();
