@@ -40,7 +40,7 @@
 
         function getViolations() {
             var promise = $http({
-                url: '/StudentInfo/GetVoilationsList',
+                url: '/StudentInfo/GetViolationsList',
                 method: "GET",
             });
             return promise;
