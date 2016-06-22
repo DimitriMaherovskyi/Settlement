@@ -109,6 +109,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Scripts\hostel-info.html" />
+    <Content Include="Areas\Admin\Scripts\hostelInfo\hostelInfo-data.service.js" />
+    <Content Include="Areas\Admin\Scripts\hostelInfo\hostelInfo.controller.js" />
+    <Content Include="Areas\Admin\Scripts\quote-review.html" />
+    <Content Include="Areas\Admin\Scripts\quoteReview\quoteReview-data.service.js" />
+    <Content Include="Areas\Admin\Scripts\quoteReview\quoteReview.controller.js" />
     <Content Include="Areas\Admin\Scripts\review\group.filter.js" />
     <Content Include="Areas\Admin\Scripts\review\highlight.filter.js" />
     <Content Include="Areas\Admin\Scripts\review\review.controller.js" />
