@@ -50,6 +50,19 @@
                     },
                     reloadOnSearch: false
                 })
+
+                .when('/Index/Hostel', {
+                    templateUrl: '/Areas/Admin/Scripts/hostel-info.html',
+                    controller: 'HostelInfoController',
+                    controllerAs: 'hc',
+                    resolve: {
+                        hostelInfo: function (hostelInfoDataService, $location) {
+                            var Id = $location.search().Id;
+                            return hostelInfoDataService.getHostelInfo(Id);
+                        },
+                    },
+                    reloadOnSearch: false
+                })
                  .when('/Index/Rooms', {
                      templateUrl: '/Areas/Admin/Scripts/rooms-review.html',
                      controller: 'RoomsReviewController',

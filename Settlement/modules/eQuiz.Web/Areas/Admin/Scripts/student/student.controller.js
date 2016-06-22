@@ -62,11 +62,11 @@
         };
 
         vm.checkIn = function() {
-            studentDataService.checkIn(vm.studendId, vm.chosenRoom);
+            studentDataService.checkIn(vm.studendInfo.Id, vm.chosenRoom);
         }
 
         vm.checkOut = function () {
-            studentDataService.checkOut(vm.student.Id);
+            studentDataService.checkOut(vm.studentInfo.Id);
         }
 
         vm.addPay = function () {

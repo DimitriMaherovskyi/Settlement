@@ -1,55 +1,39 @@
 ﻿(function (angular) {
     angular.module('settlementModule').controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$scope', '$filter', 'studentDataService', '$routeParams', 'studentInfo', 'violations', '$location', '$timeout'];
+    StudentController.$inject = ['$scope', '$filter', 'hostelDataService', '$routeParams', 'hostelInfo', '$location', '$timeout'];
 
-    function StudentController($scope, $filter, studentDataService, $routeParams, studentInfo, violations, $location, $timeout) {
+    function StudentController($scope, $filter, hostelDataService, $routeParams, hostelInfo, $location, $timeout) {
         var vm = this;
 
-        vm.studentInfo = studentInfo;
-        vm.violationsList = violations;
+        vm.hostelInfo = hostelInfo;
         
         $scope.showNotification = false;
         $scope.showWarning = false;
  
-        vm.currentTab = $location.hash();
+        vm.currentTab = 'Student';
         vm.modelChanged = false; // Indicates whether data in the model was changed
-        vm.checkInBoxOpened = false;
-        vm.addPayBoxOpened = false;
 
         function activate() {
-            studentDataService.getStudentInfo($location.search().Id).then(function (response) {
-                vm.studentInfo = response.data;
-                return vm.studentInfo;
+            hostelDataService.getHostelInfo().then(function (response) {
+                vm.hostelInfo = response.data;
+                return vm.hostelInfo;
             });
-            studentDataService.getViolations().then(function (response) {
-                vm.violationsList = response.data;
-                return vm.violationsList;
-            });
-
             }
 
         vm.saveProfile = function () {
-            studentDataService.saveProfileInfo(vm.studentInfo)
+            studentDataService.saveHostelProfileInfo(vm.hostelInfo)
             .success(function (res) {
-                $scope.showNotifyPopUp('Student data was sucessfully saved!')
+                $scope.showNotifyPopUp('Hostel data was sucessfully saved!')
                 vm.modelChanged = false;
                 $timeout($scope.closePopUp, 4000);
             })
             .error(function (res) {
-                $scope.showNotifyPopUp('Error: student data was not saved!')
+                $scope.showNotifyPopUp('Error: hostel data was not saved!')
                 $timeout($scope.closePopUp, 4000);
             });
             
         };
-
-        vm.addViolation = function () {
-            vm.currentViolation && vm.studentInfo.Violations.push(vm.currentViolation);
-        }
-
-        vm.clearViolations = function () {
-            vm.studentInfo.Violations = [];
-        }
 
         vm.cancelProfile = function () {
             activate();
@@ -57,21 +41,8 @@
         }; // Cancel unsaved changes in the profile
 
         vm.validationCheck = function () {
-            return vm.studentInfo.Name && vm.studentInfo.Surname && vm.studentInfo.Institute && vm.modelChanged == true
-            vm.studentInfo.Group;
+            return vm.hostelInfo.Name && vm.hostelInfo.Address && vm.hostelInfo.MonthPaymentSum && vm.modelChanged == true;
         };
-
-        vm.checkIn = function() {
-            studentDataService.checkIn(vm.studendId, vm.chosenRoom);
-        }
-
-        vm.checkOut = function () {
-            studentDataService.checkOut(vm.student.Id);
-        }
-
-        vm.addPay = function () {
-
-        }
 
     };
 })(angular);
