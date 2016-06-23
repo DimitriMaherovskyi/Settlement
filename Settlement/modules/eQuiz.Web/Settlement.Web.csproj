@@ -205,12 +205,14 @@
     <Compile Include="Code\BaseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HostelRoomsController.cs" />
     <Compile Include="Controllers\StudentInfoController.cs" />
     <Compile Include="Controllers\StudentReviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\RoomStuds.cs" />
     <Compile Include="Models\StudentInfo.cs" />
     <Compile Include="Models\StudentsReview.cs" />
     <Compile Include="Models\Hostel.cs" />
