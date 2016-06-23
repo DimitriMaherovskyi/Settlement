@@ -35,18 +35,21 @@
                     UserId: 1,
                     Name: 'John Smith',
                     Status: 'Admin',
+                    Institute: 'IKTA, IKNI',
                     Quote: 200
                 },
                 {
                     UserId: 2,
                     Name: 'Jane Smith',
                     Status: 'Warden',
+                    Institute: 'IARX',
                     Quote: 100
                 },
                 {
                     UserId: 3,
                     Name: 'Jack Brown',
                     Status: 'Dean',
+                    Institute: 'INEM',
                     Quote: 50
                 }
             ]
