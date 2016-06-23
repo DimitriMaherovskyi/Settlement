@@ -11,7 +11,7 @@
         var service = {
             getStudentInfo: getStudentInfo,
             saveProfileInfo: saveProfileInfo,
-            getViolations: getViolationsMock,
+            getViolations: getViolations,
             getHostels: getHostels,
             getRooms: getRooms,
             checkIn: checkIn,

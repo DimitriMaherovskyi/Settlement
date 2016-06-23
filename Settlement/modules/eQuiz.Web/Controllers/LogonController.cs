@@ -12,7 +12,6 @@ namespace Settlement.Web.Views.Account
         [HttpGet]
         public ActionResult Login()
         {
-            HttpContext.User.
             return View();
         }
 

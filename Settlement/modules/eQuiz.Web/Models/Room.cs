@@ -11,13 +11,15 @@ namespace Settlement.Web.Models
         public int Number { get; set; }
         public int AmountPlaces { get; set; }
         public int RoomFloor { get; set; }
+        public int HostelId { get; set; }
 
-        public Room(int id, int number, int amountPlaces, int roomFloor)
+        public Room(int id, int number, int amountPlaces, int roomFloor, int hostelId)
         {
             Id = id;
             number = Number;
             amountPlaces = AmountPlaces;
             RoomFloor = roomFloor;
+            HostelId = hostelId;
         }
     }
 }

@@ -128,6 +128,7 @@
     <Content Include="Areas\Admin\Scripts\shared\loading-screen.directive.js" />
     <Content Include="Areas\Admin\Scripts\shared\pop-up-window.directive.js" />
     <Content Include="Areas\Admin\Scripts\shared\routing.js" />
+    <Content Include="Areas\Admin\Scripts\student\hostel-room.filter.js" />
     <Content Include="Areas\Admin\Scripts\student\student.controller.js" />
     <Content Include="Areas\Admin\Scripts\student\student-data.service.js" />
     <Content Include="Areas\Admin\Scripts\student.html" />
@@ -212,7 +213,7 @@
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\StudentInfo.cs" />
     <Compile Include="Models\StudentsReview.cs" />
-    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\Hostel.cs" />
     <Compile Include="Models\Violation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\LogonController.cs" />

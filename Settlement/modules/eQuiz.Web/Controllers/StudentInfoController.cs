@@ -35,7 +35,7 @@ namespace Settlement.Web.Controllers
             var studentRoom = _repository.GetSingle<StudentRoom>(sr => sr.StudentId == id);
 
             var room = _repository.GetSingle<Entities.Room>(r => r.Id == studentRoom.RoomId);
-            var hostel = _repository.GetSingle<Hostel>(h => h.Id == room.HostelId);
+            var hostel = _repository.GetSingle<Entities.Hostel>(h => h.Id == room.HostelId);
 
             var studentViolations = _repository.Get<StudentViolation>(sv => sv.StudentId == id);
             var violations = _repository.Get<Entities.Violation>();
@@ -74,12 +74,12 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetHostels()
         {
-            var result = new List<Test>();
-            var hostels = _repository.Get<Hostel>();
+            var result = new List<Models.Hostel>();
+            var hostels = _repository.Get<Entities.Hostel>();
 
             foreach (var item in hostels)
             {
-                var t = new Test(item.Id);
+                var t = new Models.Hostel(item.Id, item.Number, item.Address, item.MonthPaymentSum);
                 result.Add(t);
             }
 
@@ -89,12 +89,12 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetRooms()
         {
-            var result = new List<object>();
+            var result = new List<Models.Room>();
             var rooms = _repository.Get<Entities.Room>();
 
             foreach (var item in rooms)
             {
-                result.Add(new Models.Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor));
+                result.Add(new Models.Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor, item.HostelId));
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

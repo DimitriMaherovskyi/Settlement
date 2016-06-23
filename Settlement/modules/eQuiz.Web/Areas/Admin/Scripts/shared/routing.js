@@ -22,17 +22,25 @@
                     resolve: {
                         studentInfo: function (studentDataService, $location) {
                             var Id = $location.search().Id;
-                            return studentDataService.getStudentInfo(Id);
+                            return studentDataService.getStudentInfo(Id).then(function (respond) {
+                                return respond.data;
+                            });
                         },
 
                         violations: function (studentDataService) {
-                            return studentDataService.getViolations();
+                            return studentDataService.getViolations().then(function (respond) {
+                                return respond.data;
+                            });
                         },
                         hostels: function (studentDataService) {
-                            return studentDataService.getHostels();
+                            return studentDataService.getHostels().then(function (respond) {
+                                return respond.data;
+                            });
                         },
                         rooms: function (studentDataService) {
-                            return studentDataService.getRooms();
+                            return studentDataService.getRooms().then(function (respond) {
+                                return respond.data;
+                            });
                         }
                     },
                     reloadOnSearch: false

@@ -1,13 +1,16 @@
 ﻿(function (angular) {
     angular.module('settlementModule').controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$scope', '$filter', 'studentDataService', '$routeParams', 'studentInfo', 'violations', '$location', '$timeout'];
+    StudentController.$inject = ['$scope', '$filter', 'studentDataService', '$routeParams', 'studentInfo', 'violations', 'hostels', 'rooms', '$location', '$timeout'];
 
-    function StudentController($scope, $filter, studentDataService, $routeParams, studentInfo, violations, $location, $timeout) {
+    function StudentController($scope, $filter, studentDataService, $routeParams, studentInfo, violations, hostels, rooms, $location, $timeout) {
         var vm = this;
 
         vm.studentInfo = studentInfo;
         vm.violationsList = violations;
+        vm.hostels = hostels;
+        vm.rooms = rooms;
+        vm.currentViolation = violations[0];
         
         $scope.showNotification = false;
         $scope.showWarning = false;
@@ -44,7 +47,17 @@
         };
 
         vm.addViolation = function () {
-            vm.currentViolation && vm.studentInfo.Violations.push(vm.currentViolation);
+            var result = vm.studentInfo.Violations.filter(function (v) {
+                return v.Name === vm.currentViolation.Name;
+            })[0];
+            if (result == undefined) {
+                vm.studentInfo.Violations.push(vm.currentViolation);
+                vm.modelChanged = true;
+            }
+            else {
+                $scope.showNotifyPopUp('Error: there is such violation already!')
+                $timeout($scope.closePopUp, 3000);
+            }
         }
 
         vm.clearViolations = function () {

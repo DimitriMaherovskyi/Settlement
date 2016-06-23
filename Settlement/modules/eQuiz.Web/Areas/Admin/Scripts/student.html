@@ -41,10 +41,10 @@
             <div id="checkInBox" ng-show="sc.checkInBoxOpened == true">
                 Choose hostel:
                 <span>
-                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenHostel" ng-options="h for h in sc.hostels"></select>
+                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenHostel" ng-options="h.Number for h in sc.hostels"></select>
                 </span>
                 <span>
-                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenRoom" ng-options="r for r in sc.rooms"></select>
+                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenRoom" ng-options="r.Number for r in sc.rooms | hostel: sc.chosenHostel.Id"></select>
                 </span>
                 <button ng-click="sc.checkIn()">Check in</button>
             </div>
@@ -57,12 +57,12 @@
         <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
                <h3>Violations:</h3>
                 <div class="violation" ng-repeat="v in sc.studentInfo.Violations track by $index">
-                    {{v}}
+                    {{v.Name}}
                 </div>
             <br />
                 <div style="border-style:inset; border-width:1px;border-color:black; width:500px">
                     <span>
-                        <select style="margin:15px; font-size:17px " ng-model="sc.currentViolation" ng-options="v for v in sc.violationsList"></select>
+                        <select style="margin:15px; font-size:17px " ng-model="sc.currentViolation" ng-options="v.Name for v in sc.violationsList"></select>
                     </span>
                     <br />
                     <br />
