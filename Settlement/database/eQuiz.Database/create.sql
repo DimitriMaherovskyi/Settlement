@@ -103,6 +103,7 @@ CREATE TABLE [tblStudentViolation]
 [ViolationId] INT NOT NULL,
 [StudentId] INT NOT NULL,
 [Time] DATETIME NULL
+CONSTRAINT [PK_tblStudentViolation_ID] PRIMARY KEY ([Id])
 );
 
 CREATE TABLE [tblPayment]
