@@ -5,7 +5,6 @@
 
     function QuotesReviewController($scope, $filter, quoteReviewDataService, quotesList) {
         var vm = this;
-
         var orderBy = $filter('orderBy');
         vm.search = ''; // Represents search field on the form
         vm.myPredicate = null;
@@ -14,7 +13,9 @@
         vm.resultsCount = [10, 25, 50, 100]; // Possible numbers of results per page
         vm.selectedGroup = [];
         vm.newQuoteValue;
+        vm.userId;
         vm.changeQuoteBoxOpened = false;
+        vm.quotes = quotesList;
 
         vm.headers = [
     {
@@ -35,14 +36,14 @@
         predicateIndex: 3
     },
         ];
-        vm.quotes = [];
 
         function activate() {
-            vm.quotes = quotesList;
+                quoteReviewDataService.getQuotes();//.then(function (respond) {
+                // vm.quotes = respond.data;
+                //})
             generatePredicate();
         };
-
-        activate();
+        generatePredicate();
 
         function generatePredicate() {
             vm.myPredicate = [null, null, null, null];
@@ -112,13 +113,19 @@
             vm.tablePage = page;
         };
 
-        vm.toggleChangeQuote = function() {
-            vm.changeQuoteBoxOpened = !changeQuoteBoxOpened;
+        vm.toggleChangeQuote = function(id) {
+            vm.changeQuoteBoxOpened = !vm.changeQuoteBoxOpened;
+            vm.userId = id;
+            var result = vm.quotes.filter(function(v) {
+                return v.UserId === id;
+            })[0].Quote;
+            vm.newQuoteValue = result;
             
         };
 
-        vm.saveQuote = function (userId) {
-            quoteReviewDataService.changeQuote(userId, vm.newQuoteValue);
+        vm.saveQuote = function () {
+            quoteReviewDataService.changeQuote(vm.userId, vm.newQuoteValue);
+            activate();
         }
     };
 

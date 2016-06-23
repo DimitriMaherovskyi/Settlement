@@ -8,7 +8,7 @@
     </div>
 
     <div style="overflow-x:auto;">
-        <table class="reviewTable">
+        <table class="reviewTable" style="width:80em">
             <thead>
                 <tr>
                     <th ng-repeat="h in qrc.headers">
@@ -20,21 +20,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in qrc.contents = ((qrc.seaqrchFiltered = (qrc.quotes | filter: {Name:qrc.seaqrch})) | startFrom: qrc.tablePage*qrc.resultsPerPage | limitTo:qrc.resultsPerPage)" ng-class="{ 'student-with-problems' : c.HasProblem}" style="height: 50px">
+                <tr ng-repeat="c in qrc.contents = ((qrc.searchFiltered = (qrc.quotes | filter: {Name:qrc.search})) | startFrom: qrc.tablePage*qrc.resultsPerPage | limitTo:qrc.resultsPerPage)" style="height: 50px">
                     <td><a ng-bind-html="c.Name | highlight: qrc.seaqrch">{{c.Name}}</a></td>
                     <td>{{c.Status}}</td>
                     <td>{{c.Institute}}</td>
                     <td>{{c.Quote}}</td>
                     <td>
-                        <button ng-click="qrc.changeQuote(c.UserId)">Change quote</button>
-                        <div ng-show="qrc.changeQuoteBoxOpened">
-                            <input type="number" ng-model="qrc.newQuoteValue"/>
-                            <button ng-disabled="qrc.newQuoteValue && true" ng-click="qrc.saveQuote(c.UserId)">Save new quote</button>
-                        </div>
+                        <button ng-click="qrc.toggleChangeQuote(c.UserId)">Change quote</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div style="z-index:5; border-color:black; border:inset; background-color:white" class="centered" ng-show="qrc.changeQuoteBoxOpened">
+            <input type="number" class="profileField" ng-model="qrc.newQuoteValue" />
+            <button class="profileButton" ng-disabled="!(qrc.newQuoteValue && 1)" ng-click="qrc.saveQuote(c.UserId)">Save new quote</button>
+            <button class="profileButton" ng-click="qrc.toggleChangeQuote(c.UserId)">Cancel</button>
+        </div>
 
         <div layout="row">
             <span>
