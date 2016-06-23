@@ -38,12 +38,12 @@
                     reloadOnSearch: false
                 })
                 .when('/Index/Quotes', {
-                    templateUrl: '/Areas/Admin/Scripts/quotes-review.html',
+                    templateUrl: '/Areas/Admin/Scripts/quote-review.html',
                     controller: 'QuotesReviewController',
                     controllerAs: 'qrc',
                     resolve: {
-                        quotesList: function (quotesReviewDataService) {
-                            return roomsReviewDataService.getQuotes();//.then(function (respond) {
+                        quotesList: function (quoteReviewDataService) {
+                            return quoteReviewDataService.getQuotes();//.then(function (respond) {
                             // return respond.data;
                             //})
                         },

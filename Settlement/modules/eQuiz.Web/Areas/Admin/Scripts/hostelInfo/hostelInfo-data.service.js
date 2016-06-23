@@ -4,9 +4,9 @@
         .module("settlementModule")
         .factory("hostelDataService", hostelDataService);
 
-    studentDataService.$inject = ["$http"];
+    hostelDataService.$inject = ["$http"];
 
-    function studentDataService($http) {
+    function hostelDataService($http) {
 
         var service = {
             getHostelInfo: getHostels,

@@ -1,9 +1,9 @@
 ﻿(function (angular) {
-    angular.module('settlementModule').controller('QuoteReviewController', ReviewController);
+    angular.module('settlementModule').controller('QuotesReviewController', QuotesReviewController);
 
-    ReviewController.$inject = ['$scope', '$filter', 'quoteReviewDataService', 'quotesList'];
+    QuotesReviewController.$inject = ['$scope', '$filter', 'quoteReviewDataService', 'quotesList'];
 
-    function ReviewController($scope, $filter, quoteReviewDataService, quotesList) {
+    function QuotesReviewController($scope, $filter, quoteReviewDataService, quotesList) {
         var vm = this;
 
         var orderBy = $filter('orderBy');
@@ -13,6 +13,8 @@
         vm.resultsPerPage = 10;
         vm.resultsCount = [10, 25, 50, 100]; // Possible numbers of results per page
         vm.selectedGroup = [];
+        vm.newQuoteValue;
+        vm.changeQuoteBoxOpened = false;
 
         vm.headers = [
     {
@@ -37,12 +39,6 @@
 
         function activate() {
             vm.quotes = quotesList;
-            vm.quotes.forEach(function (currVal, index, array) {
-                currVal.Id = currVal.Id.toString();
-                currVal.Name = currVal.Name.toString();
-                currVal.Status = currVal.Status.toString();
-                currVal.Institute = currVal.Institute.toString();
-            }); // Converts received data to string values
             generatePredicate();
         };
 
@@ -115,6 +111,15 @@
         vm.goToPage = function (page) {
             vm.tablePage = page;
         };
+
+        vm.toggleChangeQuote = function() {
+            vm.changeQuoteBoxOpened = !changeQuoteBoxOpened;
+            
+        };
+
+        vm.saveQuote = function (userId) {
+            quoteReviewDataService.changeQuote(userId, vm.newQuoteValue);
+        }
     };
 
 })(angular);

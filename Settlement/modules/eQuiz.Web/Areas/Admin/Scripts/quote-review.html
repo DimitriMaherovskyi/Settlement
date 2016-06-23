@@ -24,8 +24,14 @@
                     <td><a ng-bind-html="c.Name | highlight: qrc.seaqrch">{{c.Name}}</a></td>
                     <td>{{c.Status}}</td>
                     <td>{{c.Institute}}</td>
-                    <td>{{c.quote}}</td>
-                    <td><button ng-click="qrc.changeQuoteBoxOpened = !qrc.changeQuoteBoxOpened">Change quote</button></td>
+                    <td>{{c.Quote}}</td>
+                    <td>
+                        <button ng-click="qrc.changeQuote(c.UserId)">Change quote</button>
+                        <div ng-show="qrc.changeQuoteBoxOpened">
+                            <input type="number" ng-model="qrc.newQuoteValue"/>
+                            <button ng-disabled="qrc.newQuoteValue && true" ng-click="qrc.saveQuote(c.UserId)">Save new quote</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
