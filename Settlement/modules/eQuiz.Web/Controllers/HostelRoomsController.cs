@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Settlement.Entities;
+using eQuiz.Entities;
 using Settlement.Web.Models;
 
 namespace Settlement.Web.Controllers
@@ -31,7 +31,7 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetHostelInfo(int id)
         {
-            var h = _repository.GetSingle<Entities.Hostel>(hh => hh.Id == id);
+            var h = _repository.GetSingle<eQuiz.Entities.Hostel>(hh => hh.Id == id);
 
             var hostel = new Models.Hostel(h.Id, h.Number, h.Address, h.MonthPaymentSum);
 
@@ -46,8 +46,8 @@ namespace Settlement.Web.Controllers
             var students = _repository.Get<Student>();
 
             var studentRooms = _repository.Get<StudentRoom>();
-            var rooms = _repository.Get<Entities.Room>();
-            var hostels = _repository.Get<Entities.Hostel>();
+            var rooms = _repository.Get<eQuiz.Entities.Room>();
+            var hostels = _repository.Get<eQuiz.Entities.Hostel>();
 
             var studentBenefits = _repository.Get<StudentBenefit>();
             var benefits = _repository.Get<Benefit>();
@@ -94,13 +94,13 @@ namespace Settlement.Web.Controllers
 
         public void UpdateHostelInfo(int id, int number, string address, int monthPayment)
         {
-            var h = _repository.GetSingle<Entities.Hostel>(hh => hh.Id == id);
+            var h = _repository.GetSingle<eQuiz.Entities.Hostel>(hh => hh.Id == id);
 
             h.Number = number;
             h.Address = address;
             h.MonthPaymentSum = monthPayment;
 
-            _repository.Update<Entities.Hostel>(h);
+            _repository.Update<eQuiz.Entities.Hostel>(h);
         }
 
         #endregion

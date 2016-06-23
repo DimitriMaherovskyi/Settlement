@@ -38,6 +38,13 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Distance" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblRoom">
           <Key>
             <PropertyRef Name="Id" />
@@ -103,6 +110,18 @@
           <Property Name="ViolationId" Type="int" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="Time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="RoleId" Type="int" />
         </EntityType>
         <EntityType Name="tblViolation">
           <Key>
@@ -244,11 +263,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblUsers_tblRoles">
+          <End Role="tblRoles" Type="Self.tblRoles" Multiplicity="0..1" />
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tblUsers">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="eQuizModelStoreContainer">
           <EntitySet Name="tblBenefit" EntityType="Self.tblBenefit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHostel" EntityType="Self.tblHostel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPayment" EntityType="Self.tblPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblResidence" EntityType="Self.tblResidence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRoles" EntityType="Self.tblRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoom" EntityType="Self.tblRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoomType" EntityType="Self.tblRoomType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudent" EntityType="Self.tblStudent" Schema="dbo" store:Type="Tables" />
@@ -256,6 +288,7 @@
           <EntitySet Name="tblStudentResidence" EntityType="Self.tblStudentResidence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentRoom" EntityType="Self.tblStudentRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentViolation" EntityType="Self.tblStudentViolation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblViolation" EntityType="Self.tblViolation" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tblPayment_tblStudent" Association="Self.FK_tblPayment_tblStudent">
             <End Role="tblStudent" EntitySet="tblStudent" />
@@ -300,6 +333,10 @@
           <AssociationSet Name="FK_tblStudentViolation_tblViolation" Association="Self.FK_tblStudentViolation_tblViolation">
             <End Role="tblViolation" EntitySet="tblViolation" />
             <End Role="tblStudentViolation" EntitySet="tblStudentViolation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUsers_tblRoles" Association="Self.FK_tblUsers_tblRoles">
+            <End Role="tblRoles" EntitySet="tblRoles" />
+            <End Role="tblUsers" EntitySet="tblUsers" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -362,6 +399,12 @@
           <AssociationSet Name="FK_tblStudentViolation_tblViolation" Association="eQuizModel.FK_tblStudentViolation_tblViolation">
             <End Role="Violation" EntitySet="Violations" />
             <End Role="tblStudentViolation" EntitySet="StudentViolations" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="eQuizModel.Role" />
+          <EntitySet Name="Users" EntityType="eQuizModel.User" />
+          <AssociationSet Name="FK_tblUsers_tblRoles" Association="eQuizModel.FK_tblUsers_tblRoles">
+            <End Role="tblRole" EntitySet="Roles" />
+            <End Role="tblUser" EntitySet="Users" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Benefit">
@@ -625,6 +668,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblUsers" Relationship="eQuizModel.FK_tblUsers_tblRoles" FromRole="tblRole" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="tblRole" Relationship="eQuizModel.FK_tblUsers_tblRoles" FromRole="tblUser" ToRole="tblRole" />
+        </EntityType>
+        <Association Name="FK_tblUsers_tblRoles">
+          <End Type="eQuizModel.Role" Role="tblRole" Multiplicity="0..1" />
+          <End Type="eQuizModel.User" Role="tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -747,6 +823,27 @@
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="ViolationId" ColumnName="ViolationId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="eQuizModel.Role">
+              <MappingFragment StoreEntitySet="tblRoles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="eQuizModel.User">
+              <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

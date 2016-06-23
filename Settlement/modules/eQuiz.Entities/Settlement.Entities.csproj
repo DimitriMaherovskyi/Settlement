@@ -80,6 +80,9 @@
     <Compile Include="Residence.cs">
       <DependentUpon>eQuizEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>eQuizEntities.tt</DependentUpon>
     </Compile>
@@ -99,6 +102,9 @@
       <DependentUpon>eQuizEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="StudentViolation.cs">
+      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
       <DependentUpon>eQuizEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Violation.cs">
