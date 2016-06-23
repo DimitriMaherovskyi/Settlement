@@ -3,6 +3,25 @@ GO
 
 USE [Settlement];
 
+CREATE TABLE [tblUsers]
+(
+[UserId] INT NOT NULL,
+[UserName] NVARCHAR(20) NOT NULL,
+[Password] NVARCHAR(20) NOT NULL,
+[Email] NVARCHAR(40) NOT NULL,
+[CreatedDate] DATETIME NOT NULL,
+[LastLoginDate] DATETIME NULL,
+[RoleId] INT NULL,
+CONSTRAINT [PK_tblUsers_ID] PRIMARY KEY ([UserId])
+);
+
+CREATE TABLE [tblRoles]
+(
+[RoleId] INT NOT NULL,
+[RoleName] nvarchar(30) NOT NULL
+CONSTRAINT [PK_tblRoles_ID] PRIMARY KEY ([RoleId])
+);
+
 CREATE TABLE [tblHostel]
 (
 [Id] INT NOT NULL IDENTITY (1, 1),
@@ -109,6 +128,8 @@ CREATE TABLE [tblStudentBenefit]
 [StudentId] INT NOT NULL,
 CONSTRAINT [PK_tblStudentBenefit_ID] PRIMARY KEY ([Id])
 );
+
+ALTER TABLE [tblUsers] ADD CONSTRAINT [FK_tblUsers_tblRoles] FOREIGN KEY ([RoleId]) REFERENCES [tblRoles]([RoleId]);
 
 ALTER TABLE [tblStudentBenefit] ADD CONSTRAINT [FK_tblStudentBenefit_tblBenefit] FOREIGN KEY ([BenefitId]) REFERENCES [tblBenefit]([Id]);
 
