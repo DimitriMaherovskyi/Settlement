@@ -15,7 +15,7 @@
         return service;
 
         function getStudentsAjax() {
-            var promise = $http.get('/StudentReview/GetStudentsList');
+            var promise = $http.get('/StudentReview/GetStudentsList');          
             return promise;
         }
     }

@@ -199,7 +199,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\StudentInfo.cs" />
     <Compile Include="Models\StudentsReview.cs" />
+    <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\Violation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
