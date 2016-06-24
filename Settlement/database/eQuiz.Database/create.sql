@@ -110,8 +110,9 @@ CREATE TABLE [tblPayment]
 (
 [Id] INT NOT NULL IDENTITY (1, 1),
 [StudentId] INT NOT NULL,
+[HostelId] INT NOT NULL,
 [Amount] INT NOT NULL,
-[TillDate] DATETIME NOT NULL
+[PaymentDate] DATETIME NOT NULL
 CONSTRAINT [PK_tblPayment_ID] PRIMARY KEY ([Id])
 );
 
@@ -129,6 +130,8 @@ CREATE TABLE [tblStudentBenefit]
 [StudentId] INT NOT NULL,
 CONSTRAINT [PK_tblStudentBenefit_ID] PRIMARY KEY ([Id])
 );
+
+ALTER TABLE [tblPayment] ADD CONSTRAINT [FK_tblPayment_tblHostel] FOREIGN KEY ([HostelId]) REFERENCES [tblHostel]([Id])
 
 ALTER TABLE [tblUsers] ADD CONSTRAINT [FK_tblUsers_tblRoles] FOREIGN KEY ([RoleId]) REFERENCES [tblRoles]([RoleId]);
 
