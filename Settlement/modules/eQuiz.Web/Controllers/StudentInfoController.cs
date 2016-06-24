@@ -130,9 +130,38 @@ namespace Settlement.Web.Controllers
 
         //To do tomorrow
         [HttpPost]
-        public void AddPayment()
+        public void AddPayment(int sum, int studentId, int hostelId, DateTime dateTill)
         {
+            var payment = new tblPayment();
+            payment.Amount = sum;
+            payment.StudentId = studentId;
+            payment.HostelId = hostelId;
 
+            _repository.Insert<tblPayment>(payment);
+
+            var studentRoom = _repository.GetSingle<tblStudentRoom>(sr => sr.StudentId == studentId);
+            studentRoom.DateOut = dateTill;
+
+            _repository.Update<tblStudentRoom>(studentRoom);
+        }
+
+        [HttpPost]
+        public void CheckIn(int studentId, int roomId, DateTime dateIn)
+        {
+            var studentRoom = new tblStudentRoom();
+
+            studentRoom.StudentId = studentId;
+            studentRoom.RoomId = roomId;
+            studentRoom.DateIn = dateIn;
+            studentRoom.DateOut = dateIn;
+
+            _repository.Insert<tblStudentRoom>(studentRoom);
+        }
+
+        [HttpPost]
+        public void CheckOut(int studentId)
+        {
+            
         }
 
         #endregion
