@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Settlement.Entities
+namespace eQuiz.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Benefit
+    public partial class tblViolation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Benefit()
+        public tblViolation()
         {
-            this.tblStudentBenefits = new HashSet<StudentBenefit>();
+            this.tblStudentViolation = new HashSet<tblStudentViolation>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Penalty { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentBenefit> tblStudentBenefits { get; set; }
+        public virtual ICollection<tblStudentViolation> tblStudentViolation { get; set; }
     }
 }

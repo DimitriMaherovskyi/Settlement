@@ -51,89 +51,90 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Benefit.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="eQuizEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>eQuizEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="eQuizEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="eQuizEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>eQuizEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="eQuizEntitiesPartial.cs" />
-    <Compile Include="Hostel.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Payment.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Residence.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="SettlementEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettlementEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Role.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="SettlementEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Room.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="SettlementEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettlementEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="RoomType.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="SettlementEntitiesPartial.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Student.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="tblBenefit.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentBenefit.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="tblHostel.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentResidence.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="tblPayment.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentRoom.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="tblResidence.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentViolation.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="tblRoles.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="tblRoom.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Violation.cs">
-      <DependentUpon>eQuizEntities.tt</DependentUpon>
+    <Compile Include="tblRoomType.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="eQuizEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>eQuizEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="tblStudent.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStudentBenefit.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStudentResidence.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStudentRoom.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStudentViolation.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblUsers.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblViolation.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="eQuizEntities.edmx.diagram">
-      <DependentUpon>eQuizEntities.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="SettlementEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SettlementEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SettlementEntities.edmx.diagram">
+      <DependentUpon>SettlementEntities.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="eQuizEntities.Context.tt">
+    <Content Include="SettlementEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>eQuizEntities.edmx</DependentUpon>
-      <LastGenOutput>eQuizEntities.Context.cs</LastGenOutput>
+      <DependentUpon>SettlementEntities.edmx</DependentUpon>
+      <LastGenOutput>SettlementEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="eQuizEntities.tt">
+    <Content Include="SettlementEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>eQuizEntities.edmx</DependentUpon>
-      <LastGenOutput>eQuizEntities.cs</LastGenOutput>
+      <DependentUpon>SettlementEntities.edmx</DependentUpon>
+      <LastGenOutput>SettlementEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

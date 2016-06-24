@@ -7,18 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Settlement.Entities
+namespace eQuiz.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentResidence
+    public partial class tblRoomType
     {
-        public int Id { get; set; }
-        public int StudentId { get; set; }
-        public int ResidenceId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblRoomType()
+        {
+            this.tblRoom = new HashSet<tblRoom>();
+        }
     
-        public virtual Residence tblResidence { get; set; }
-        public virtual Student tblStudent { get; set; }
+        public int Id { get; set; }
+        public string Type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblRoom> tblRoom { get; set; }
     }
 }

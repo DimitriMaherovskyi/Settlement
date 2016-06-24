@@ -12,18 +12,19 @@ namespace eQuiz.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class tblResidence
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
+        public tblResidence()
         {
-            this.tblUsers = new HashSet<User>();
+            this.tblStudentResidence = new HashSet<tblStudentResidence>();
         }
     
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Distance { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> tblUsers { get; set; }
+        public virtual ICollection<tblStudentResidence> tblStudentResidence { get; set; }
     }
 }

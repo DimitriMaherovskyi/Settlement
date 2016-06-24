@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Settlement.Entities
+namespace eQuiz.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentResidence
+    public partial class sysdiagrams
     {
-        public int Id { get; set; }
-        public int StudentId { get; set; }
-        public int ResidenceId { get; set; }
-    
-        public virtual Residence tblResidence { get; set; }
-        public virtual Student tblStudent { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

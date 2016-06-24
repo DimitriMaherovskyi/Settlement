@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eQuiz.Entities
+namespace Settlement.Entities
 {
     using System;
     using System.Data.Entity;
@@ -37,7 +37,5 @@ namespace eQuiz.Entities
         public virtual DbSet<StudentRoom> StudentRooms { get; set; }
         public virtual DbSet<Violation> Violations { get; set; }
         public virtual DbSet<StudentViolation> StudentViolations { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
     }
 }

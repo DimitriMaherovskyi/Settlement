@@ -12,16 +12,13 @@ namespace eQuiz.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class tblStudentResidence
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> LastLoginDate { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public int Id { get; set; }
+        public int StudentId { get; set; }
+        public int ResidenceId { get; set; }
     
-        public virtual Role tblRole { get; set; }
+        public virtual tblResidence tblResidence { get; set; }
+        public virtual tblStudent tblStudent { get; set; }
     }
 }

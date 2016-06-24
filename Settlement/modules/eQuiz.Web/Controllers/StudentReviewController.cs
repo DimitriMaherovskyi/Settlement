@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Settlement.Entities;
+using eQuiz.Entities;
 using Settlement.Web.Models;
 
 namespace Settlement.Web.Controllers
@@ -34,16 +34,16 @@ namespace Settlement.Web.Controllers
         {
             var result = new List<StudentsReview>();
 
-            var students = _repository.Get<Student>();
+            var students = _repository.Get<tblStudent>();
 
-            var studentRooms = _repository.Get<StudentRoom>();
-            var rooms = _repository.Get<Entities.Room>();
-            var hostels = _repository.Get<Entities.Hostel>();
+            var studentRooms = _repository.Get<tblStudentRoom>();
+            var rooms = _repository.Get<tblRoom>();
+            var hostels = _repository.Get<tblHostel>();
 
-            var studentBenefits = _repository.Get<StudentBenefit>();
-            var benefits = _repository.Get<Benefit>();
+            var studentBenefits = _repository.Get<tblStudentBenefit>();
+            var benefits = _repository.Get<tblBenefit>();
 
-            var studentViolations = _repository.Get<StudentViolation>();
+            var studentViolations = _repository.Get<tblStudentViolation>();
 
             var setteled = from s in students
                         join sr in studentRooms on s.Id equals sr.StudentId
@@ -76,16 +76,16 @@ namespace Settlement.Web.Controllers
         {
             var result = new List<StudentsReview>();
 
-            var students = _repository.Get<Student>();
+            var students = _repository.Get<tblStudent>();
 
-            var studentRooms = _repository.Get<StudentRoom>();
-            var rooms = _repository.Get<Entities.Room>();
-            var hostels = _repository.Get<Entities.Hostel>();
+            var studentRooms = _repository.Get<tblStudentRoom>();
+            var rooms = _repository.Get<tblRoom>();
+            var hostels = _repository.Get<tblHostel>();
 
-            var studentBenefits = _repository.Get<StudentBenefit>();
-            var benefits = _repository.Get<Benefit>();
+            var studentBenefits = _repository.Get<tblStudentBenefit>();
+            var benefits = _repository.Get<tblBenefit>();
 
-            var studentViolations = _repository.Get<StudentViolation>();
+            var studentViolations = _repository.Get<tblStudentViolation>();
 
             var setteled = from s in students
                            join sr in studentRooms on s.Id equals sr.StudentId

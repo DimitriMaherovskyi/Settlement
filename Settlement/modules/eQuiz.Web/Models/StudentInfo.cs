@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Settlement.Entities;
 
 namespace Settlement.Web.Models
 {

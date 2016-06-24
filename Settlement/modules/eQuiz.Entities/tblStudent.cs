@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Settlement.Entities
+namespace eQuiz.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class tblStudent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public tblStudent()
         {
-            this.tblPayments = new HashSet<Payment>();
-            this.tblStudentBenefits = new HashSet<StudentBenefit>();
-            this.tblStudentResidences = new HashSet<StudentResidence>();
-            this.tblStudentRooms = new HashSet<StudentRoom>();
-            this.tblStudentViolations = new HashSet<StudentViolation>();
+            this.tblPayment = new HashSet<tblPayment>();
+            this.tblStudentBenefit = new HashSet<tblStudentBenefit>();
+            this.tblStudentResidence = new HashSet<tblStudentResidence>();
+            this.tblStudentRoom = new HashSet<tblStudentRoom>();
+            this.tblStudentViolation = new HashSet<tblStudentViolation>();
         }
     
         public int Id { get; set; }
@@ -34,14 +34,14 @@ namespace Settlement.Entities
         public bool Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> tblPayments { get; set; }
+        public virtual ICollection<tblPayment> tblPayment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentBenefit> tblStudentBenefits { get; set; }
+        public virtual ICollection<tblStudentBenefit> tblStudentBenefit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentResidence> tblStudentResidences { get; set; }
+        public virtual ICollection<tblStudentResidence> tblStudentResidence { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentRoom> tblStudentRooms { get; set; }
+        public virtual ICollection<tblStudentRoom> tblStudentRoom { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentViolation> tblStudentViolations { get; set; }
+        public virtual ICollection<tblStudentViolation> tblStudentViolation { get; set; }
     }
 }

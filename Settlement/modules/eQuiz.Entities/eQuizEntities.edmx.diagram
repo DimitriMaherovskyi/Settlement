@@ -28,9 +28,6 @@
         <EntityTypeShape EntityType="eQuizModel.StudentViolation" Width="1.5" PointX="6" PointY="4.625" />
         <AssociationConnector Association="eQuizModel.FK_tblStudentViolation_tblStudent" />
         <AssociationConnector Association="eQuizModel.FK_tblStudentViolation_tblViolation" />
-        <EntityTypeShape EntityType="eQuizModel.Role" Width="1.5" PointX="6.375" PointY="1.375" />
-        <EntityTypeShape EntityType="eQuizModel.User" Width="1.5" PointX="8.625" PointY="1" />
-        <AssociationConnector Association="eQuizModel.FK_tblUsers_tblRoles" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

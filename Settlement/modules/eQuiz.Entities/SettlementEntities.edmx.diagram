@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fdc8c0cf42ad45008e3a86944db0fb9a" Name="Diagram1">
+        <EntityTypeShape EntityType="SettlementModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblBenefit" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblHostel" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblPayment" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblResidence" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblRoles" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblRoom" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblRoomType" Width="1.5" PointX="1.5" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblStudent" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblStudentBenefit" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblStudentResidence" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblStudentRoom" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblStudentViolation" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblUsers" Width="1.5" PointX="11" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SettlementModel.tblViolation" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentBenefit_tblBenefit" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblPayment_tblHostel" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblRoom_tblHostel" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblPayment_tblStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentResidence_tblResidence" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblUsers_tblRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblRoom_tblRoomType" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentRoom_tblRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentBenefit_tblStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentResidence_tblStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentRoom_tblStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentViolation_tblStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SettlementModel.FK_tblStudentViolation_tblViolation" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -7,18 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Settlement.Entities
+namespace eQuiz.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentResidence
+    public partial class tblPayment
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int ResidenceId { get; set; }
+        public int HostelId { get; set; }
+        public int Amount { get; set; }
+        public System.DateTime PaymentDate { get; set; }
     
-        public virtual Residence tblResidence { get; set; }
-        public virtual Student tblStudent { get; set; }
+        public virtual tblHostel tblHostel { get; set; }
+        public virtual tblStudent tblStudent { get; set; }
     }
 }
