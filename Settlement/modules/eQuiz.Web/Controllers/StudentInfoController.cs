@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Settlement.Entities;
+using eQuiz.Entities;
 using Settlement.Web.Models;
 
 namespace Settlement.Web.Controllers
@@ -31,18 +31,18 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetStudentInfo(int id)
         {
-            var student = _repository.GetSingle<Student>(s => s.Id == id);
-            var studentRoom = _repository.GetSingle<StudentRoom>(sr => sr.StudentId == id);
+            var student = _repository.GetSingle<tblStudent>(s => s.Id == id);
+            var studentRoom = _repository.GetSingle<tblStudentRoom>(sr => sr.StudentId == id);
 
-            var room = _repository.GetSingle<Entities.Room>(r => r.Id == studentRoom.RoomId);
-            var hostel = _repository.GetSingle<Entities.Hostel>(h => h.Id == room.HostelId);
+            var room = _repository.GetSingle<tblRoom>(r => r.Id == studentRoom.RoomId);
+            var hostel = _repository.GetSingle<tblHostel>(h => h.Id == room.HostelId);
 
-            var studentViolations = _repository.Get<StudentViolation>(sv => sv.StudentId == id);
-            var violations = _repository.Get<Entities.Violation>();
+            var studentViolations = _repository.Get<tblStudentViolation>(sv => sv.StudentId == id);
+            var violations = _repository.Get<tblViolation>();
 
             var query = from v in violations
                         join sv in studentViolations on v.Id equals sv.ViolationId
-                        select new Models.Violation(v.Id, v.Name, v.Penalty);
+                        select new Violation(v.Id, v.Name, v.Penalty);
 
             var vv = new List<object>();
 
@@ -60,11 +60,11 @@ namespace Settlement.Web.Controllers
         public JsonResult GetViolationsList()
         {
             var result = new List<object>();
-            var violations = _repository.Get<Entities.Violation>();
+            var violations = _repository.Get<tblViolation>();
 
             foreach(var item in violations)
             {
-                result.Add(new Models.Violation(item.Id, item.Name, item.Penalty));
+                result.Add(new Violation(item.Id, item.Name, item.Penalty));
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -74,8 +74,8 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetHostels()
         {
-            var result = new List<Models.Hostel>();
-            var hostels = _repository.Get<Entities.Hostel>();
+            var result = new List<Hostel>();
+            var hostels = _repository.Get<tblHostel>();
 
             foreach (var item in hostels)
             {
@@ -89,12 +89,12 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetRooms()
         {
-            var result = new List<Models.Room>();
-            var rooms = _repository.Get<Entities.Room>();
+            var result = new List<Room>();
+            var rooms = _repository.Get<tblRoom>();
 
             foreach (var item in rooms)
             {
-                result.Add(new Models.Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor, item.HostelId));
+                result.Add(new Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor, item.HostelId));
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -107,25 +107,25 @@ namespace Settlement.Web.Controllers
         [HttpPost]
         public void SaveStudentProfileInfo(int id, string name, string surname, string studyGroup, string institute)
         {
-            var student = _repository.GetSingle<Student>(s => s.Id == id);
+            var student = _repository.GetSingle<tblStudent>(s => s.Id == id);
 
             student.Firstname = name;
             student.Surname = surname;
             student.StudyGroup = studyGroup;
             student.Insitute = institute;
 
-            _repository.Update<Student>(student);
+            _repository.Update<tblStudent>(student);
         }
 
         [HttpPost]
         public void AddViolation(int studentId, int violationId, DateTime time)
         {
-            var violation = new StudentViolation();
+            var violation = new tblStudentViolation();
             violation.StudentId = studentId;
             violation.ViolationId = violationId;
             violation.Time = time;
 
-            _repository.Insert<StudentViolation>(violation);
+            _repository.Insert<tblStudentViolation>(violation);
         }
 
         //To do tomorrow

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Settlement.Entities;
+using eQuiz.Entities;
 using Settlement.Web.Models;
 
 namespace Settlement.Web.Controllers
@@ -31,9 +31,9 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetHostelInfo(int id)
         {
-            var h = _repository.GetSingle<Entities.Hostel>(hh => hh.Id == id);
+            var h = _repository.GetSingle<tblHostel>(hh => hh.Id == id);
 
-            var hostel = new Models.Hostel(h.Id, h.Number, h.Address, h.MonthPaymentSum);
+            var hostel = new Hostel(h.Id, h.Number, h.Address, h.MonthPaymentSum);
 
             return Json(hostel, JsonRequestBehavior.AllowGet);
         }
@@ -43,16 +43,16 @@ namespace Settlement.Web.Controllers
             var setteledStudents = new List<StudentsReview>();
             var setteledRooms = new List<object>();
 
-            var students = _repository.Get<Student>();
+            var students = _repository.Get<tblStudent>();
 
-            var studentRooms = _repository.Get<StudentRoom>();
-            var rooms = _repository.Get<Entities.Room>();
-            var hostels = _repository.Get<Entities.Hostel>();
+            var studentRooms = _repository.Get<tblStudentRoom>();
+            var rooms = _repository.Get<tblRoom>();
+            var hostels = _repository.Get<tblHostel>();
 
-            var studentBenefits = _repository.Get<StudentBenefit>();
-            var benefits = _repository.Get<Benefit>();
+            var studentBenefits = _repository.Get<tblStudentBenefit>();
+            var benefits = _repository.Get<tblBenefit>();
 
-            var studentViolations = _repository.Get<StudentViolation>();
+            var studentViolations = _repository.Get<tblStudentViolation>();
 
             var setteled = from s in students
                            join sr in studentRooms on s.Id equals sr.StudentId
@@ -94,13 +94,13 @@ namespace Settlement.Web.Controllers
 
         public void UpdateHostelInfo(int id, int number, string address, int monthPayment)
         {
-            var h = _repository.GetSingle<Entities.Hostel>(hh => hh.Id == id);
+            var h = _repository.GetSingle<tblHostel>(hh => hh.Id == id);
 
             h.Number = number;
             h.Address = address;
             h.MonthPaymentSum = monthPayment;
 
-            _repository.Update<Entities.Hostel>(h);
+            _repository.Update<tblHostel>(h);
         }
 
         #endregion
