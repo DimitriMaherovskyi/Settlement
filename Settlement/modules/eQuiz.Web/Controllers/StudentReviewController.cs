@@ -46,18 +46,49 @@ namespace Settlement.Web.Controllers
             var studentViolations = _repository.Get<tblStudentViolation>();
 
             var setteled = from s in students
-                        join sr in studentRooms on s.Id equals sr.StudentId
-                        join r in rooms on sr.RoomId equals r.Id
-                        join h in hostels on r.HostelId equals h.Id
-                        select new StudentsReview(s.Id, s.Firstname + " " + s.Surname, h.Number, r.Number, s.Insitute, false);
+                           join sr in studentRooms on s.Id equals sr.StudentId
+                           join r in rooms on sr.RoomId equals r.Id
+                           join h in hostels on r.HostelId equals h.Id
+                           select new StudentsReview(s.Id, s.Firstname + " " + s.Surname, h.Number, r.Number, s.Insitute, false);
 
             var unsetteled = from s in students
                              join sr in studentRooms on s.Id equals sr.StudentId into g1
                              from sr in g1.DefaultIfEmpty()
                              where sr == null
-                             select new StudentsReview(s.Id, s.Firstname + " " + s.Surname, null, null, s.Insitute, true);
+                             select new StudentsReview(s.Id, s.Firstname + " " + s.Surname, null, null, s.Insitute, false);
+
+            // Adding hasProblem mark
+            var setteledList = new List<StudentsReview>();
+            var dateOut = new List<DateOut>();
 
             foreach (var item in setteled)
+            {
+                setteledList.Add(item);
+            }
+
+            var problemsQuery = from sl in setteledList
+                                join sr in studentRooms on sl.Id equals sr.StudentId
+                                select new DateOut(sr.StudentId, sr.DateOut);
+
+            foreach (var item in problemsQuery)
+            {
+                dateOut.Add(item);
+            }
+
+            for (var i = 0; i < setteledList.Count; i++)
+            {
+                for (var j = 0; j < dateOut.Count; j++)
+                {
+                    if(setteledList[i].Id == dateOut[j].Id && dateOut[j].OutDate < DateTime.Now)
+                    {
+                        setteledList[i].HasProblem = true;
+                        break;
+                    }
+                }
+            }
+
+            // Adding students to result
+            foreach (var item in setteledList)
             {
                 result.Add(item);
             }
@@ -65,6 +96,32 @@ namespace Settlement.Web.Controllers
             foreach (var item in unsetteled)
             {
                 result.Add(item);
+            }
+
+             
+
+            // Adding benefits mark
+            var benefitsQuery = from r in result
+                                join sb in studentBenefits on r.Id equals sb.StudentId
+                                select sb;
+
+            var bens = new List<tblStudentBenefit>();
+
+            foreach (var item in benefitsQuery)
+            {
+                bens.Add(item);
+            }
+
+            for (var i = 0; i < result.Count; i++)
+            {
+                for (var j = 0; j < bens.Count; j++)
+                {
+                    if (result[i].Id == bens[j].StudentId)
+                    {
+                        result[i].Name += " (п)";
+                        break;
+                    }
+                }
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -108,6 +165,30 @@ namespace Settlement.Web.Controllers
             foreach (var item in unsetteled)
             {
                 result.Add(item);
+            }
+
+            // Adding benefits mark
+            var benefitsQuery = from r in result
+                                join sb in studentBenefits on r.Id equals sb.StudentId
+                                select sb;
+
+            var bens = new List<tblStudentBenefit>();
+
+            foreach (var item in benefitsQuery)
+            {
+                bens.Add(item);
+            }
+
+            for (var i = 0; i < result.Count; i++)
+            {
+                for (var j = 0; j < bens.Count; j++)
+                {
+                    if(result[i].Id == bens[j].StudentId)
+                    {
+                        result[i].Name += " (п)";
+                        break;
+                    }
+                }
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
