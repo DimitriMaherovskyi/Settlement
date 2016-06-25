@@ -15,8 +15,9 @@
             getHostels: getHostels,
             getRooms: getRooms,
             checkIn: checkIn,
-            checkOut: checkOut
-            
+            checkOut: checkOut,
+            addPay: addPay,
+            addViolation: addViolation          
         };
 
         return service;
@@ -40,8 +41,8 @@
         function checkIn(studentId, roomId) {
             var promise = $http({
                 url: '/StudentInfo/CheckIn',
-                method: "GET",
-                params: { id: studentId, room: roomId }
+                method: "POST",
+                params: { studentId: studentId, roomId: roomId }
             });
             return promise;
         }
@@ -95,13 +96,30 @@
             ];
         }
 
-        function saveProfileInfo(studentInfo) {
+        function saveProfileInfo(id, name, surname, group, institute) {
             var promise = $http({
-                url: '/Admin/Student/SaveStudentProfileInfo',
+                url: '/StudentInfo/SaveStudentProfileInfo',
                 method: "POST",
-                params: { studentInfo: studentInfo }
+                params: { id: id, name: name, surname: surname, studyGroup: group, institute: institute}
             });
-            //var promise = $http.post("/Admin/Student/UpdateUserInfo", { Id: id, firstName: firstName, lastName: lastName, phone: phone });
+            return promise;
+        }
+
+        function addPay(sum, studentId, hostelId, dateTill) {
+            var promise = $http({
+                url: '/StudentInfo/AddPayment',
+                method: "POST",
+                params: { sum: sum, studentId: studentId, hostelId: hostelId, dateTill: dateTill }
+            });
+            return promise;
+        }
+
+        function addViolation(id, violationId) {
+            var promise = $http({
+                url: '/StudentInfo/AddViolation',
+                method: "POST",
+                params: { studentId: id, violationId: violationId }
+            });
             return promise;
         }
     }

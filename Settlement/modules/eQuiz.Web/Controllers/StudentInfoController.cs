@@ -118,44 +118,43 @@ namespace Settlement.Web.Controllers
         }
 
         [HttpPost]
-        public void AddViolation(int studentId, int violationId, DateTime time)
+        public void AddViolation(int studentId, int violationId)
         {
             var violation = new tblStudentViolation();
             violation.StudentId = studentId;
             violation.ViolationId = violationId;
-            violation.Time = time;
+            violation.Time = DateTime.Now;
 
             _repository.Insert<tblStudentViolation>(violation);
         }
 
         //To do tomorrow
         [HttpPost]
-        public void AddPayment(int sum, int studentId, int hostelId, DateTime dateTill)
+        public void AddPayment(int sum, int studentId, int hostelId, string dateTill)
         {
             var payment = new tblPayment();
             payment.Amount = sum;
             payment.StudentId = studentId;
             payment.HostelId = hostelId;
-
+            payment.PaymentDate = DateTime.Now;
             _repository.Insert<tblPayment>(payment);
-
             var studentRoom = _repository.GetSingle<tblStudentRoom>(sr => sr.StudentId == studentId);
-            studentRoom.DateOut = dateTill;
+            studentRoom.DateOut = DateTime.Parse(dateTill);
 
             _repository.Update<tblStudentRoom>(studentRoom);
         }
 
         [HttpPost]
-        public void CheckIn(int studentId, int roomId, DateTime dateIn)
+        public void CheckIn(int studentId, int roomId)
         {
             var studentRoom = new tblStudentRoom();
 
             studentRoom.StudentId = studentId;
             studentRoom.RoomId = roomId;
-            studentRoom.DateIn = dateIn;
-            studentRoom.DateOut = dateIn;
+            studentRoom.DateIn = DateTime.Now;
+            studentRoom.DateOut = DateTime.Now;
 
-            _repository.Insert<tblStudentRoom>(studentRoom);
+            _repository.Update<tblStudentRoom>(studentRoom);
         }
 
         [HttpPost]

@@ -50,7 +50,11 @@
             </div>
 
             <div id="addPayBox" ng-show="sc.addPayBoxOpened == true">
-                ADD PAY HERE
+                <label>Enter end date:</label>
+                <input type="date" ng-model="sc.payTillDate"/>
+                <label>Enter sum:</label>
+                <input type="number" ng-model="sc.paySum"/>
+                <button ng-click="sc.addPay()">Add pay</button>
             </div>
         </div>
 

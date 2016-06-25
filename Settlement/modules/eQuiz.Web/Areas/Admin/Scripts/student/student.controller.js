@@ -33,7 +33,7 @@
             }
 
         vm.saveProfile = function () {
-            studentDataService.saveProfileInfo(vm.studentInfo)
+            studentDataService.saveProfileInfo(vm.studentInfo.Id, vm.studentInfo.Name, vm.studentInfo.Surname, vm.studentInfo.Group, vm.studentInfo.Institute)
             .success(function (res) {
                 $scope.showNotifyPopUp('Student data was sucessfully saved!')
                 vm.modelChanged = false;
@@ -52,7 +52,15 @@
             })[0];
             if (result == undefined) {
                 vm.studentInfo.Violations.push(vm.currentViolation);
-                vm.modelChanged = true;
+                studentDataService.addViolation(vm.studentInfo.Id, vm.currentViolation.Id)
+                    .success(function (res) {
+                        $scope.showNotifyPopUp('Violation was successfully added!')
+                        $timeout($scope.closePopUp, 4000);
+                    })
+                    .error(function (res) {
+                        $scope.showNotifyPopUp('Error: violation was not added!')
+                        $timeout($scope.closePopUp, 4000);
+                    });
             }
             else {
                 $scope.showNotifyPopUp('Error: there is such violation already!')
@@ -75,15 +83,46 @@
         };
 
         vm.checkIn = function() {
-            studentDataService.checkIn(vm.studendInfo.Id, vm.chosenRoom);
+            studentDataService.checkIn(vm.studentInfo.Id, vm.chosenRoom.Id)
+            .success(function (res) {
+                $scope.showNotifyPopUp('Student was successfully checked in!')
+                $timeout($scope.closePopUp, 4000);
+                activate();
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: student was not checked in!')
+                $timeout($scope.closePopUp, 4000);
+            });
         }
 
         vm.checkOut = function () {
-            studentDataService.checkOut(vm.studentInfo.Id);
+            studentDataService.checkOut(vm.studentInfo.Id)
+            .success(function (res) {
+                $scope.showNotifyPopUp('Student was successfully checked out!')
+                $timeout($scope.closePopUp, 4000);
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: student was not checked out!')
+                $timeout($scope.closePopUp, 4000);
+            });
         }
 
         vm.addPay = function () {
-
+            var hostelId = vm.hostels.filter(function (v) {
+                return v.Number === vm.studentInfo.Hostel;
+            })[0].Id;
+            console.log(vm.payTillDate.toLocaleString());
+            studentDataService.addPay(vm.paySum, vm.studentInfo.Id, hostelId, vm.payTillDate.toLocaleString())
+                .success(function (res) {
+                
+                $scope.showNotifyPopUp('Pay was successfully added!')
+                $timeout($scope.closePopUp, 4000);
+                activate();
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: pay was not added!')
+                $timeout($scope.closePopUp, 4000);
+            });
         }
 
     };
