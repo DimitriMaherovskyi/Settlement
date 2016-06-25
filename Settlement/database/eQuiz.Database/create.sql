@@ -12,6 +12,7 @@ CREATE TABLE [tblUsers]
 [CreatedDate] DATETIME NOT NULL,
 [LastLoginDate] DATETIME NULL,
 [RoleId] INT NULL,
+[Quote] INT NULL
 CONSTRAINT [PK_tblUsers_ID] PRIMARY KEY ([UserId])
 );
 
@@ -119,7 +120,8 @@ CONSTRAINT [PK_tblPayment_ID] PRIMARY KEY ([Id])
 CREATE TABLE [tblBenefit]
 (
 [Id] INT NOT NULL IDENTITY (1, 1),
-[Name] NVARCHAR(50) NOT NULL
+[Name] NVARCHAR(50) NOT NULL,
+[Value] INT NOT NULL
 CONSTRAINT [PK_tblBenefit_ID] PRIMARY KEY ([Id])
 );
 
@@ -131,7 +133,17 @@ CREATE TABLE [tblStudentBenefit]
 CONSTRAINT [PK_tblStudentBenefit_ID] PRIMARY KEY ([Id])
 );
 
-ALTER TABLE [tblPayment] ADD CONSTRAINT [FK_tblPayment_tblHostel] FOREIGN KEY ([HostelId]) REFERENCES [tblHostel]([Id])
+CREATE TABLE [tblSettleRequest]
+(
+[Id] INT NOT NULL IDENTITY (1, 1),
+[StudentId] INT NOT NULL,
+[Status] BIT NOT NULL
+CONSTRAINT [PK_tblSettleRequest_ID] PRIMARY KEY ([Id])
+);
+
+ALTER TABLE [tblSettleRequest] ADD CONSTRAINT [FK_tblSettleRequest_tblStudent] FOREIGN KEY ([StudentId]) REFERENCES [tblStudent](Id);
+
+ALTER TABLE [tblPayment] ADD CONSTRAINT [FK_tblPayment_tblHostel] FOREIGN KEY ([HostelId]) REFERENCES [tblHostel]([Id]);
 
 ALTER TABLE [tblUsers] ADD CONSTRAINT [FK_tblUsers_tblRoles] FOREIGN KEY ([RoleId]) REFERENCES [tblRoles]([RoleId]);
 
