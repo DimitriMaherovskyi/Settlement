@@ -97,7 +97,7 @@
 
         function saveProfileInfo(studentInfo) {
             var promise = $http({
-                url: '/Admin/Student/UpdateUserInfo',
+                url: '/Admin/Student/SaveStudentProfileInfo',
                 method: "POST",
                 params: { studentInfo: studentInfo }
             });

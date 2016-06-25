@@ -51,7 +51,7 @@ namespace Settlement.Web.Controllers
                 vv.Add(item);
             }
 
-            var result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut, room.Number, hostel.Number, vv);
+            var result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut.ToShortDateString(), room.Number, hostel.Number, vv);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
