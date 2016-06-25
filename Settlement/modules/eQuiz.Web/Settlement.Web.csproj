@@ -203,6 +203,11 @@
     <Compile Include="Areas\Dean\DeanAreaRegistration.cs" />
     <Compile Include="AutofacModule.cs" />
     <Compile Include="Code\BaseController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HostelRoomsController.cs" />
+    <Compile Include="Controllers\LogonController.cs" />
+    <Compile Include="Controllers\StudentInfoController.cs" />
     <Compile Include="Controllers\StudentReviewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
