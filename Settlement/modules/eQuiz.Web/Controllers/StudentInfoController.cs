@@ -42,7 +42,7 @@ namespace Settlement.Web.Controllers
 
             var query = from v in violations
                         join sv in studentViolations on v.Id equals sv.ViolationId
-                        select new Models.Violation(v.Id, v.Name, v.Penalty);
+                        select new Violation(v.Id, v.Name, v.Penalty);
 
             var vv = new List<object>();
 
@@ -51,7 +51,7 @@ namespace Settlement.Web.Controllers
                 vv.Add(item);
             }
 
-            var result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut.ToShortDateString(), room.Number, hostel.Number, vv);
+            var result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut, room.Number, hostel.Number, vv);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -64,7 +64,7 @@ namespace Settlement.Web.Controllers
 
             foreach(var item in violations)
             {
-                result.Add(new Models.Violation(item.Id, item.Name, item.Penalty));
+                result.Add(new Violation(item.Id, item.Name, item.Penalty));
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -74,7 +74,7 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetHostels()
         {
-            var result = new List<Models.Hostel>();
+            var result = new List<Hostel>();
             var hostels = _repository.Get<tblHostel>();
 
             foreach (var item in hostels)
@@ -89,12 +89,12 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetRooms()
         {
-            var result = new List<Models.Room>();
+            var result = new List<Room>();
             var rooms = _repository.Get<tblRoom>();
 
             foreach (var item in rooms)
             {
-                result.Add(new Models.Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor, item.HostelId));
+                result.Add(new Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor, item.HostelId));
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -130,9 +130,38 @@ namespace Settlement.Web.Controllers
 
         //To do tomorrow
         [HttpPost]
-        public void AddPayment()
+        public void AddPayment(int sum, int studentId, int hostelId, DateTime dateTill)
         {
+            var payment = new tblPayment();
+            payment.Amount = sum;
+            payment.StudentId = studentId;
+            payment.HostelId = hostelId;
 
+            _repository.Insert<tblPayment>(payment);
+
+            var studentRoom = _repository.GetSingle<tblStudentRoom>(sr => sr.StudentId == studentId);
+            studentRoom.DateOut = dateTill;
+
+            _repository.Update<tblStudentRoom>(studentRoom);
+        }
+
+        [HttpPost]
+        public void CheckIn(int studentId, int roomId, DateTime dateIn)
+        {
+            var studentRoom = new tblStudentRoom();
+
+            studentRoom.StudentId = studentId;
+            studentRoom.RoomId = roomId;
+            studentRoom.DateIn = dateIn;
+            studentRoom.DateOut = dateIn;
+
+            _repository.Insert<tblStudentRoom>(studentRoom);
+        }
+
+        [HttpPost]
+        public void CheckOut(int studentId)
+        {
+            
         }
 
         #endregion

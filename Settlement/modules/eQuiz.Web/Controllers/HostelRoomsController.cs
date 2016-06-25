@@ -31,9 +31,9 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetHostelInfo(int id)
         {
-            var h = _repository.GetSingle<Hostel>(hh => hh.Id == id);
+            var h = _repository.GetSingle<tblHostel>(hh => hh.Id == id);
 
-            var hostel = new Models.Hostel(h.Id, h.Number, h.Address, h.MonthPaymentSum);
+            var hostel = new Hostel(h.Id, h.Number, h.Address, h.MonthPaymentSum);
 
             return Json(hostel, JsonRequestBehavior.AllowGet);
         }
@@ -43,11 +43,11 @@ namespace Settlement.Web.Controllers
             var setteledStudents = new List<StudentsReview>();
             var setteledRooms = new List<object>();
 
-            var students = _repository.Get<eQuiz.Entities.tblStudent>();
+            var students = _repository.Get<tblStudent>();
 
             var studentRooms = _repository.Get<tblStudentRoom>();
-            var rooms = _repository.Get<Room>();
-            var hostels = _repository.Get<Hostel>();
+            var rooms = _repository.Get<tblRoom>();
+            var hostels = _repository.Get<tblHostel>();
 
             var studentBenefits = _repository.Get<tblStudentBenefit>();
             var benefits = _repository.Get<tblBenefit>();

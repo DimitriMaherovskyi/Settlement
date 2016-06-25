@@ -209,14 +209,17 @@
     <Compile Include="Controllers\LogonController.cs" />
     <Compile Include="Controllers\StudentInfoController.cs" />
     <Compile Include="Controllers\StudentReviewController.cs" />
+    <Compile Include="Controllers\SystemUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomStuds.cs" />
     <Compile Include="Models\StudentInfo.cs" />
     <Compile Include="Models\StudentsReview.cs" />
     <Compile Include="Models\Hostel.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Violation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -260,6 +263,7 @@
     <Folder Include="Scripts\app\pages\" />
     <Folder Include="Views\StudentInfo\" />
     <Folder Include="Views\StudentReview\" />
+    <Folder Include="Views\SystemUsers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eQuiz.Entities\Settlement.Entities.csproj">
