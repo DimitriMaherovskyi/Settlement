@@ -21,6 +21,7 @@ namespace eQuiz.Entities
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> LastLoginDate { get; set; }
         public Nullable<int> RoleId { get; set; }
+        public Nullable<int> Quote { get; set; }
     
         public virtual tblRoles tblRoles { get; set; }
     }

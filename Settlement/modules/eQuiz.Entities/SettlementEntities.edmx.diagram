@@ -4,8 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fdc8c0cf42ad45008e3a86944db0fb9a" Name="Diagram1">
-        <EntityTypeShape EntityType="SettlementModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="fdc8c0cf42ad45008e3a86944db0fb9a" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="SettlementModel.tblBenefit" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SettlementModel.tblHostel" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SettlementModel.tblPayment" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
@@ -33,6 +32,8 @@
         <AssociationConnector Association="SettlementModel.FK_tblStudentRoom_tblStudent" ManuallyRouted="false" />
         <AssociationConnector Association="SettlementModel.FK_tblStudentViolation_tblStudent" ManuallyRouted="false" />
         <AssociationConnector Association="SettlementModel.FK_tblStudentViolation_tblViolation" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SettlementModel.tblSettleRequest" Width="1.5" PointX="3" PointY="18.75" />
+        <AssociationConnector Association="SettlementModel.FK_tblSettleRequest_tblStudent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
