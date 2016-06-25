@@ -99,7 +99,32 @@ namespace Settlement.Web.Controllers
             user.RoleId = roleId;
             user.CreatedDate = DateTime.Now;
 
-            _repository.Insert<tblUsers>(user);
+            var users = _repository.Get<tblUsers>();
+            
+            try
+            {
+                user.UserId = users.Count + 1;
+                _repository.Insert<tblUsers>(user);
+            }
+            catch
+            {
+                for (var i = 1; i < users.Count + 1; i++)
+                {
+                    if (i != users[i].UserId)
+                    {
+                        user.UserId = i;
+                        try
+                        {
+                            _repository.Insert<tblUsers>(user);
+                            break;
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
         }
 
         public void UpdateUserInfo(int id, string name, int roleId, int quote)
@@ -108,7 +133,7 @@ namespace Settlement.Web.Controllers
 
             user.UserName = name;
             user.RoleId = roleId;
-            //user.Quote = quote;
+            user.Quote = quote;
         }
 
         public void DeleteUser(int id)
