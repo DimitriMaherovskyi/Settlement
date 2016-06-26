@@ -25,7 +25,6 @@ namespace eQuiz.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tblBenefit> tblBenefit { get; set; }
         public virtual DbSet<tblHostel> tblHostel { get; set; }
         public virtual DbSet<tblPayment> tblPayment { get; set; }
@@ -40,5 +39,6 @@ namespace eQuiz.Entities
         public virtual DbSet<tblStudentViolation> tblStudentViolation { get; set; }
         public virtual DbSet<tblUsers> tblUsers { get; set; }
         public virtual DbSet<tblViolation> tblViolation { get; set; }
+        public virtual DbSet<tblSettleRequest> tblSettleRequest { get; set; }
     }
 }

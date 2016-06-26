@@ -22,6 +22,7 @@ namespace eQuiz.Entities
             this.tblStudentResidence = new HashSet<tblStudentResidence>();
             this.tblStudentRoom = new HashSet<tblStudentRoom>();
             this.tblStudentViolation = new HashSet<tblStudentViolation>();
+            this.tblSettleRequest = new HashSet<tblSettleRequest>();
         }
     
         public int Id { get; set; }
@@ -43,5 +44,7 @@ namespace eQuiz.Entities
         public virtual ICollection<tblStudentRoom> tblStudentRoom { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblStudentViolation> tblStudentViolation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblSettleRequest> tblSettleRequest { get; set; }
     }
 }

@@ -4,23 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SettlementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
+    <Schema Namespace="SettlementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblBenefit">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblHostel">
           <Key>
@@ -74,6 +65,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblSettleRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblStudent">
           <Key>
             <PropertyRef Name="Id" />
@@ -110,8 +109,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="RoomId" Type="int" Nullable="false" />
-          <Property Name="DateIn" Type="datetime" Nullable="false" />
-          <Property Name="DateOut" Type="datetime" Nullable="false" />
+          <Property Name="DateIn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateOut" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="tblStudentViolation">
           <Key>
@@ -133,6 +132,7 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="LastLoginDate" Type="datetime" />
           <Property Name="RoleId" Type="int" />
+          <Property Name="Quote" Type="int" />
         </EntityType>
         <EntityType Name="tblViolation">
           <Key>
@@ -187,6 +187,18 @@
             </Principal>
             <Dependent Role="tblRoom">
               <PropertyRef Name="RoomTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSettleRequest_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="1" />
+          <End Role="tblSettleRequest" Type="Self.tblSettleRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblSettleRequest">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -299,7 +311,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SettlementModelStoreContainer">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBenefit" EntityType="Self.tblBenefit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHostel" EntityType="Self.tblHostel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPayment" EntityType="Self.tblPayment" Schema="dbo" store:Type="Tables" />
@@ -307,6 +318,7 @@
           <EntitySet Name="tblRoles" EntityType="Self.tblRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoom" EntityType="Self.tblRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRoomType" EntityType="Self.tblRoomType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSettleRequest" EntityType="Self.tblSettleRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudent" EntityType="Self.tblStudent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentBenefit" EntityType="Self.tblStudentBenefit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblStudentResidence" EntityType="Self.tblStudentResidence" Schema="dbo" store:Type="Tables" />
@@ -329,6 +341,10 @@
           <AssociationSet Name="FK_tblRoom_tblRoomType" Association="Self.FK_tblRoom_tblRoomType">
             <End Role="tblRoomType" EntitySet="tblRoomType" />
             <End Role="tblRoom" EntitySet="tblRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSettleRequest_tblStudent" Association="Self.FK_tblSettleRequest_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblSettleRequest" EntitySet="tblSettleRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_tblStudentBenefit_tblBenefit" Association="Self.FK_tblStudentBenefit_tblBenefit">
             <End Role="tblBenefit" EntitySet="tblBenefit" />
@@ -367,21 +383,10 @@
             <End Role="tblUsers" EntitySet="tblUsers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SettlementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="tblBenefit">
           <Key>
             <PropertyRef Name="Id" />
@@ -389,6 +394,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tblStudentBenefit" Relationship="Self.FK_tblStudentBenefit_tblBenefit" FromRole="tblBenefit" ToRole="tblStudentBenefit" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tblHostel">
           <Key>
@@ -469,6 +475,7 @@
           <NavigationProperty Name="tblStudentResidence" Relationship="Self.FK_tblStudentResidence_tblStudent" FromRole="tblStudent" ToRole="tblStudentResidence" />
           <NavigationProperty Name="tblStudentRoom" Relationship="Self.FK_tblStudentRoom_tblStudent" FromRole="tblStudent" ToRole="tblStudentRoom" />
           <NavigationProperty Name="tblStudentViolation" Relationship="Self.FK_tblStudentViolation_tblStudent" FromRole="tblStudent" ToRole="tblStudentViolation" />
+          <NavigationProperty Name="tblSettleRequest" Relationship="SettlementModel.FK_tblSettleRequest_tblStudent" FromRole="tblStudent" ToRole="tblSettleRequest" />
         </EntityType>
         <EntityType Name="tblStudentBenefit">
           <Key>
@@ -497,8 +504,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="RoomId" Type="Int32" Nullable="false" />
-          <Property Name="DateIn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateOut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateIn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DateOut" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="tblRoom" Relationship="Self.FK_tblStudentRoom_tblRoom" FromRole="tblStudentRoom" ToRole="tblRoom" />
           <NavigationProperty Name="tblStudent" Relationship="Self.FK_tblStudentRoom_tblStudent" FromRole="tblStudentRoom" ToRole="tblStudent" />
         </EntityType>
@@ -525,6 +532,7 @@
           <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
           <Property Name="RoleId" Type="Int32" />
           <NavigationProperty Name="tblRoles" Relationship="Self.FK_tblUsers_tblRoles" FromRole="tblUsers" ToRole="tblRoles" />
+          <Property Name="Quote" Type="Int32" />
         </EntityType>
         <EntityType Name="tblViolation">
           <Key>
@@ -692,7 +700,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tblBenefit" EntityType="Self.tblBenefit" />
           <EntitySet Name="tblHostel" EntityType="Self.tblHostel" />
           <EntitySet Name="tblPayment" EntityType="Self.tblPayment" />
@@ -759,27 +766,43 @@
             <End Role="tblViolation" EntitySet="tblViolation" />
             <End Role="tblStudentViolation" EntitySet="tblStudentViolation" />
           </AssociationSet>
+          <EntitySet Name="tblSettleRequest" EntityType="SettlementModel.tblSettleRequest" />
+          <AssociationSet Name="FK_tblSettleRequest_tblStudent" Association="SettlementModel.FK_tblSettleRequest_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblSettleRequest" EntitySet="tblSettleRequest" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tblSettleRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblStudent" Relationship="SettlementModel.FK_tblSettleRequest_tblStudent" FromRole="tblSettleRequest" ToRole="tblStudent" />
+        </EntityType>
+        <Association Name="FK_tblSettleRequest_tblStudent">
+          <End Type="SettlementModel.tblStudent" Role="tblStudent" Multiplicity="1" />
+          <End Type="SettlementModel.tblSettleRequest" Role="tblSettleRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblSettleRequest">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SettlementModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SettlementModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblBenefit">
             <EntityTypeMapping TypeName="SettlementModel.tblBenefit">
               <MappingFragment StoreEntitySet="tblBenefit">
+                <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -899,6 +922,7 @@
           <EntitySetMapping Name="tblUsers">
             <EntityTypeMapping TypeName="SettlementModel.tblUsers">
               <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="Quote" ColumnName="Quote" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -915,6 +939,15 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Penalty" ColumnName="Penalty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSettleRequest">
+            <EntityTypeMapping TypeName="SettlementModel.tblSettleRequest">
+              <MappingFragment StoreEntitySet="tblSettleRequest">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

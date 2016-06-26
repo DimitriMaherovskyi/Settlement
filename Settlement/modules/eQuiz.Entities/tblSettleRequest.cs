@@ -12,12 +12,12 @@ namespace eQuiz.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class tblSettleRequest
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public int StudentId { get; set; }
+        public bool Status { get; set; }
+    
+        public virtual tblStudent tblStudent { get; set; }
     }
 }

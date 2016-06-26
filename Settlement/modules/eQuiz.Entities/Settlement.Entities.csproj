@@ -68,9 +68,6 @@
       <DependentUpon>SettlementEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="SettlementEntitiesPartial.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>SettlementEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="tblBenefit.cs">
       <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
@@ -90,6 +87,9 @@
       <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tblRoomType.cs">
+      <DependentUpon>SettlementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSettleRequest.cs">
       <DependentUpon>SettlementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tblStudent.cs">

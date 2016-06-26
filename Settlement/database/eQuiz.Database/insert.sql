@@ -90,9 +90,9 @@ VALUES (1, 1, 1, '2016-06-06'),
 SET IDENTITY_INSERT [tblStudentViolation] OFF;
 
 SET IDENTITY_INSERT [tblBenefit] ON;
-INSERT INTO [tblBenefit] ([Id], [Name])
-VALUES (1, 'Mountain place'),
-		(2, 'Invalid 3 group')
+INSERT INTO [tblBenefit] ([Id], [Name], [Value])
+VALUES (1, 'Mountain place', 100),
+		(2, 'Invalid 3 group', 250)
 SET IDENTITY_INSERT [tblBenefit] OFF;
 
 SET IDENTITY_INSERT [tblStudentBenefit] ON;
@@ -105,12 +105,12 @@ SET IDENTITY_INSERT [tblStudentBenefit] OFF;
 
 SET IDENTITY_INSERT [tblStudentRoom] ON;
 INSERT INTO tblStudentRoom([Id], [StudentId], [RoomId], [DateIn], [DateOut])
-VALUES (1, 1, 1, '2016-03-03', '2016-04-04'),
-		(2, 2, 2, '2016-03-03', '2016-04-04'),
+VALUES (1, 1, 1, '2016-03-03', '2016-07-07'),
+		(2, 2, 2, '2016-03-03', '2016-07-07'),
 		(3, 3, 3, '2016-03-03', '2016-04-04'),
-		(4, 4, 3, '2016-03-03', '2016-04-04'),
-		(5, 5, 5, '2016-03-03', '2016-04-04'),
-		(6, 6, 6, '2016-03-03', '2016-04-04'),
-		(7, 7, 7, '2016-03-03', '2016-04-04'),
+		(4, 4, 3, '2016-03-03', '2016-07-07'),
+		(5, 5, 5, '2016-03-03', '2016-07-07'),
+		(6, 6, 6, '2016-03-03', '2016-07-07'),
+		(7, 7, 7, '2016-03-03', '2016-07-07'),
 		(8, 8, 7, '2016-03-03', '2016-04-04')
 SET IDENTITY_INSERT [tblStudentRoom] OFF;
