@@ -41,7 +41,7 @@ namespace Settlement.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _repository.Get<tblUsers>(u => u.UserName == model.Username && u.Password == model.Password).FirstOrDefault();
+                var user = _repository.Get<tblUsers>(u => u.UserName == model.Username && u.PasswordHash == model.Password).FirstOrDefault();
                 if (user != null)
                 {
                     var role = _repository.Get<tblRoles>(r => r.RoleId == user.RoleId).FirstOrDefault();

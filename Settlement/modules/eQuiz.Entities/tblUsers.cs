@@ -16,12 +16,14 @@ namespace eQuiz.Entities
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
         public string Email { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> LastLoginDate { get; set; }
         public Nullable<int> RoleId { get; set; }
         public Nullable<int> Quote { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PasswordHash { get; set; }
     
         public virtual tblRoles tblRoles { get; set; }
     }

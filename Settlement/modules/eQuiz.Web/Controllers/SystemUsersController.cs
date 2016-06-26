@@ -39,7 +39,7 @@ namespace Settlement.Web.Controllers
 
             var query = from u in users
                         join r in roles on u.RoleId equals r.RoleId
-                        select new User(u.UserId, u.UserName, u.Password,  u.Email, r.RoleName);
+                        select new User(u.UserId, u.UserName, u.PasswordHash,  u.Email, r.RoleName);
 
             foreach (var item in query)
             {
@@ -60,7 +60,7 @@ namespace Settlement.Web.Controllers
             var query = from u in users
                         join r in roles on u.RoleId equals r.RoleId
                         where r.RoleName != "Admin"
-                        select new User(u.UserId, u.UserName, u.Password, u.Email, r.RoleName);
+                        select new User(u.UserId, u.UserName, u.PasswordHash, u.Email, r.RoleName);
 
             foreach (var item in query)
             {
@@ -95,7 +95,7 @@ namespace Settlement.Web.Controllers
 
             user.UserName = name;
             user.Email = email;
-            user.Password = password;
+            user.PasswordHash = password;
             user.RoleId = roleId;
             user.CreatedDate = DateTime.Now;
 
