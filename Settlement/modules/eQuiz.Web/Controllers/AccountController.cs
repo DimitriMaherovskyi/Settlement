@@ -57,7 +57,7 @@ namespace Settlement.Web.Controllers
                 }
                 string passwordHash = strBuilder.ToString();
 
-                var user = _repository.Get<tblUsers>(u => u.UserName == model.Username && u.Password == passwordHash).FirstOrDefault();
+                var user = _repository.Get<tblUsers>(u => u.UserName == model.Username && u.PasswordHash == passwordHash).FirstOrDefault();
                 if (user != null)
                 {
                     var role = _repository.Get<tblRoles>(r => r.RoleId == user.RoleId).FirstOrDefault();
