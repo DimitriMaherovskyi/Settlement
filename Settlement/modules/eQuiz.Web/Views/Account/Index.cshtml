@@ -1,20 +1,46 @@
-﻿
+﻿@model Settlement.Web.Models.LoginViewModel
+
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h3>Choose your role</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<div>
-    <form action="@Url.Action("Index", "Account")" method="post">
-        <div>
-            <select name="role">
-                <option value="dean">Dean</option>
-                <option value="warden">Warden</option>                
-                <option value="admin">Admin</option>
-            </select>
-            <button type="submit" style="width:60px;">Go</button>
+    <div class="form-horizontal">
+        <h4>User Login</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username)
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
         </div>
-    </form>
-</div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RememberMe, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RememberMe)
+                @Html.ValidationMessageFor(model => model.RememberMe)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

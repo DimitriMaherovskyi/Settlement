@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
@@ -204,16 +205,19 @@
     <Compile Include="AutofacModule.cs" />
     <Compile Include="Code\BaseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostelRoomsController.cs" />
-    <Compile Include="Controllers\LogonController.cs" />
     <Compile Include="Controllers\StudentInfoController.cs" />
     <Compile Include="Controllers\StudentReviewController.cs" />
     <Compile Include="Controllers\SystemUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuthorizeAccessAttribute.cs" />
+    <Compile Include="Models\BaseViewPage.cs" />
     <Compile Include="Models\DateOut.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomStuds.cs" />
@@ -221,6 +225,8 @@
     <Compile Include="Models\StudentsReview.cs" />
     <Compile Include="Models\Hostel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserPrincipal.cs" />
+    <Compile Include="Models\UserPrincipalSerializeModel.cs" />
     <Compile Include="Models\Violation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -247,6 +253,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Logon\Login.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
