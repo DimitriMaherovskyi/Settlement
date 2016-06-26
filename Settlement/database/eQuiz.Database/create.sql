@@ -5,7 +5,9 @@ USE [Settlement];
 
 CREATE TABLE [tblUsers]
 (
-[UserId] INT NOT NULL,
+[UserId] INT NOT NULL IDENTITY (1, 1),
+[FirstName] NVARCHAR(30) NOT NULL,
+[LastName] NVARCHAR(30) NOT NULL,
 [UserName] NVARCHAR(20) NOT NULL,
 [Password] NVARCHAR(20) NOT NULL,
 [Email] NVARCHAR(40) NOT NULL,
@@ -18,7 +20,7 @@ CONSTRAINT [PK_tblUsers_ID] PRIMARY KEY ([UserId])
 
 CREATE TABLE [tblRoles]
 (
-[RoleId] INT NOT NULL,
+[RoleId] INT NOT NULL IDENTITY (1, 1),
 [RoleName] nvarchar(30) NOT NULL
 CONSTRAINT [PK_tblRoles_ID] PRIMARY KEY ([RoleId])
 );

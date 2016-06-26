@@ -8,6 +8,20 @@ VALUES (1, 1, 100),
 		(3, 3, 150);
 SET IDENTITY_INSERT [tblHostel] OFF;
 
+SET IDENTITY_INSERT [tblRoles] ON;
+INSERT INTO [tblRoles]([RoleId], [RoleName])
+VALUES (1, 'Admin'),
+		(2, 'Warden'),
+		(3, 'Dean');
+SET IDENTITY_INSERT [tblRoles] OFF;
+
+SET IDENTITY_INSERT [tblUsers] ON;
+INSERT INTO [tblUsers]([UserId], [FirstName], [LastName], [UserName], [Password], [Email], [CreatedDate], [LastLoginDate], [RoleId], [Quote])
+VALUES (1, 'Andriy', 'Shevchenko', 'andrewShevchenko', '', 'andrewShev@nulp.ua', GETDATE(),NULL, 1, 100),
+		(2, 'Kateryna', 'Ivanchuk', 'kateIvanchuk', '', 'kateIvanchuk@nulp.ua', GETDATE(),NULL, 2, 70),
+		(3, 'Bogdan', 'Telnyah', 'bogdanTelnyah', '', 'bogdanTelnyah@nulp.ua', GETDATE(),NULL, 3, 100);
+SET IDENTITY_INSERT [tblUsers] OFF;
+
 SET IDENTITY_INSERT [tblRoomType] ON;
 INSERT INTO tblRoomType([Id], [Type])
 VALUES (1, 'Living'),
