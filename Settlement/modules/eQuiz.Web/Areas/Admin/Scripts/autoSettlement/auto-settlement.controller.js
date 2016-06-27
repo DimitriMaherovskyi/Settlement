@@ -118,7 +118,9 @@
 
         vm.settleStudents = function () {
             autoSettlementDataService.settleStudents().success(function (res) {
-                activate();
+                autoSettlementDataService.getSettleResult().then(function (result) {
+                    studentList = result.data;
+                });
                 $scope.showNotifyPopUp('Students were successfully settled!')
                 $timeout($scope.closePopUp, 5000);
                 vm.studentsWereSettled = true;
