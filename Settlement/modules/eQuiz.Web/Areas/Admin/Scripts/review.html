@@ -27,24 +27,6 @@
                             <span class="sortorder" ng-show="rc.direction(h.predicateIndex) !== null" ng-class="{direction:rc.direction(h.predicateIndex)}"></span>
                             {{h.name}}
                         </a>
-                        <!--<div ng-if="h.field == 'userGroup'" ng-cloak class="btn-group groupBtn" ng-class="{open: rc.groupListOpened}">
-
-                            <button class="btn dropdown-toggle" ng-click="rc.groupListOpened=!rc.groupListOpened">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                <li>
-                                    <a ng-click="rc.checkAll()"><i class="icon-ok-sign"></i>Check All</a>
-                                </li>
-                                <li>
-                                    <a ng-click="rc.unCheckAll()"><i class="icon-remove-sign"></i>Uncheck All</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li ng-repeat="group in rc.groupList">
-                                    <a ng-click="setSelectedGroup()" ng-model="group">{{group}} <span ng-class="rc.isChecked(group)"></span> </a>
-                                </li>
-                            </ul>
-                        </div>-->
                     </th>
                 </tr>
             </thead>
@@ -73,5 +55,6 @@
                 Total: {{rc.searchFiltered.length}}
             </span>
         </div>
+        <button class="btn btn-primary" onclick="location.href='/Admin/Default/Index/Settlement'">Settle students</button>
     </div>
 </div>

@@ -15,6 +15,18 @@
                }
                }
                 })
+                .when('/Index/Settlement', {
+                    templateUrl: '/Areas/Admin/Scripts/auto-settlement.html',
+                    controller: 'AutoSettlementController',
+                    controllerAs: 'asc',
+                    resolve: {
+                        studentsList: function (autoSettlementDataService) {
+                            return autoSettlementDataService.getStudentsToSettle().then(function (respond) {
+                                return respond.data;
+                            })
+                        }
+                    }
+                })
                  .when('/Index/Accounts', {
                      templateUrl: '/Areas/Admin/Scripts/accounts.html',
                      controller: 'AccountsController',
