@@ -14,7 +14,24 @@
                     })
                }
                }
-               }) 
+                })
+                 .when('/Index/Accounts', {
+                     templateUrl: '/Areas/Admin/Scripts/accounts.html',
+                     controller: 'AccountsController',
+                     controllerAs: 'ac',
+                     resolve: {
+                         accountsList: function (accountsDataService) {
+                             return accountsDataService.getAccounts()//.then(function (respond) {
+                                 //return respond.data;
+                             //})
+                         },
+                         accountRoles: function (accountsDataService) {
+                            return accountsDataService.getRoles()//.then(function (respond) {
+                             //return respond.data;
+                             //})
+                        }
+                     }
+                 })
                 .when('/Index/Student', {
                     templateUrl: '/Areas/Admin/Scripts/student.html',
                     controller: 'StudentController',

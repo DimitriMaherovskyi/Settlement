@@ -109,6 +109,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Scripts\accounts.html" />
+    <Content Include="Areas\Admin\Scripts\accounts\accounts-data.service.js" />
+    <Content Include="Areas\Admin\Scripts\accounts\accounts.controller.js" />
     <Content Include="Areas\Admin\Scripts\hostel-info.html" />
     <Content Include="Areas\Admin\Scripts\hostelInfo\hostelInfo-data.service.js" />
     <Content Include="Areas\Admin\Scripts\hostelInfo\hostelInfo.controller.js" />
