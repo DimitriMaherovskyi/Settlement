@@ -42,7 +42,7 @@ namespace Settlement.Web.Controllers
 
             var query = from v in violations
                         join sv in studentViolations on v.Id equals sv.ViolationId
-                        select new Violation(v.Id, v.Name, v.Penalty);
+                        select new Violation(v.Id, v.Name, v.Penalty, sv.Time);
 
             var vv = new List<object>();
 
@@ -72,7 +72,7 @@ namespace Settlement.Web.Controllers
 
             foreach(var item in violations)
             {
-                result.Add(new Violation(item.Id, item.Name, item.Penalty));
+                result.Add(new Violation(item.Id, item.Name, item.Penalty, null));
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

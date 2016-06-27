@@ -11,7 +11,9 @@ namespace Settlement.Web.Models
         public string Name { get; set; }
         public int Penalty { get; set; }
 
-        public Violation(int id, string name, int penalty)
+        public DateTime? Time { get; set; }
+
+        public Violation(int id, string name, int penalty, DateTime? time)
         {
             Id = id;
             Name = name;
