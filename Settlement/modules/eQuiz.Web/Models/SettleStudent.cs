@@ -5,6 +5,11 @@ using System.Web;
 
 namespace Settlement.Web.Models
 {
+    public enum Sex
+    {
+        female, male
+    }
+
     public class SettleStudent
     {
         const int maxLivingDistance = 400;
@@ -14,17 +19,21 @@ namespace Settlement.Web.Models
         public string Institute { get; set; }
         public string Gender { get; set; }
         public int Distance { get; set; }
+        public string LivingPlace { get; set; }
         public int BenefitPoints { get; set; }
         public int Rating { get; set; }
-
-        public SettleStudent (int id, string name, string institute, string gender, int distance, int benefitPoints)
+        public int? RoomId { get; set; }
+        public int RequestId { get; set; }
+        public SettleStudent (int id, string name, string institute, bool gender, string livingPlace, int distance, int benefitPoints, int requestId)
         {
             Id = id;
             Name = name;
             Institute = institute;
-            Gender = gender;
+            Gender = SetGender(gender);
+            LivingPlace = livingPlace;
             Distance = distance;
             BenefitPoints = benefitPoints;
+            RequestId = requestId;
         }
 
         public static void CountRating(SettleStudent student)
@@ -39,9 +48,21 @@ namespace Settlement.Web.Models
             }
         }
 
-        static int Rate(int distance, int benefit)
+        private string SetGender(bool gender)
+        {
+            if (Convert.ToInt32(gender) == (int)Sex.female)
+            {
+                return "Female";
+            }
+
+            return "Male";
+        }
+
+        private static int Rate(int distance, int benefit)
         {
             return distance + benefit;
         }
+
+        
     }
 }
