@@ -31,7 +31,10 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetStudentsToSettle()
         {
+            AutoSettle.Students = new List<SettleStudent>();
             var result = new List<ShowStudent>();
+            var noBen = new List<SettleStudent>();
+            var ben = new List<SettleStudent>();
 
             var students = _repository.Get<tblStudent>();
             var studentRooms = _repository.Get<tblStudentRoom>();
@@ -43,7 +46,7 @@ namespace Settlement.Web.Controllers
             var benefits = _repository.Get<tblBenefit>();
 
             var noBenefitStudents = from s in students
-                                    join sr in studentRooms on s.Id equals sr.StudentId
+                                        //join sr in studentRooms on s.Id equals sr.StudentId
                                     join srq in settleRequests on s.Id equals srq.StudentId
                                     join sres in studentResidences on s.Id equals sres.StudentId
                                     join res in residences on sres.ResidenceId equals res.Id
@@ -51,7 +54,7 @@ namespace Settlement.Web.Controllers
                                     select new SettleStudent(s.Id, s.Firstname + " " + s.Surname, s.Insitute, s.GenderType, res.Name, res.Distance, 0, srq.Id);
 
             var benefitStudents = from s in students
-                                  join sr in studentRooms on s.Id equals sr.StudentId
+                                      //join sr in studentRooms on s.Id equals sr.StudentId
                                   join srq in settleRequests on s.Id equals srq.StudentId
                                   join sres in studentResidences on s.Id equals sres.StudentId
                                   join res in residences on sres.ResidenceId equals res.Id
@@ -62,10 +65,32 @@ namespace Settlement.Web.Controllers
 
             foreach (var item in noBenefitStudents)
             {
-                AutoSettle.Students.Add(item);
+                noBen.Add(item);
             }
 
             foreach (var item in benefitStudents)
+            {
+                ben.Add(item);
+            }
+
+            for (var i = 0; i < ben.Count; i++)
+            {
+                for (var j = 0; j < noBen.Count; j++)
+                {
+                    if (ben[i].Equals(noBen[j]))
+                    {
+                        noBen.Remove(noBen[j]);
+                        break;
+                    }
+                }
+            }
+
+            foreach (var item in ben)
+            {
+                AutoSettle.Students.Add(item);
+            }
+
+            foreach (var item in noBen)
             {
                 AutoSettle.Students.Add(item);
             }

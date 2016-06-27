@@ -7,9 +7,9 @@ namespace Settlement.Web.Models
 {
     public static class AutoSettle
     {
-        private static List<SettleRoom> freeRooms;
+        private static List<SettleRoom> freeRooms = new List<SettleRoom>();
 
-        private static List<SettleStudent> students;
+        private static List<SettleStudent> students = new List<SettleStudent>();
 
         public static List<SettleRoom> FreeRooms
         {
@@ -69,7 +69,7 @@ namespace Settlement.Web.Models
 
         public static void OrderStudentsByRating()
         {
-            students.OrderByDescending(s => s.Rating);
+            Students = students.OrderByDescending(s => s.Rating).ToList();
         }
 
         public static void SetRatings()

@@ -10,7 +10,7 @@ namespace Settlement.Web.Models
         female, male
     }
 
-    public class SettleStudent
+    public class SettleStudent : IEquatable<SettleStudent>
     {
         const int maxLivingDistance = 400;
 
@@ -48,6 +48,11 @@ namespace Settlement.Web.Models
             }
         }
 
+        public override int GetHashCode()
+        {
+            return Id.ToString().GetHashCode() + Name.GetHashCode();
+        }
+
         private string SetGender(bool gender)
         {
             if (Convert.ToInt32(gender) == (int)Sex.female)
@@ -63,6 +68,14 @@ namespace Settlement.Web.Models
             return distance + benefit;
         }
 
-        
+        public bool Equals(SettleStudent other)
+        {
+            if (other.Id == Id && other.Name == Name)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
