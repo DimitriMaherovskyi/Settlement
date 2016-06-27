@@ -33,9 +33,9 @@ namespace Settlement.Web.Controllers
         {
             var student = _repository.GetSingle<tblStudent>(s => s.Id == id);
             var studentRoom = _repository.GetSingle<tblStudentRoom>(sr => sr.StudentId == id);
-
-            var room = _repository.GetSingle<tblRoom>(r => r.Id == studentRoom.RoomId);
-            var hostel = _repository.GetSingle<tblHostel>(h => h.Id == room.HostelId);
+            tblRoom room;
+            tblHostel hostel;
+            StudentInfo result;
 
             var studentViolations = _repository.Get<tblStudentViolation>(sv => sv.StudentId == id);
             var violations = _repository.Get<tblViolation>();
@@ -51,8 +51,16 @@ namespace Settlement.Web.Controllers
                 vv.Add(item);
             }
 
-            var result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut.ToShortDateString(), room.Number, hostel.Number, vv);
-
+            if (studentRoom != null)
+            {
+                room = _repository.GetSingle<tblRoom>(r => r.Id == studentRoom.RoomId);
+                hostel = _repository.GetSingle<tblHostel>(h => h.Id == room.HostelId);
+                result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut.ToShortDateString(), room.Number, hostel.Number, vv);
+            }
+            else
+            {
+                result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut.ToShortDateString(), 0, 0, vv);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
