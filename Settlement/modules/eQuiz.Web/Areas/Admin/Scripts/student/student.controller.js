@@ -11,10 +11,10 @@
         vm.hostels = hostels;
         vm.rooms = rooms;
         vm.currentViolation = violations[0];
-        
+
         $scope.showNotification = false;
         $scope.showWarning = false;
- 
+
         vm.currentTab = $location.hash();
         vm.modelChanged = false; // Indicates whether data in the model was changed
         vm.checkInBoxOpened = false;
@@ -30,7 +30,7 @@
                 return vm.violationsList;
             });
 
-            }
+        }
 
         vm.saveProfile = function () {
             studentDataService.saveProfileInfo(vm.studentInfo.Id, vm.studentInfo.Name, vm.studentInfo.Surname, vm.studentInfo.Group, vm.studentInfo.Institute)
@@ -43,33 +43,20 @@
                 $scope.showNotifyPopUp('Error: student data was not saved!')
                 $timeout($scope.closePopUp, 4000);
             });
-            
+
         };
 
         vm.addViolation = function () {
-            var result = vm.studentInfo.Violations.filter(function (v) {
-                return v.Name === vm.currentViolation.Name;
-            })[0];
-            if (result == undefined) {
-                vm.studentInfo.Violations.push(vm.currentViolation);
-                studentDataService.addViolation(vm.studentInfo.Id, vm.currentViolation.Id)
-                    .success(function (res) {
-                        $scope.showNotifyPopUp('Violation was successfully added!')
-                        $timeout($scope.closePopUp, 4000);
-                    })
-                    .error(function (res) {
-                        $scope.showNotifyPopUp('Error: violation was not added!')
-                        $timeout($scope.closePopUp, 4000);
-                    });
-            }
-            else {
-                $scope.showNotifyPopUp('Error: there is such violation already!')
-                $timeout($scope.closePopUp, 3000);
-            }
-        }
-
-        vm.clearViolations = function () {
-            vm.studentInfo.Violations = [];
+            vm.studentInfo.Violations.push(vm.currentViolation);
+            studentDataService.addViolation(vm.studentInfo.Id, vm.currentViolation.Id)
+               .success(function (res) {
+                   $scope.showNotifyPopUp('Violation was successfully added!')
+                   $timeout($scope.closePopUp, 4000);
+               })
+               .error(function (res) {
+                   $scope.showNotifyPopUp('Error: violation was not added!')
+                   $timeout($scope.closePopUp, 4000);
+               });
         }
 
         vm.cancelProfile = function () {
@@ -78,11 +65,24 @@
         }; // Cancel unsaved changes in the profile
 
         vm.validationCheck = function () {
-            return vm.studentInfo.Name && vm.studentInfo.Surname && vm.studentInfo.Institute && vm.modelChanged == true
-            vm.studentInfo.Group;
+            return (vm.studentInfo.Name && vm.studentInfo.Surname && vm.studentInfo.Institute && (vm.modelChanged == true) && vm.studentInfo.Group) != undefined;
         };
 
-        vm.checkIn = function() {
+        vm.checkInValidation = function() {
+            return (vm.chosenHostel && vm.chosenRoom) != undefined;
+        }
+
+        vm.addPayValidation = function() {
+            var condition1 = (vm.paySum && vm.payTillDate) != undefined;
+            var condition2 = vm.payTillDate > Date.now();
+            return condition1 && condition2;
+        }
+
+        vm.violationValidation = function() {
+            return vm.currentViolation.Time != undefined && vm.currentViolation.Time > Date.now();
+        }
+
+        vm.checkIn = function () {
             studentDataService.checkIn(vm.studentInfo.Id, vm.chosenRoom.Id)
             .success(function (res) {
                 $scope.showNotifyPopUp('Student was successfully checked in!')
@@ -114,16 +114,15 @@
             console.log(vm.payTillDate.toLocaleString());
             studentDataService.addPay(vm.paySum, vm.studentInfo.Id, hostelId, vm.payTillDate.toLocaleString())
                 .success(function (res) {
-                
-                $scope.showNotifyPopUp('Pay was successfully added!')
-                $timeout($scope.closePopUp, 4000);
-                activate();
-            })
+
+                    $scope.showNotifyPopUp('Pay was successfully added!')
+                    $timeout($scope.closePopUp, 4000);
+                    activate();
+                })
             .error(function (res) {
                 $scope.showNotifyPopUp('Error: pay was not added!')
                 $timeout($scope.closePopUp, 4000);
             });
         }
-
-    };
+    }
 })(angular);
