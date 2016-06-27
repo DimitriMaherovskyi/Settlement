@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-
+@using Settlement.Web.Models;
 @section HeadScripts
 {
     <base href="/Admin/Default/" />
@@ -21,10 +21,9 @@
                 Quotes
             </button>
             <label style="text-decoration:solid; font-size:20px; float:right">
-                @User.FirstName
-                @User.LastName
+                @User.Identity.Name; 
             </label>
-            <a href="/Account/LogOut">Logout</a>
+            <a class="navbar-link" href="/Account/LogOut">Logout</a>
         </div>
         }
         <div style="z-index: 5" data-loading class="cssload-container centered">
