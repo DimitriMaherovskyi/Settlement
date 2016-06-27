@@ -34,27 +34,31 @@
             <input type="text" name="room" class="profileField" ng-model="sc.studentInfo.Room" ng-change="sc.modelChanged = true;" class="showValidation" readonly required /><br /><br />
             <label class="profileLabel">Paid till:</label>
             <input type="text" name="paidTill" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
-            <button class="profileButton" ng-click="sc.checkInBoxOpened = !sc.checkInBoxOpened">Check in</button>
-            <button class="profileButton" ng-click="sc.checkOut()">Check out</button>
-            <button class="profileButton" ng-click="sc.addPayBoxOpened = !sc.addPayBoxOpened">Add pay</button>
+            <button class="profileButton btn btn-primary" ng-click="sc.checkInBoxOpened = !sc.checkInBoxOpened">Check in</button>
+            <button class="profileButton btn btn-primary" ng-click="sc.checkOut()">Check out</button>
+            <button class="profileButton btn btn-primary" ng-click="sc.addPayBoxOpened = !sc.addPayBoxOpened">Add pay</button>
 
-            <div id="checkInBox" ng-show="sc.checkInBoxOpened == true">
-                Choose hostel:
-                <span>
-                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenHostel" ng-options="h.Number for h in sc.hostels"></select>
-                </span>
-                <span>
-                    <select style="margin:15px; font-size:17px " ng-model="sc.chosenRoom" ng-options="r.Number for r in sc.rooms | hostel: sc.chosenHostel.Id"></select>
-                </span>
-                <button ng-click="sc.checkIn()">Check in</button>
+            <div id="checkInBox" class="panel panel-default centered" style="z-index:5; width:250px" ng-show="sc.checkInBoxOpened == true">
+                <div class="panel panel-body">
+                    <label class="profileLabel">Choose hostel:</label>
+                    <select class="input-group" style="margin:15px; font-size:17px " ng-model="sc.chosenHostel" ng-options="h.Number for h in sc.hostels"></select>
+                    <label class="profileLabel">Choose room:</label>
+                    <select class="input-group" style="margin:15px; font-size:17px " ng-model="sc.chosenRoom" ng-options="r.Number for r in sc.rooms | hostel: sc.chosenHostel.Id"></select>
+                    <button class="btn btn-primary" ng-disabled="!sc.checkInValidation()" ng-click="sc.checkIn()">Check in</button>
+                    <button class="btn btn-default" ng-click="sc.checkInBoxOpened = false">Close</button>
+                </div>
             </div>
 
-            <div id="addPayBox" ng-show="sc.addPayBoxOpened == true">
-                <label>Enter end date:</label>
-                <input type="date" ng-model="sc.payTillDate"/>
-                <label>Enter sum:</label>
-                <input type="number" ng-model="sc.paySum"/>
-                <button ng-click="sc.addPay()">Add pay</button>
+            <div id="addPayBox" class="panel panel-default centered" style="z-index:5" ng-show="sc.addPayBoxOpened == true">
+                <div class="panel panel-body">
+                    <label class="profileLabel">Enter end date:</label>
+                    <input type="date" class="input-group" ng-model="sc.payTillDate" />
+                    <label class="profileLabel">Enter sum:</label>
+                    <input type="number" class="input-group" ng-model="sc.paySum" />
+                    <br />
+                    <button class="btn btn-primary" ng-disabled="!sc.addPayValidation()" ng-click="sc.addPay()">Add pay</button>
+                    <button class="btn btn-default" ng-click="sc.addPayBoxOpened = false">Close</button>
+                </div>
             </div>
         </div>
 
@@ -66,22 +70,22 @@
                     {{v.Time}}
                 </div>
             <br />
-                <div style="border-style:inset; border-width:1px;border-color:black; width:500px">
-                    <span>
-                        <select style="margin:15px; font-size:17px " ng-model="sc.currentViolation" ng-options="v.Name for v in sc.violationsList"></select>
-                    </span>
-                    <br />
-                    <br />
-                    <button class="profileButton" ng-click="sc.addViolation()" >Add violation</button>
-                    <button class="profileButton" ng-click="sc.clearViolations()">Clear all violations</button>
+                <div class="panel panel-default">
+                    <div class="panel-body" style="margin:10px">
+                        <label class="profileLabel">Select violation:</label>
+                        <select class="input-group" style="margin:15px; font-size:17px" ng-model="sc.currentViolation" ng-options="v.Name for v in sc.violationsList"></select>
+                        <label class="profileLabel">Select date:</label>
+                        <input type="date" style="margin:15px; font-size:17px" class="input-group" ng-model="sc.currentViolation.Time" />
+                        <button class="profileButton btn btn-primary" style="margin:15px" ng-disabled="!sc.violationValidation()" ng-click="sc.addViolation()">Add violation</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <br />
-    <div class="footerButtons" layout="row">
-        <button class="profileButton" ng-click="sc.saveProfile()" ng-disabled="!sc.validationCheck()">Save</button>
+    <div class="footerButtons" ng-show="sc.currentTab == 'Student'" layout="row">
+        <button class="profileButton btn btn-success" ng-click="sc.saveProfile()" ng-disabled="!sc.validationCheck()">Save</button>
         <div></div>
-        <button class="profileButton" ng-click="sc.cancelProfile()">Cancel</button>
+        <button class="profileButton btn btn-default" ng-click="sc.cancelProfile()">Cancel</button>
     </div>
