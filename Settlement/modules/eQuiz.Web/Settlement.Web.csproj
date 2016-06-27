@@ -228,6 +228,7 @@
     <Compile Include="Models\RoomStuds.cs" />
     <Compile Include="Models\SettleRoom.cs" />
     <Compile Include="Models\SettleStudent.cs" />
+    <Compile Include="Models\ShowStudent.cs" />
     <Compile Include="Models\StudentInfo.cs" />
     <Compile Include="Models\StudentsReview.cs" />
     <Compile Include="Models\Hostel.cs" />

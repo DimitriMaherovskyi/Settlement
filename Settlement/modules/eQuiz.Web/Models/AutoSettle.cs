@@ -51,6 +51,7 @@ namespace Settlement.Web.Models
                     {
                         freeRooms[j].Students.Add(students[i]);
                         freeRooms[j].PlacesLeft -= 1;
+                        students[i].RoomId = freeRooms[j].Id;
                         SetRoomGenders();
                         break;
                     }
@@ -59,18 +60,19 @@ namespace Settlement.Web.Models
                     {
                         freeRooms[j].Students.Add(students[i]);
                         freeRooms[j].PlacesLeft -= 1;
+                        students[i].RoomId = freeRooms[j].Id;
                         break;
                     }
                 }
             }
         }
 
-        private static void OrderStudentsByRating()
+        public static void OrderStudentsByRating()
         {
             students.OrderByDescending(s => s.Rating);
         }
 
-        private static void SetRatings()
+        public static void SetRatings()
         {
             foreach (var stud in students)
             {
