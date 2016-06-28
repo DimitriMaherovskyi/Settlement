@@ -176,6 +176,13 @@ namespace Settlement.Web.Controllers
         [HttpPost]
         public void AddSettleRequest(int studentId)
         {
+            var settleRequests = _repository.Get<tblSettleRequest>(sr => sr.StudentId == studentId && sr.Status == true);
+
+            if (settleRequests.Count > 0)
+            {
+                return;
+            }
+
             var settleRequest = new tblSettleRequest();
             settleRequest.StudentId = studentId;
             settleRequest.Status = true;
