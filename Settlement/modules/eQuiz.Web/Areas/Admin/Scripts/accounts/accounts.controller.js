@@ -30,29 +30,33 @@
         field: 'Email',
         predicateIndex: 1
     }, {
+        name: 'Institute',
+        field: 'Institute',
+        predicateIndex: 2
+    }, {
         name: 'CreatedDate',
         field: 'CreatedDate',
-        predicateIndex: 2
+        predicateIndex: 3
     }, {
         name: 'LastLoginDate',
         field: 'LastLoginDate',
-        predicateIndex: 3
+        predicateIndex: 4
     }, {
         name: 'Role',
         field: 'Role',
-        predicateIndex: 4
+        predicateIndex: 5
     }, {
         name: 'Quote',
         field: 'Quote',
-        predicateIndex: 5
+        predicateIndex: 6
     }, {
         name: 'FirstName',
         field: 'FirstName',
-        predicateIndex: 6
+        predicateIndex: 7
     }, {
         name: 'LastName',
         field: 'LastName',
-        predicateIndex: 7
+        predicateIndex: 8
 },];
 
         function activate() {
@@ -64,7 +68,7 @@
         generatePredicate();
 
         function generatePredicate() {
-            vm.myPredicate = [null, null, null, null, null, null, null, null];
+            vm.myPredicate = [null, null, null, null, null, null, null, null, null];
         }; // Generates empty predicates that are used for ordering
 
         function clearPredicatesExcept(index) {
@@ -84,21 +88,24 @@
                         item = '+Email';
                         break;
                     case 2:
-                        item = '+CreatedDate';
+                        item = '+Institute';
                         break;
                     case 3:
-                        item = '+LastLoginDate';
+                        item = '+CreatedDate';
                         break;
                     case 4:
-                        item = '+Role';
+                        item = '+LastLoginDate';
                         break;
                     case 5:
-                        item = '+Quote';
+                        item = '+Role';
                         break;
                     case 6:
-                        item = '+FirstName';
+                        item = '+Quote';
                         break;
                     case 7:
+                        item = '+FirstName';
+                        break;
+                    case 8:
                         item = '+LastName';
                         break;
                 }
@@ -208,7 +215,7 @@
         }
 
         vm.validateNewAccountForm = function() {
-            if (vm.newAccount.UserName && vm.newAccount.Email && vm.chosenRole && vm.newAccount.Quote && vm.newAccount.FirstName && vm.newAccount.LastName && vm.newAccount.Password != undefined) {
+            if (vm.newAccount.UserName && vm.newAccount.Email && vm.newAccount.Institute && vm.chosenRole && vm.newAccount.Quote && vm.newAccount.FirstName && vm.newAccount.LastName && vm.newAccount.Password != undefined) {
                 return true;
             }
             else
@@ -217,7 +224,7 @@
             }
         }
         vm.validateChangeAccountForm = function () {
-            if(vm.changedAccount.Username && vm.changedAccount.Email && vm.chosenRole && vm.changedAccount.Quote && vm.changedAccount.FirstName && vm.changedAccount.LastName != undefined)
+            if(vm.changedAccount.Username && vm.changedAccount.Email && vm.changedAccount.Institute && vm.chosenRole && vm.changedAccount.Quote && vm.changedAccount.FirstName && vm.changedAccount.LastName != undefined)
             {
                 return true;
             }

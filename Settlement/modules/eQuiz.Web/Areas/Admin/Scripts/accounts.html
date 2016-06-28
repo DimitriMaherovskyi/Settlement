@@ -23,6 +23,7 @@
                 <tr ng-repeat="c in ac.contents = ((ac.searchFiltered = (ac.accounts | filter: {Username: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
                     <td><a ng-bind-html="c.Username | highlight: ac.search">{{c.Username}}</a></td>
                     <td>{{c.Email}}</td>
+                    <td>{{c.Institute}}</td>
                     <td>{{c.CreatedDate}}</td>
                     <td>{{c.LastLoginDate}}</td>
                     <td>{{ac.getRoleName(c.RoleId)}}</td>
@@ -42,6 +43,8 @@
                 <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Username" /> <br />
                 Email:
                 <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Email" /> <br />
+                Institute:
+                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Institute" /> <br />
                 User role:
                 <select class="profileField input-group" ng-model="ac.chosenRole" ng-options="r.RoleName for r in ac.roles"></select> <br />
                 Quote:
@@ -61,6 +64,8 @@
                 <input type="text" class="profileField input-group" ng-model="ac.newAccount.UserName" /> <br />
                 Email:
                 <input type="text" class="profileField input-group" ng-model="ac.newAccount.Email" /> <br />
+                Institute:
+                <input type="text" class="profileField input-group" ng-model="ac.newAccount.Institute" /> <br />
                 User role:
                 <select class="profileField input-group" ng-model="ac.chosenRole" ng-options="r.RoleName for r in ac.roles"></select> <br />
                 Quote:

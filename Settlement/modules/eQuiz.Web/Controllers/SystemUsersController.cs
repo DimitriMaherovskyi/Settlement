@@ -41,7 +41,7 @@ namespace Settlement.Web.Controllers
 
             var query = from u in users
                         join r in roles on u.RoleId equals r.RoleId
-                        select new User(u.UserId, u.UserName, u.Email, r.RoleId, u.CreatedDate != null ? u.CreatedDate.ToString() : null, u.LastLoginDate != null ? u.LastLoginDate.ToString() : null, u.Quote, u.FirstName, u.LastName);
+                        select new User(u.UserId, u.UserName, u.Email, u.Institute, r.RoleId, u.CreatedDate != null ? u.CreatedDate.ToString() : null, u.LastLoginDate != null ? u.LastLoginDate.ToString() : null, u.Quote, u.FirstName, u.LastName);
 
             foreach (var item in query)
             {
@@ -91,13 +91,14 @@ namespace Settlement.Web.Controllers
         #region Post methods
 
         [HttpPost]
-        public void AddUser(string Username, string Email, int RoleId, int Quote, string FirstName, string LastName, string Password)
+        public void AddUser(string Username, string Email, string Institute, int RoleId, int Quote, string FirstName, string LastName, string Password)
         {
             var user = new tblUsers();
 
             string passwordHash = MD5CryptoProvider.ComputeHash(Password);
             user.UserName = Username;
             user.Email = Email;
+            user.Institute = Institute;
             user.PasswordHash = passwordHash;
             user.RoleId = RoleId;
             user.CreatedDate = DateTime.Now;
@@ -134,7 +135,7 @@ namespace Settlement.Web.Controllers
             }
         }
 
-        public void UpdateUserInfo(int UserId, string Username, string Email, int RoleId, int Quote, string FirstName, string LastName)
+        public void UpdateUserInfo(int UserId, string Username, string Email, string Institute, int RoleId, int Quote, string FirstName, string LastName)
         {
             var user = _repository.GetSingle<tblUsers>(u => u.UserId == UserId);
 
@@ -144,6 +145,7 @@ namespace Settlement.Web.Controllers
             user.FirstName = FirstName;
             user.LastName = LastName;
             user.Email = Email;
+            user.Institute = Institute;
 
             _repository.Update<tblUsers>(user);
         }

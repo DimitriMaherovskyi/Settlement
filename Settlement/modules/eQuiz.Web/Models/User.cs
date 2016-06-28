@@ -16,12 +16,14 @@ namespace Settlement.Web.Models
         public int? Quote { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Institute { get; set; }
 
-        public User(int id, string username, string email, int roleId, string createdDate, string lastLogin, int? quote, string firstName, string lastName)
+        public User(int id, string username, string email, string institute, int roleId, string createdDate, string lastLogin, int? quote, string firstName, string lastName)
         {
             UserId = id;
             Username = username;
             Email = email;
+            Institute = institute;
             RoleId = roleId;
             CreatedDate = createdDate;
             LastLoginDate = lastLogin;

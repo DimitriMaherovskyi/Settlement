@@ -25,6 +25,7 @@
                     UserId: changedAccount.UserId,
                     Username: changedAccount.Username,
                     Email: changedAccount.Email,
+                    Institute: changedAccount.Institute,
                     RoleId: changedAccount.RoleId,
                     Quote: changedAccount.Quote,
                     FirstName: changedAccount.FirstName,
@@ -97,6 +98,7 @@
                 params: {
                     Username: newAccount.UserName,
                     Email: newAccount.Email,
+                    Institute: newAccount.Institute,
                     RoleId: newAccount.RoleId,
                     Quote: newAccount.Quote,
                     FirstName: newAccount.FirstName,
