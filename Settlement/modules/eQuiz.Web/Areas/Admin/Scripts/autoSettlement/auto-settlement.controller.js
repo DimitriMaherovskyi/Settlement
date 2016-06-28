@@ -140,7 +140,7 @@
                 $timeout($scope.closePopUp, 5000);
             });
         }
-        vm.discardChanges() = function () {
+        vm.discardChanges = function () {
             autoSettlementDataService.discardChanges().success(function (res) {
                 $scope.showNotifyPopUp('Changes discarded!');
                 activate();
