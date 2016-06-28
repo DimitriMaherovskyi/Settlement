@@ -1,9 +1,9 @@
 ﻿(function (angular) {
     angular.module('settlementModule').controller('AccountsController', AccountsController);
 
-    AccountsController.$inject = ['$scope', '$filter', 'accountsDataService', 'accountsList', 'accountRoles'];
+    AccountsController.$inject = ['$scope', '$filter', 'accountsDataService', 'accountsList', 'accountRoles', '$timeout'];
 
-    function AccountsController($scope, $filter, accountsDataService, accountsList, accountRoles) {
+    function AccountsController($scope, $filter, accountsDataService, accountsList, accountRoles, $timeout) {
         var vm = this;
         var orderBy = $filter('orderBy');
         vm.search = ''; // Represents search field on the form
@@ -161,16 +161,42 @@
 
         vm.saveAccount = function () {
             vm.changedAccount.RoleId = vm.chosenRole.RoleId;
-            accountDataService.changeAccount(vm.changedAccount);
-            activate();
-            vm.changeAccountBoxOpened = false;
+            accountDataService.changeAccount(vm.changedAccount).success(function (res) {
+                activate();
+                vm.changeAccountBoxOpened = false;
+                $scope.showNotifyPopUp('Account was successfully saved!')
+                $timeout($scope.closePopUp, 4000);
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: account was not saved!')
+                $timeout($scope.closePopUp, 4000);
+            });;
         }
 
         vm.addAccount = function () {
             vm.newAccount.RoleId = vm.chosenRole.RoleId;
-            accountsDataService.addAccount(vm.newAccount);
-            activate();
-            vm.newAccountBoxOpened = false;
+            accountsDataService.addAccount(vm.newAccount).success(function (res) {
+                activate();
+                vm.newAccountBoxOpened = false;
+                $scope.showNotifyPopUp('New account was successfully added!')
+                $timeout($scope.closePopUp, 4000);
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: new account was not added!')
+                $timeout($scope.closePopUp, 4000);
+            });; 
+        }
+
+        vm.deleteAccount = function (userId) {
+            accountsDataService.deleteAccount(userId).success(function (res) {
+                activate();
+                $scope.showNotifyPopUp('Account was successfully deleted!')
+                $timeout($scope.closePopUp, 4000);
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: account was not deleted!')
+                $timeout($scope.closePopUp, 4000);
+            });;
         }
 
         vm.getRoleName = function (roleId) {

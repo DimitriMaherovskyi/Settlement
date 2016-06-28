@@ -91,20 +91,20 @@ namespace Settlement.Web.Controllers
         #region Post methods
 
         [HttpPost]
-        public void AddUser(User userData)
+        public void AddUser(string Username, string Email, int RoleId, int Quote, string FirstName, string LastName, string Password)
         {
             var user = new tblUsers();
 
-            string passwordHash = MD5CryptoProvider.ComputeHash(userData.Password);
-            user.UserName = userData.Username;
-            user.Email = userData.Email;
+            string passwordHash = MD5CryptoProvider.ComputeHash(Password);
+            user.UserName = Username;
+            user.Email = Email;
             user.PasswordHash = passwordHash;
-            user.RoleId = userData.RoleId;
+            user.RoleId = RoleId;
             user.CreatedDate = DateTime.Now;
             user.LastLoginDate = null;
-            user.Quote = userData.Quote;
-            user.FirstName = userData.FirstName;
-            user.LastName = userData.LastName;
+            user.Quote = Quote;
+            user.FirstName = FirstName;
+            user.LastName = LastName;
 
             var users = _repository.Get<tblUsers>();
             
@@ -134,13 +134,16 @@ namespace Settlement.Web.Controllers
             }
         }
 
-        public void UpdateUserInfo(int id, string name, int roleId, int quote)
+        public void UpdateUserInfo(int UserId, string Username, string Email, int RoleId, int Quote, string FirstName, string LastName)
         {
-            var user = _repository.GetSingle<tblUsers>(u => u.UserId == id);
+            var user = _repository.GetSingle<tblUsers>(u => u.UserId == UserId);
 
-            user.UserName = name;
-            user.RoleId = roleId;
-            user.Quote = quote;
+            user.UserName = Username;
+            user.RoleId = RoleId;
+            user.Quote = Quote;
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+            user.Email = Email;
         }
 
         public void DeleteUser(int id)

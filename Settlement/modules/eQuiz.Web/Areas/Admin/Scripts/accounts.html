@@ -1,7 +1,7 @@
 ﻿<div>
     <br />
     <br />
-
+    <div pop-up-window></div>
     <div style="display:inline; margin:5px">
         <label>Search</label>
         <input type="text" ng-model="ac.search" style="width:15em">
@@ -31,6 +31,7 @@
                     <td>{{c.LastName}}</td>
                     <td>
                         <button class="btn btn-info" ng-click="ac.toggleChangeAccount(c.UserId)">Change account info</button>
+                        <button class="btn btn-danger" ng-click="ac.deleteAccount(c.UserId)">Delete</button>
                     </td>
                 </tr>
             </tbody>

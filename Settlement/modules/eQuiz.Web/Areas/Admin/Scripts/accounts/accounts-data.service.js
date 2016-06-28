@@ -21,7 +21,15 @@
             var promise = $http({
                 url: '/QuotesReview/ChangeQuote',
                 method: "POST",
-                params: { changedAccount: changedAccount}
+                params: {
+                    UserId: changedAccount.UserId,
+                    Username: changedAccount.UserName,
+                    Email: changedAccount.Email,
+                    RoleId: changedAccount.RoleId,
+                    Quote: changedAccount.Quote,
+                    FirstName: changedAccount.FirstName,
+                    LastName: changedAccount.LastName,
+                }
             });
             return promise;
         }
@@ -86,7 +94,26 @@
             var promise = $http({
                 url: '/SystemUsers/AddUser',
                 method: "POST",
-                params: { newAccount: newAccount}
+                params: {
+                    Username: newAccount.UserName,
+                    Email: newAccount.Email,
+                    RoleId: newAccount.RoleId,
+                    Quote: newAccount.Quote,
+                    FirstName: newAccount.FirstName,
+                    LastName: newAccount.LastName,
+                    Password: newAccount.Password
+                }
+            });
+            return promise;
+        }
+
+        function deleteAccount(userId) {
+            var promise = $http({
+                url: '/SystemUsers/DeleteUser',
+                method: "POST",
+                params: {
+                    UserId: userId,
+                }
             });
             return promise;
         }
