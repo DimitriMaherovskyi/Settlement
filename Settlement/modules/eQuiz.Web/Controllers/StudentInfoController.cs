@@ -42,9 +42,9 @@ namespace Settlement.Web.Controllers
 
             var query = from v in violations
                         join sv in studentViolations on v.Id equals sv.ViolationId
-                        select new Violation(v.Id, v.Name, v.Penalty, sv.Time);
+                        select new Violation(v.Id, v.Name, v.Penalty, sv.Time.HasValue ? sv.Time.ToString(): null);
 
-            var vv = new List<object>();
+            var vv = new List<Violation>();
 
             foreach (var item in query)
             {

@@ -47,9 +47,9 @@
         };
 
         vm.addViolation = function () {
-            vm.studentInfo.Violations.push(vm.currentViolation);
             studentDataService.addViolation(vm.studentInfo.Id, vm.currentViolation.Id)
                .success(function (res) {
+                   activate();
                    $scope.showNotifyPopUp('Violation was successfully added!')
                    $timeout($scope.closePopUp, 4000);
                })
@@ -123,6 +123,12 @@
                 $scope.showNotifyPopUp('Error: pay was not added!')
                 $timeout($scope.closePopUp, 4000);
             });
+        }
+
+        vm.getHostelPayment = function() {
+            return vm.hostels.filter(function (h) {
+                return h.Number == vm.studentInfo.Hostel;
+            })[0].MonthPaymentSum;
         }
     }
 })(angular);

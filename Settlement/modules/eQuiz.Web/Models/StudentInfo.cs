@@ -15,9 +15,9 @@ namespace Settlement.Web.Models
         public string LivingTill { get; set; }
         public int? Room { get; set; }
         public int? Hostel { get; set; }
-        public List<object> Violations;
+        public List<Violation> Violations;
 
-        public StudentInfo(int id, string name, string surname, string institute, string group, string livingTill, int? room, int? hostel, List<object> violations)
+        public StudentInfo(int id, string name, string surname, string institute, string group, string livingTill, int? room, int? hostel, List<Violation> violations)
         {
             Id = id;
             Name = name;

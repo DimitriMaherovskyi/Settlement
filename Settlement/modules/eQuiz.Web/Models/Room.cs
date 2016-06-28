@@ -16,7 +16,7 @@ namespace Settlement.Web.Models
         public Room(int id, int number, int amountPlaces, int roomFloor, int hostelId)
         {
             Id = id;
-            number = Number;
+            Number = number;
             amountPlaces = AmountPlaces;
             RoomFloor = roomFloor;
             HostelId = hostelId;
