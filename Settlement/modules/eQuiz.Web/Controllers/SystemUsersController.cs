@@ -108,33 +108,36 @@ namespace Settlement.Web.Controllers
             user.LastName = LastName;
 
             var users = _repository.Get<tblUsers>();
-            
-            try
-            {
-                user.UserId = users.Count + 1;
-                _repository.Insert<tblUsers>(user);
-            }
-            catch
-            {
-                for (var i = 1; i < users.Count + 1; i++)
-                {
-                    if (i != users[i].UserId)
-                    {
-                        user.UserId = i;
-                        try
-                        {
-                            _repository.Insert<tblUsers>(user);
-                            break;
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-                    }
-                }
-            }
+
+            //try
+            //{
+            //    user.UserId = users.Count + 1;
+            //    _repository.Insert<tblUsers>(user);
+            //}
+            //catch
+            //{
+            //    for (var i = 1; i < users.Count + 1; i++)
+            //    {
+            //        if (i != users[i].UserId)
+            //        {
+            //            user.UserId = i;
+            //            try
+            //            {
+            //                _repository.Insert<tblUsers>(user);
+            //                break;
+            //            }
+            //            catch
+            //            {
+            //                continue;
+            //            }
+            //        }
+            //    }
+            //}
+
+            _repository.Insert<tblUsers>(user);
         }
 
+        [HttpPost]
         public void UpdateUserInfo(int UserId, string Username, string Email, string Institute, int RoleId, int Quote, string FirstName, string LastName)
         {
             var user = _repository.GetSingle<tblUsers>(u => u.UserId == UserId);
@@ -150,9 +153,11 @@ namespace Settlement.Web.Controllers
             _repository.Update<tblUsers>(user);
         }
 
+        [HttpPost]
         public void DeleteUser(int id)
         {
             //_repository.Delete<tblUsers>("UserId", id);
+            _repository.Delete<int, tblUsers>("UserId", id);
         }
     }
 

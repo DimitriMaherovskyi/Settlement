@@ -12,7 +12,8 @@
             getAccounts: getAccountsAjax,
             changeAccount: changeAccount,
             addAccount: addAccount,
-            getRoles: getRolesAjax
+            getRoles: getRolesAjax,
+            deleteAccount: deleteAccount
         };
 
         return service;
@@ -114,7 +115,7 @@
                 url: '/SystemUsers/DeleteUser',
                 method: "POST",
                 params: {
-                    UserId: userId,
+                    id: userId,
                 }
             });
             return promise;
