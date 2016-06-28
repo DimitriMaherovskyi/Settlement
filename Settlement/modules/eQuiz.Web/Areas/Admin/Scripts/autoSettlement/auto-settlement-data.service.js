@@ -29,17 +29,17 @@
         }
 
         function settleStudents() {
-            var promise = $http.get('/Settle/SettleStudents');
+            var promise = $http.post('/Settle/SettleStudents');
             return promise;
         }
 
         function discardChanges() {
-            var promise = $http.get('/Settle/DiscardChanges');
+            var promise = $http.post('/Settle/DiscardChanges');
             return promise;
         }
 
         function saveChanges() {
-            var promise = $http.get('/Settle/SaveChanges');
+            var promise = $http.post('/Settle/SaveChanges');
             return promise;
         }
     }

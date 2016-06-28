@@ -1,9 +1,9 @@
 ﻿(function (angular) {
     angular.module('settlementModule').controller('AutoSettlementController', AutoSettlementController);
 
-    AutoSettlementController.$inject = ['$scope', '$filter', 'autoSettlementDataService', 'studentsList'];
+    AutoSettlementController.$inject = ['$scope', '$filter', 'autoSettlementDataService', 'studentsList', '$timeout'];
 
-    function AutoSettlementController($scope, $filter, autoSettlementDataService, studentsList) {
+    function AutoSettlementController($scope, $filter, autoSettlementDataService, studentsList, timeout) {
         var vm = this;
 
         var orderBy = $filter('orderBy');
