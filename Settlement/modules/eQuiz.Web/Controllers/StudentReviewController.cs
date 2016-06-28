@@ -124,6 +124,21 @@ namespace Settlement.Web.Controllers
                 }
             }
 
+            // Adding request mark
+            var settleRequests = _repository.Get<tblSettleRequest>(sr => sr.Status == true);
+
+            for (var i = 0; i < result.Count; i++)
+            {
+                for (var j = 0; j < settleRequests.Count; j++)
+                {
+                    if (result[i].Id == settleRequests[j].StudentId)
+                    {
+                        result[i].Name += " (з)";
+                        break;
+                    }
+                }
+            }
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
