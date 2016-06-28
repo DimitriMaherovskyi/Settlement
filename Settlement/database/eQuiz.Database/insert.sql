@@ -16,10 +16,10 @@ VALUES (1, 'Admin'),
 SET IDENTITY_INSERT [tblRoles] OFF;
 
 SET IDENTITY_INSERT [tblUsers] ON;
-INSERT INTO [tblUsers]([UserId], [FirstName], [LastName], [UserName], [PasswordHash], [Email], [CreatedDate], [LastLoginDate], [RoleId], [Quote])
-VALUES (1, 'Andriy', 'Shevchenko', 'andrewShevchenko', '1bbd886460827015e5d605ed44252251', 'andrewShev@nulp.ua', GETDATE(),NULL, 1, 100), --Password: 11111111
-		(2, 'Kateryna', 'Ivanchuk', 'kateIvanchuk', '62a8489af34a1bb0f97d40485425c622', 'kateIvanchuk@nulp.ua', GETDATE(),NULL, 2, 70),   --Password: kate1408
-		(3, 'Bogdan', 'Telnyah', 'bogdanTelnyah', '715822acce9cdbb622a62c9e305cd6b0', 'bogdanTelnyah@nulp.ua', GETDATE(),NULL, 3, 100);   --Password: !hotdog2376
+INSERT INTO [tblUsers]([UserId], [FirstName], [LastName], [Institute], [UserName], [PasswordHash], [Email], [CreatedDate], [LastLoginDate], [RoleId], [Quote])
+VALUES (1, 'Andriy', 'Shevchenko', 'andrewShevchenko', 'IKTA', '1bbd886460827015e5d605ed44252251', 'andrewShev@nulp.ua', GETDATE(),NULL, 1, 100), --Password: 11111111
+		(2, 'Kateryna', 'Ivanchuk', 'kateIvanchuk', 'IKNI', '62a8489af34a1bb0f97d40485425c622', 'kateIvanchuk@nulp.ua', GETDATE(),NULL, 2, 70),   --Password: kate1408
+		(3, 'Bogdan', 'Telnyah', 'bogdanTelnyah', 'IARX', '715822acce9cdbb622a62c9e305cd6b0', 'bogdanTelnyah@nulp.ua', GETDATE(),NULL, 3, 100);   --Password: !hotdog2376
 SET IDENTITY_INSERT [tblUsers] OFF;
 
 SET IDENTITY_INSERT [tblRoomType] ON;

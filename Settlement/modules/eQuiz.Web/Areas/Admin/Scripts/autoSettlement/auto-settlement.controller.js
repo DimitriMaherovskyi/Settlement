@@ -7,7 +7,6 @@
         var vm = this;
 
         var orderBy = $filter('orderBy');
-        vm.groupListOpened = false;
         vm.search = ''; // Represents search field on the form
         vm.myPredicate = null;
         vm.tablePage = 0; // Current table page
@@ -42,7 +41,6 @@
                 currVal.Id = currVal.Id.toString();
                 currVal.Name = currVal.Name.toString();
             }); // Converts received data to string values
-            vm.groupList = GetUniquePropertyValues(vm.students, 'Institute'); // Property user group needs to be changed manualy    
             generatePredicate();
         };
 
