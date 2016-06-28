@@ -116,8 +116,11 @@
     <Content Include="Areas\Admin\Scripts\autoSettlement\auto-settlement-data.service.js" />
     <Content Include="Areas\Admin\Scripts\autoSettlement\auto-settlement.controller.js" />
     <Content Include="Areas\Admin\Scripts\hostel-info.html" />
+    <Content Include="Areas\Admin\Scripts\hostel-review.html" />
     <Content Include="Areas\Admin\Scripts\hostelInfo\hostelInfo-data.service.js" />
     <Content Include="Areas\Admin\Scripts\hostelInfo\hostelInfo.controller.js" />
+    <Content Include="Areas\Admin\Scripts\hostelsReview\hostels-data.service.js" />
+    <Content Include="Areas\Admin\Scripts\hostelsReview\hostels-review.controller.js" />
     <Content Include="Areas\Admin\Scripts\quote-review.html" />
     <Content Include="Areas\Admin\Scripts\quoteReview\quoteReview-data.service.js" />
     <Content Include="Areas\Admin\Scripts\quoteReview\quoteReview.controller.js" />
@@ -215,6 +218,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostelRoomsController.cs" />
+    <Compile Include="Controllers\HostelsReviewController.cs" />
     <Compile Include="Controllers\QuotesReviewController.cs" />
     <Compile Include="Controllers\SettleController.cs" />
     <Compile Include="Controllers\StudentInfoController.cs" />
@@ -281,6 +285,7 @@
     <Folder Include="Areas\Warden\Models\" />
     <Folder Include="Areas\Warden\Views\Shared\" />
     <Folder Include="Scripts\app\pages\" />
+    <Folder Include="Views\HostelsReview\" />
     <Folder Include="Views\QuotesReview\" />
     <Folder Include="Views\Settle\" />
     <Folder Include="Views\StudentInfo\" />
