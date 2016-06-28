@@ -128,6 +128,7 @@
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Institute" Type="nvarchar" MaxLength="30" />
           <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="40" Nullable="false" />
@@ -537,6 +538,7 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Institute" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblViolation">
           <Key>
@@ -926,6 +928,7 @@
           <EntitySetMapping Name="tblUsers">
             <EntityTypeMapping TypeName="SettlementModel.tblUsers">
               <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

@@ -24,6 +24,7 @@ namespace eQuiz.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PasswordHash { get; set; }
+        public string Institute { get; set; }
     
         public virtual tblRoles tblRoles { get; set; }
     }
