@@ -37,6 +37,7 @@
             <button class="profileButton btn btn-primary" ng-click="sc.checkInBoxOpened = !sc.checkInBoxOpened">Check in</button>
             <button class="profileButton btn btn-primary" ng-click="sc.checkOut()">Check out</button>
             <button class="profileButton btn btn-primary" ng-click="sc.addPayBoxOpened = !sc.addPayBoxOpened">Add pay</button>
+            <button class="profileButton btn btn-primary" ng-click="sc.addSettleRequest()">Confirm settle request</button>
 
             <div id="checkInBox" class="panel panel-default centered" style="z-index:5; width:250px" ng-show="sc.checkInBoxOpened == true">
                 <div class="panel panel-body">

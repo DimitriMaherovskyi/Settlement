@@ -17,7 +17,8 @@
             checkIn: checkIn,
             checkOut: checkOut,
             addPay: addPay,
-            addViolation: addViolation          
+            addViolation: addViolation,
+            addSettleRequest: addSettleRequest
         };
 
         return service;
@@ -54,6 +55,14 @@
                 params: { studentId: studentId }
             });
             return promise;
+        }
+
+        function addSettleRequest(studentId) {
+            var promise = $http({
+                url: '/StudentInfo/AddSettleRequest',
+                method: "POST",
+                params: { studentId: studentId }
+            });
         }
 
         function getStudentInfo(studentId) {

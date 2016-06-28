@@ -82,6 +82,19 @@
             return vm.currentViolation.Time != undefined && vm.currentViolation.Time > Date.now();
         }
 
+        vm.addSettleRequest = function () {
+            studentDataService.addSettleRequest(vm.studentInfo.Id)
+            .success(function (res) {
+                $scope.showNotifyPopUp('Student was successfully added to list!')
+                $timeout($scope.closePopUp, 4000);
+                activate();
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: student was not added!')
+                $timeout($scope.closePopUp, 4000);
+            });
+        }
+
         vm.checkIn = function () {
             studentDataService.checkIn(vm.studentInfo.Id, vm.chosenRoom.Id)
             .success(function (res) {
@@ -101,6 +114,7 @@
             .success(function (res) {
                 $scope.showNotifyPopUp('Student was successfully checked out!')
                 $timeout($scope.closePopUp, 4000);
+                activate();
             })
             .error(function (res) {
                 $scope.showNotifyPopUp('Error: student was not checked out!')
