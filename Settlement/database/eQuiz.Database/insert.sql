@@ -60,6 +60,17 @@ VALUES (1, 'Alex', 'Alexeyevich', 'Flesh', 1, 'IKNI', 'KN-17', 1),
 		(12, 'Vanko', 'Georgeivich', 'Pirelli', 1, 'IPPT', 'KT-42', 1);
 SET IDENTITY_INSERT [tblStudent] OFF;
 
+SET IDENTITY_INSERT [tblSettleRequest] ON
+INSERT INTO [tblSettleRequest]([Id], [StudentId], [Status])
+VALUES (1, 1, 0),
+		(2, 4, 0),
+		(3, 9, 0),
+		(4, 9, 1),
+		(5, 10, 1),
+		(6, 11, 1),
+		(7, 12, 1)
+SET IDENTITY_INSERT [tblSettleRequest] OFF
+
 SET IDENTITY_INSERT [tblResidence] ON;
 INSERT INTO [tblResidence] ([Id], [Name], [Distance])
 VALUES (1, 'Rudno', 25),
