@@ -50,7 +50,8 @@ namespace Settlement.Web.Controllers
                 if (user != null)
                 {
                     var role = _repository.Get<tblRoles>(r => r.RoleId == user.RoleId).FirstOrDefault();
-
+                    user.LastLoginDate = DateTime.Now;
+                    _repository.Update<tblUsers>(user);
                     CustomPrincipalSerializeModel serializeModel = new CustomPrincipalSerializeModel();
                     serializeModel.UserId = user.UserId;
                     serializeModel.FirstName = user.FirstName;

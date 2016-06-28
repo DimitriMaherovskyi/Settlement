@@ -41,7 +41,7 @@ namespace Settlement.Web.Controllers
 
             var query = from u in users
                         join r in roles on u.RoleId equals r.RoleId
-                        select new User(u.UserId, u.UserName, null,  u.Email, r.RoleId, u.CreatedDate, u.LastLoginDate, u.Quote, u.FirstName, u.LastName);
+                        select new User(u.UserId, u.UserName, null, u.Email, r.RoleId, u.CreatedDate != null ? u.CreatedDate.ToString() : null, u.LastLoginDate != null ? u.LastLoginDate.ToString() : null, u.Quote, u.FirstName, u.LastName);
 
             foreach (var item in query)
             {
@@ -148,7 +148,7 @@ namespace Settlement.Web.Controllers
 
         public void DeleteUser(int id)
         {
-
+            //_repository.Delete<tblUsers>("UserId", id);
         }
     }
 

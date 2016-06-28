@@ -51,11 +51,11 @@
                     UserName: 'johnSmith',
                     Email: 'johnSmith@mail.com',
                     CreatedDate: '15.05.2016',
-                    LastLoginDate: '12.06.2016',
+                    LastLoginDate: null,
                     RoleId: 1,
                     Quote: 300,
                     FirstName: 'John',
-                    LastName: 'Smith',
+                    LastName: null,
                 },
                 {
                     UserId: 2,

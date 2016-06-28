@@ -20,8 +20,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in ac.contents = ((ac.searchFiltered = (ac.accounts | filter: {UserName: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
-                    <td><a ng-bind-html="c.UserName | highlight: ac.search">{{c.UserName}}</a></td>
+                <tr ng-repeat="c in ac.contents = ((ac.searchFiltered = (ac.accounts | filter: {Username: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
+                    <td><a ng-bind-html="c.Username | highlight: ac.search">{{c.Username}}</a></td>
                     <td>{{c.Email}}</td>
                     <td>{{c.CreatedDate}}</td>
                     <td>{{c.LastLoginDate}}</td>
@@ -39,7 +39,7 @@
         <div style="z-index:5;" class="panel panel-default centered" ng-show="ac.changeAccountBoxOpened">
             <div class="panel-body" style="margin:20px">
                 Username:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.UserName" /> <br />
+                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Username" /> <br />
                 Email:
                 <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Email" /> <br />
                 User role:
