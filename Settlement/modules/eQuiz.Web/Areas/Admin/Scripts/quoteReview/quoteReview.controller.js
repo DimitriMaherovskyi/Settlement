@@ -38,9 +38,9 @@
         ];
 
         function activate() {
-                quoteReviewDataService.getQuotes();//.then(function (respond) {
-                // vm.quotes = respond.data;
-                //})
+                quoteReviewDataService.getQuotes().then(function (respond) {
+                 vm.quotes = respond.data;
+                })
             generatePredicate();
         };
         generatePredicate();
@@ -124,8 +124,16 @@
         };
 
         vm.saveQuote = function () {
-            quoteReviewDataService.changeQuote(vm.userId, vm.newQuoteValue);
-            activate();
+            quoteReviewDataService.changeQuote(vm.userId, vm.newQuoteValue).success(function (res) {
+                activate();
+                vm.changeQuoteBoxOpened = false;
+                $scope.showNotifyPopUp('New quote was successfully saved!')
+                $timeout($scope.closePopUp, 5000);
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: new quote was not saved!')
+                $timeout($scope.closePopUp, 5000);
+            });;
         }
     };
 

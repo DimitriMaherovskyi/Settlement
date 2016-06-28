@@ -80,9 +80,9 @@
                     controllerAs: 'qrc',
                     resolve: {
                         quotesList: function (quoteReviewDataService) {
-                            return quoteReviewDataService.getQuotes();//.then(function (respond) {
-                            // return respond.data;
-                            //})
+                            return quoteReviewDataService.getQuotes().then(function (respond) {
+                             return respond.data;
+                         })
                         },
                     },
                     reloadOnSearch: false
