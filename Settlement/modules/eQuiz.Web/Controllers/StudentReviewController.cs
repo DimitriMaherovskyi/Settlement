@@ -32,6 +32,32 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetStudentsList()
         {
+            var result = GetStudents();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        // Institute mentor method
+        [HttpGet]
+        public JsonResult GetStudentsByInstitute(string institute)
+        {
+            var all = GetStudents();
+            var result = new List<StudentsReview>();
+
+            foreach (var item in all)
+            {
+                if (item.Institute == institute)
+                {
+                    result.Add(item);
+                }
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        public List<StudentsReview> GetStudents()
+        {
             var result = new List<StudentsReview>();
 
             var students = _repository.Get<tblStudent>();
@@ -79,7 +105,7 @@ namespace Settlement.Web.Controllers
             {
                 for (var j = 0; j < dateOut.Count; j++)
                 {
-                    if(setteledList[i].Id == dateOut[j].Id && dateOut[j].OutDate < DateTime.Now)
+                    if (setteledList[i].Id == dateOut[j].Id && dateOut[j].OutDate < DateTime.Now)
                     {
                         setteledList[i].HasProblem = true;
                         break;
@@ -98,7 +124,7 @@ namespace Settlement.Web.Controllers
                 result.Add(item);
             }
 
-             
+
 
             // Adding benefits mark
             var benefitsQuery = from r in result
@@ -139,75 +165,7 @@ namespace Settlement.Web.Controllers
                 }
             }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return result;
         }
-
-        // Institute mentor method
-        [HttpGet]
-        public JsonResult GetStudentsByInstitute(string institute)
-        {
-            var result = new List<StudentsReview>();
-
-            var students = _repository.Get<tblStudent>();
-
-            var studentRooms = _repository.Get<tblStudentRoom>();
-            var rooms = _repository.Get<tblRoom>();
-            var hostels = _repository.Get<tblHostel>();
-
-            var studentBenefits = _repository.Get<tblStudentBenefit>();
-            var benefits = _repository.Get<tblBenefit>();
-
-            var studentViolations = _repository.Get<tblStudentViolation>();
-
-            var setteled = from s in students
-                           join sr in studentRooms on s.Id equals sr.StudentId
-                           join r in rooms on sr.RoomId equals r.Id
-                           join h in hostels on r.HostelId equals h.Id
-                           where s.Insitute == institute
-                           select new StudentsReview(s.Id, s.Firstname + " " + s.Surname, h.Number, r.Number, s.Insitute, false);
-
-            var unsetteled = from s in students
-                             join sr in studentRooms on s.Id equals sr.StudentId into g1
-                             from sr in g1.DefaultIfEmpty()
-                             where sr == null && s.Insitute == institute
-                             select new StudentsReview(s.Id, s.Firstname + " " + s.Surname, null, null, s.Insitute, true);
-
-            foreach (var item in setteled)
-            {
-                result.Add(item);
-            }
-
-            foreach (var item in unsetteled)
-            {
-                result.Add(item);
-            }
-
-            // Adding benefits mark
-            var benefitsQuery = from r in result
-                                join sb in studentBenefits on r.Id equals sb.StudentId
-                                select sb;
-
-            var bens = new List<tblStudentBenefit>();
-
-            foreach (var item in benefitsQuery)
-            {
-                bens.Add(item);
-            }
-
-            for (var i = 0; i < result.Count; i++)
-            {
-                for (var j = 0; j < bens.Count; j++)
-                {
-                    if(result[i].Id == bens[j].StudentId)
-                    {
-                        result[i].Name += " (п)";
-                        break;
-                    }
-                }
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        #endregion
     }
 }
