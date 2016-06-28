@@ -74,9 +74,7 @@
                     <div class="panel-body" style="margin:10px">
                         <label class="profileLabel">Select violation:</label>
                         <select class="input-group" style="margin:15px; font-size:17px" ng-model="sc.currentViolation" ng-options="v.Name for v in sc.violationsList"></select>
-                        <label class="profileLabel">Select date:</label>
-                        <input type="date" style="margin:15px; font-size:17px" class="input-group" ng-model="sc.currentViolation.Time" />
-                        <button class="profileButton btn btn-primary" style="margin:15px" ng-disabled="!sc.violationValidation()" ng-click="sc.addViolation()">Add violation</button>
+                        <button class="profileButton btn btn-primary" style="margin:15px" ng-click="sc.addViolation()">Add violation</button>
                     </div>
                 </div>
             </div>

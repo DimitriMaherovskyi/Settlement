@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in ac.contents = ((ac.searchFiltered = (ac.accounts | filter: {LastName: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
+                <tr ng-repeat="c in ac.contents = ((ac.searchFiltered = (ac.accounts | filter: {UserName: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
                     <td><a ng-bind-html="c.UserName | highlight: ac.search">{{c.UserName}}</a></td>
                     <td>{{c.Email}}</td>
                     <td>{{c.CreatedDate}}</td>

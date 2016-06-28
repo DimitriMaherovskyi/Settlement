@@ -9,25 +9,30 @@
     function accountsDataService($http) {
 
         var service = {
-            getAccounts: getAccountsAjaxMock,
+            getAccounts: getAccountsAjax,
             changeAccount: changeAccount,
             addAccount: addAccount,
-            getRoles: getRoles
+            getRoles: getRolesAjax
         };
 
         return service;
 
-        function changeAccount(userId, newValue) {
+        function changeAccount(changedAccount) {
             var promise = $http({
                 url: '/QuotesReview/ChangeQuote',
-                method: "GET",
-                params: { userId: userId, newValue: newValue}
+                method: "POST",
+                params: { changedAccount: changedAccount}
             });
             return promise;
         }
 
         function getAccountsAjax() {
-            var promise = $http.get('/QuotesReview/GetQuotes');
+            var promise = $http.get('/SystemUsers/GetUsers');
+            return promise;
+        }
+
+        function getRolesAjax() {
+            var promise = $http.get('/SystemUsers/GetRoles');
             return promise;
         }
 
@@ -77,8 +82,13 @@
             return promise;
         }
 
-        function addAccount() {
-
+        function addAccount(newAccount) {
+            var promise = $http({
+                url: '/SystemUsers/AddUser',
+                method: "POST",
+                params: { newAccount: newAccount}
+            });
+            return promise;
         }
 
         function getRolesMock() {

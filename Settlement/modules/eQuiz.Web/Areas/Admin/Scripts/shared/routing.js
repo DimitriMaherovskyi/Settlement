@@ -33,14 +33,14 @@
                      controllerAs: 'ac',
                      resolve: {
                          accountsList: function (accountsDataService) {
-                             return accountsDataService.getAccounts()//.then(function (respond) {
-                                 //return respond.data;
-                             //})
+                             return accountsDataService.getAccounts().then(function (respond) {
+                                 return respond.data;
+                             })
                          },
                          accountRoles: function (accountsDataService) {
-                            return accountsDataService.getRoles()//.then(function (respond) {
-                             //return respond.data;
-                             //})
+                            return accountsDataService.getRoles().then(function (respond) {
+                             return respond.data;
+                             })
                         }
                      }
                  })

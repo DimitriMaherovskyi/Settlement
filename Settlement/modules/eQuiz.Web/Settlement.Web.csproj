@@ -210,6 +210,7 @@
     <Compile Include="Areas\Dean\DeanAreaRegistration.cs" />
     <Compile Include="AutofacModule.cs" />
     <Compile Include="Code\BaseController.cs" />
+    <Compile Include="Code\MD5CryptoProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

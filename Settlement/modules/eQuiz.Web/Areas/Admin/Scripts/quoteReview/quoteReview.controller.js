@@ -1,9 +1,9 @@
 ﻿(function (angular) {
     angular.module('settlementModule').controller('QuotesReviewController', QuotesReviewController);
 
-    QuotesReviewController.$inject = ['$scope', '$filter', 'quoteReviewDataService', 'quotesList'];
+    QuotesReviewController.$inject = ['$scope', '$filter', 'quoteReviewDataService', 'quotesList', '$timeout'];
 
-    function QuotesReviewController($scope, $filter, quoteReviewDataService, quotesList) {
+    function QuotesReviewController($scope, $filter, quoteReviewDataService, quotesList, $timeout) {
         var vm = this;
         var orderBy = $filter('orderBy');
         vm.search = ''; // Represents search field on the form

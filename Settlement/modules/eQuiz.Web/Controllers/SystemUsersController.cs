@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Security.Cryptography;
+using Settlement.Web.Code;
 
 namespace Settlement.Web.Controllers
 {
@@ -39,7 +41,7 @@ namespace Settlement.Web.Controllers
 
             var query = from u in users
                         join r in roles on u.RoleId equals r.RoleId
-                        select new User(u.UserId, u.UserName, u.PasswordHash,  u.Email, r.RoleName);
+                        select new User(u.UserId, u.UserName, null,  u.Email, r.RoleId, u.CreatedDate, u.LastLoginDate, u.Quote, u.FirstName, u.LastName);
 
             foreach (var item in query)
             {
@@ -50,25 +52,25 @@ namespace Settlement.Web.Controllers
         }
 
         // studcity worker method
-        public JsonResult GetInstituteUsers()
-        {
-            var result = new List<object>();
+        //public JsonResult GetInstituteUsers()
+        //{
+        //    var result = new List<object>();
 
-            var users = _repository.Get<tblUsers>();
-            var roles = _repository.Get<tblRoles>();
+        //    var users = _repository.Get<tblUsers>();
+        //    var roles = _repository.Get<tblRoles>();
 
-            var query = from u in users
-                        join r in roles on u.RoleId equals r.RoleId
-                        where r.RoleName != "Admin"
-                        select new User(u.UserId, u.UserName, u.PasswordHash, u.Email, r.RoleName);
+        //    var query = from u in users
+        //                join r in roles on u.RoleId equals r.RoleId
+        //                where r.RoleName != "Admin"
+        //                select new User(u.UserId, u.UserName, u.PasswordHash, u.Email, r.RoleName);
 
-            foreach (var item in query)
-            {
-                result.Add(item);
-            }
+        //    foreach (var item in query)
+        //    {
+        //        result.Add(item);
+        //    }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
         [HttpGet]
         public JsonResult GetRoles()
@@ -89,15 +91,20 @@ namespace Settlement.Web.Controllers
         #region Post methods
 
         [HttpPost]
-        public void AddUser(string name, string email, string password, int roleId)
+        public void AddUser(User userData)
         {
             var user = new tblUsers();
 
-            user.UserName = name;
-            user.Email = email;
-            user.PasswordHash = password;
-            user.RoleId = roleId;
+            string passwordHash = MD5CryptoProvider.ComputeHash(userData.Password);
+            user.UserName = userData.Username;
+            user.Email = userData.Email;
+            user.PasswordHash = passwordHash;
+            user.RoleId = userData.RoleId;
             user.CreatedDate = DateTime.Now;
+            user.LastLoginDate = null;
+            user.Quote = userData.Quote;
+            user.FirstName = userData.FirstName;
+            user.LastName = userData.LastName;
 
             var users = _repository.Get<tblUsers>();
             

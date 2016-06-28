@@ -56,9 +56,9 @@
 },];
 
         function activate() {
-                accountsDataService.getQuotes();//.then(function (respond) {
-                // vm.quotes = respond.data;
-                //})
+                accountsDataService.getAccounts().then(function (respond) {
+                  vm.accounts = respond.data;
+                 })
             generatePredicate();
         };
         generatePredicate();

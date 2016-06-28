@@ -11,16 +11,25 @@ namespace Settlement.Web.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string Role { get; set; }
-        public int Quote { get; set; }
+        public int RoleId { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? LastLoginDate { get; set; }
+        public int? Quote { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        public User(int id, string username, string password, string email, string role)
+        public User(int id, string username, string password, string email, int roleId, DateTime createdDate, DateTime? lastLogin, int? quote, string firstName, string lastName)
         {
             Id = id;
             Username = username;
             Password = password;
             Email = email;
-            Role = role;
+            RoleId = roleId;
+            CreatedDate = createdDate;
+            LastLoginDate = lastLogin;
+            Quote = quote;
+            FirstName = firstName;
+            LastName = LastName;
         }
 
         public User()

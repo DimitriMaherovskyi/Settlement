@@ -85,6 +85,7 @@
         vm.checkIn = function () {
             studentDataService.checkIn(vm.studentInfo.Id, vm.chosenRoom.Id)
             .success(function (res) {
+                vm.checkInBoxOpened = false;
                 $scope.showNotifyPopUp('Student was successfully checked in!')
                 $timeout($scope.closePopUp, 4000);
                 activate();
@@ -111,10 +112,9 @@
             var hostelId = vm.hostels.filter(function (v) {
                 return v.Number === vm.studentInfo.Hostel;
             })[0].Id;
-            console.log(vm.payTillDate.toLocaleString());
             studentDataService.addPay(vm.paySum, vm.studentInfo.Id, hostelId, vm.payTillDate.toLocaleString())
                 .success(function (res) {
-
+                    vm.addPayBoxOpened = false;
                     $scope.showNotifyPopUp('Pay was successfully added!')
                     $timeout($scope.closePopUp, 4000);
                     activate();
