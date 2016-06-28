@@ -3,7 +3,7 @@
 
     AutoSettlementController.$inject = ['$scope', '$filter', 'autoSettlementDataService', 'studentsList', '$timeout'];
 
-    function AutoSettlementController($scope, $filter, autoSettlementDataService, studentsList, timeout) {
+    function AutoSettlementController($scope, $filter, autoSettlementDataService, studentsList, $timeout) {
         var vm = this;
 
         var orderBy = $filter('orderBy');
