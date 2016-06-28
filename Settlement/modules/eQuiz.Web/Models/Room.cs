@@ -17,7 +17,7 @@ namespace Settlement.Web.Models
         {
             Id = id;
             Number = number;
-            amountPlaces = AmountPlaces;
+            AmountPlaces = amountPlaces;
             RoomFloor = roomFloor;
             HostelId = hostelId;
         }

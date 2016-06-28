@@ -100,33 +100,34 @@ namespace Settlement.Web.Controllers
         {
             var result = new List<Room>();
             var rooms = _repository.Get<tblRoom>();
-            var studentRooms = _repository.Get<tblStudentRoom>();
 
             foreach (var item in rooms)
             {
                 result.Add(new Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor, item.HostelId));
             }
 
-            //for (var i = 0; i < result.Count; i++)
-            //{
-            //    int cou = 0;
-            //    for (var j = 0; j < studentRooms.Count; j++)
-            //    {
-            //        if (result[i].Id == studentRooms[j].RoomId)
-            //        {
-            //            cou++;
-
-            //            if (cou >= result[i].AmountPlaces)
-            //            {
-            //                result.Remove(result[i]);
-            //                i = 0;
-            //                break;
-            //            }
-            //        }
-            //    }
-            //}
+            for (var i = 0; i < result.Count; i++)
+            {
+                if (!IsFree(result[i]))
+                {
+                    result.Remove(result[i]);
+                    i = 0;
+                }
+            }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private bool IsFree(Room room)
+        {
+            var students = _repository.Get<tblStudentRoom>(r => r.RoomId == room.Id).ToList();
+
+            if (room.AmountPlaces > students.Count)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
