@@ -8,6 +8,13 @@ using System.Web.Mvc;
 
 namespace Settlement.Web.Controllers
 {
+    public enum Roles
+    {
+        Admin = 1,
+        Warden = 2,
+        Dean = 3
+    };
+
     public class QuotesReviewController : Controller
     {
         #region Fields
@@ -37,12 +44,13 @@ namespace Settlement.Web.Controllers
 
             var query = from u in users
                         join r in roles on u.RoleId equals r.RoleId
+                        where r.RoleId == (int)Roles.Dean
                         select new
                         {
                             UserId = u.UserId,
                             Name = u.FirstName + " " + u.LastName,
                             Status = r.RoleName,
-                            Institute = "IKNI",
+                            Institute = u.Institute,
                             Quote = u.Quote
                         };
             

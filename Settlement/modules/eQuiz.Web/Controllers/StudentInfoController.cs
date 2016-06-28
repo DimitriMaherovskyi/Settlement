@@ -177,8 +177,9 @@ namespace Settlement.Web.Controllers
         public void AddSettleRequest(int studentId)
         {
             var settleRequests = _repository.Get<tblSettleRequest>(sr => sr.StudentId == studentId && sr.Status == true);
+            var studentRooms = _repository.Get<tblStudentRoom>(r => r.StudentId == studentId);
 
-            if (settleRequests.Count > 0)
+            if (settleRequests.Count > 0 || studentRooms.Count > 0)
             {
                 return;
             }
