@@ -9,7 +9,7 @@
     function quoteReviewDataService($http) {
 
         var service = {
-            getQuotes: getQuotesAjaxMock,
+            getQuotes: getQuotesAjax,
             changeQuote: changeQuote
         };
 
@@ -18,7 +18,7 @@
         function changeQuote(userId, newValue) {
             var promise = $http({
                 url: '/QuotesReview/ChangeQuote',
-                method: "GET",
+                method: "POST",
                 params: { userId: userId, newValue: newValue}
             });
             return promise;

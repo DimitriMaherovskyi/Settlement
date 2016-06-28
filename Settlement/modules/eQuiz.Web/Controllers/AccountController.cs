@@ -10,6 +10,7 @@ using Settlement.Repositories.Abstract;
 using eQuiz.Entities;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace Settlement.Web.Controllers
 {
@@ -106,6 +107,20 @@ namespace Settlement.Web.Controllers
             FormsAuthentication.SignOut();
             HttpContext.User = null;
             return RedirectToAction("Index", "Account", null);
+        }
+
+        [HttpGet]
+        public JsonResult GetRoles()
+        {
+            var result = new List<object>();
+            var roles = _repository.Get<tblRoles>().ToList();
+
+            foreach(var item in roles)
+            {
+                result.Add(new { RoleId = item.RoleId, RoleName = item.RoleName });
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

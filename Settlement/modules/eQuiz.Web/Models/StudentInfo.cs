@@ -13,11 +13,11 @@ namespace Settlement.Web.Models
         public string Institute { get; set; }
         public string Group { get; set; }
         public string LivingTill { get; set; }
-        public int Room { get; set; }
-        public int Hostel { get; set; }
+        public int? Room { get; set; }
+        public int? Hostel { get; set; }
         public List<object> Violations;
 
-        public StudentInfo(int id, string name, string surname, string institute, string group, string livingTill, int room, int hostel, List<object> violations)
+        public StudentInfo(int id, string name, string surname, string institute, string group, string livingTill, int? room, int? hostel, List<object> violations)
         {
             Id = id;
             Name = name;

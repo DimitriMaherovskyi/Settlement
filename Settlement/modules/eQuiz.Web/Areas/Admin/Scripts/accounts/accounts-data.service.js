@@ -12,7 +12,7 @@
             getAccounts: getAccountsAjaxMock,
             changeAccount: changeAccount,
             addAccount: addAccount,
-            getRoles: getRolesMock
+            getRoles: getRoles
         };
 
         return service;
@@ -71,7 +71,7 @@
 
         function getRoles() {
             var promise = $http({
-                url: '/Accounts/GetRoles',
+                url: '/Account/GetRoles',
                 method: "GET",
             });
             return promise;

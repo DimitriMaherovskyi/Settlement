@@ -59,8 +59,9 @@ namespace Settlement.Web.Controllers
             }
             else
             {
-                result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, studentRoom.DateOut.ToShortDateString(), 0, 0, vv);
+                result = new StudentInfo(id, student.Firstname, student.Surname, student.Insitute, student.StudyGroup, "", null, null, vv);
             }
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -155,12 +156,38 @@ namespace Settlement.Web.Controllers
         [HttpPost]
         public void CheckIn(int studentId, int roomId)
         {
+            var rooms = _repository.Get<tblStudentRoom>();
             var studentRoom = new tblStudentRoom();
 
             studentRoom.StudentId = studentId;
             studentRoom.RoomId = roomId;
             studentRoom.DateIn = DateTime.Now;
             studentRoom.DateOut = DateTime.Now;
+
+            try
+            {
+                studentRoom.Id = rooms.Count + 1;
+                _repository.Insert<tblStudentRoom>(studentRoom);
+            }
+            catch
+            {
+                for (var i = 1; i < rooms.Count + 1; i++)
+                {
+                    if (i != rooms[i].Id)
+                    {
+                        studentRoom.Id = i;
+                        try
+                        {
+                            _repository.Insert<tblStudentRoom>(studentRoom);
+                            break;
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
 
             _repository.Update<tblStudentRoom>(studentRoom);
         }
