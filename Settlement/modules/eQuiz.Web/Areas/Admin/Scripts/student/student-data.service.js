@@ -50,8 +50,8 @@
         function checkOut(studentId) {
             var promise = $http({
                 url: '/StudentInfo/CheckOut',
-                method: "GET",
-                params: { id: studentId }
+                method: "POST",
+                params: { studentId: studentId }
             });
             return promise;
         }

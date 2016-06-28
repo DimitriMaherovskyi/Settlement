@@ -100,11 +100,31 @@ namespace Settlement.Web.Controllers
         {
             var result = new List<Room>();
             var rooms = _repository.Get<tblRoom>();
+            var studentRooms = _repository.Get<tblStudentRoom>();
 
             foreach (var item in rooms)
             {
                 result.Add(new Room(item.Id, item.Number, item.AmountPlaces, item.RoomFloor, item.HostelId));
             }
+
+            //for (var i = 0; i < result.Count; i++)
+            //{
+            //    int cou = 0;
+            //    for (var j = 0; j < studentRooms.Count; j++)
+            //    {
+            //        if (result[i].Id == studentRooms[j].RoomId)
+            //        {
+            //            cou++;
+
+            //            if (cou >= result[i].AmountPlaces)
+            //            {
+            //                result.Remove(result[i]);
+            //                i = 0;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -154,48 +174,56 @@ namespace Settlement.Web.Controllers
         }
 
         [HttpPost]
+        public void AddSettleRequest(int studentId)
+        {
+            var settleRequest = new tblSettleRequest();
+            settleRequest.StudentId = studentId;
+            settleRequest.Status = true;
+
+            _repository.Insert<tblSettleRequest>(settleRequest);
+        }
+
+        [HttpPost]
         public void CheckIn(int studentId, int roomId)
         {
             var rooms = _repository.Get<tblStudentRoom>();
             var studentRoom = new tblStudentRoom();
+            var settleRequest = _repository.GetSingle<tblSettleRequest>(t => t.StudentId == studentId && t.Status == true);
 
             studentRoom.StudentId = studentId;
             studentRoom.RoomId = roomId;
             studentRoom.DateIn = DateTime.Now;
             studentRoom.DateOut = DateTime.Now;
 
-            try
+            if (settleRequest != null)
             {
-                studentRoom.Id = rooms.Count + 1;
-                _repository.Insert<tblStudentRoom>(studentRoom);
-            }
-            catch
-            {
-                for (var i = 1; i < rooms.Count + 1; i++)
-                {
-                    if (i != rooms[i].Id)
-                    {
-                        studentRoom.Id = i;
-                        try
-                        {
-                            _repository.Insert<tblStudentRoom>(studentRoom);
-                            break;
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-                    }
-                }
+                settleRequest.Status = false;
+                _repository.Update<tblSettleRequest>(settleRequest);
             }
 
-            _repository.Update<tblStudentRoom>(studentRoom);
+            _repository.Insert<tblStudentRoom>(studentRoom);
+        }
+
+        [HttpPost]
+        public void CheckInInstitute(int studentId, int roomId, int userId)
+        {
+            var user = _repository.GetSingle<tblUsers>(u => u.UserId == userId);
+
+            if (user.Quote > 0)
+            {
+                CheckIn(studentId, roomId);
+                user.Quote -= 1;
+                _repository.Update<tblUsers>(user);
+            }
         }
 
         [HttpPost]
         public void CheckOut(int studentId)
         {
-            
+            var studentRoom = _repository.GetSingle<tblStudentRoom>(sr => sr.StudentId == studentId);
+
+            _repository.Delete<int, tblStudentRoom>("StudentId", studentId);
+            //_repository.Delete<int, QuizQuestion>("Id", quizQuestion.Id);
         }
 
         #endregion
