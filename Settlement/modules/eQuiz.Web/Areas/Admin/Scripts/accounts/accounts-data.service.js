@@ -19,11 +19,11 @@
 
         function changeAccount(changedAccount) {
             var promise = $http({
-                url: '/QuotesReview/ChangeQuote',
+                url: '/SystemUsers/UpdateUserInfo',
                 method: "POST",
                 params: {
                     UserId: changedAccount.UserId,
-                    Username: changedAccount.UserName,
+                    Username: changedAccount.Username,
                     Email: changedAccount.Email,
                     RoleId: changedAccount.RoleId,
                     Quote: changedAccount.Quote,

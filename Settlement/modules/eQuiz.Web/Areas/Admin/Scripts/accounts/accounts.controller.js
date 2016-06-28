@@ -161,7 +161,7 @@
 
         vm.saveAccount = function () {
             vm.changedAccount.RoleId = vm.chosenRole.RoleId;
-            accountDataService.changeAccount(vm.changedAccount).success(function (res) {
+            accountsDataService.changeAccount(vm.changedAccount).success(function (res) {
                 activate();
                 vm.changeAccountBoxOpened = false;
                 $scope.showNotifyPopUp('Account was successfully saved!')
@@ -170,6 +170,7 @@
             .error(function (res) {
                 $scope.showNotifyPopUp('Error: account was not saved!')
                 $timeout($scope.closePopUp, 4000);
+                vm.changeAccountBoxOpened = false;
             });;
         }
 
@@ -184,6 +185,7 @@
             .error(function (res) {
                 $scope.showNotifyPopUp('Error: new account was not added!')
                 $timeout($scope.closePopUp, 4000);
+                vm.newAccountBoxOpened = false;
             });; 
         }
 
@@ -215,7 +217,7 @@
             }
         }
         vm.validateChangeAccountForm = function () {
-            if(vm.changedAccount.UserName && vm.changedAccount.Email && vm.chosenRole && vm.changedAccount.Quote && vm.changedAccount.FirstName && vm.changedAccount.LastName != undefined)
+            if(vm.changedAccount.Username && vm.changedAccount.Email && vm.chosenRole && vm.changedAccount.Quote && vm.changedAccount.FirstName && vm.changedAccount.LastName != undefined)
             {
                 return true;
             }

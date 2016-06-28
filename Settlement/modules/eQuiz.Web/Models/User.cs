@@ -7,7 +7,7 @@ namespace Settlement.Web.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public int RoleId { get; set; }
@@ -17,9 +17,9 @@ namespace Settlement.Web.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public User(int id, string username, string password, string email, int roleId, string createdDate, string lastLogin, int? quote, string firstName, string lastName)
+        public User(int id, string username, string email, int roleId, string createdDate, string lastLogin, int? quote, string firstName, string lastName)
         {
-            Id = id;
+            UserId = id;
             Username = username;
             Email = email;
             RoleId = roleId;
@@ -27,7 +27,7 @@ namespace Settlement.Web.Models
             LastLoginDate = lastLogin;
             Quote = quote;
             FirstName = firstName;
-            LastName = LastName;
+            LastName = lastName;
         }
 
         public User()

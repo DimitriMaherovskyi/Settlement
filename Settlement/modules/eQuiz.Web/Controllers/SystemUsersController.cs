@@ -34,14 +34,14 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetUsers()
         {
-            var result = new List<object>();
+            var result = new List<User>();
 
             var users = _repository.Get<tblUsers>();
             var roles = _repository.Get<tblRoles>();
 
             var query = from u in users
                         join r in roles on u.RoleId equals r.RoleId
-                        select new User(u.UserId, u.UserName, null, u.Email, r.RoleId, u.CreatedDate != null ? u.CreatedDate.ToString() : null, u.LastLoginDate != null ? u.LastLoginDate.ToString() : null, u.Quote, u.FirstName, u.LastName);
+                        select new User(u.UserId, u.UserName, u.Email, r.RoleId, u.CreatedDate != null ? u.CreatedDate.ToString() : null, u.LastLoginDate != null ? u.LastLoginDate.ToString() : null, u.Quote, u.FirstName, u.LastName);
 
             foreach (var item in query)
             {
@@ -144,6 +144,8 @@ namespace Settlement.Web.Controllers
             user.FirstName = FirstName;
             user.LastName = LastName;
             user.Email = Email;
+
+            _repository.Update<tblUsers>(user);
         }
 
         public void DeleteUser(int id)
