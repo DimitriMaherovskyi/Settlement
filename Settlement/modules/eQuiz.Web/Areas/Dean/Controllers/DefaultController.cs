@@ -8,7 +8,7 @@ using Settlement.Web.Models;
 
 namespace Settlement.Web.Areas.Dean.Controllers
 {
-    [AuthorizeAccess(Roles= "Admin")]
+    [AuthorizeAccess(Roles= "Dean")]
     public class DefaultController : BaseController
     {
         [HttpGet]

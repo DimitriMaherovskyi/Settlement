@@ -268,7 +268,6 @@
     <Compile Include="Code\MD5CryptoProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostelRoomsController.cs" />
     <Compile Include="Controllers\HostelsReviewController.cs" />
     <Compile Include="Controllers\QuotesReviewController.cs" />
@@ -305,7 +304,6 @@
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Views\Home\MainLogin.cshtml" />
     <Content Include="connections.config">
       <SubType>Designer</SubType>
     </Content>

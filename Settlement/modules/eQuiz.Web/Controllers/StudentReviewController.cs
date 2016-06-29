@@ -28,6 +28,7 @@ namespace Settlement.Web.Controllers
 
         #region Web actions
 
+        [AuthorizeAccess(Roles = "Rector, Warden")]
         // Overall method
         [HttpGet]
         public JsonResult GetStudentsList()
@@ -37,6 +38,7 @@ namespace Settlement.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizeAccess(Roles = "Dean")]
         // Institute mentor method
         [HttpGet]
         public JsonResult GetStudentsByInstitute(string institute)
@@ -56,7 +58,7 @@ namespace Settlement.Web.Controllers
         }
         #endregion
 
-        public List<StudentsReview> GetStudents()
+        List<StudentsReview> GetStudents()
         {
             var result = new List<StudentsReview>();
 

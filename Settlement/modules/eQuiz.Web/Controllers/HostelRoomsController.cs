@@ -94,7 +94,7 @@ namespace Settlement.Web.Controllers
         #endregion
 
         #region Post methods
-        [AuthorizeAccess(Roles = "Rector, Warden")]
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpPost]
         public void UpdateHostelInfo(int id, int number, string address, int monthPayment)
         {

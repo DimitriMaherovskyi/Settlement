@@ -27,7 +27,7 @@
                         }
                     }
                 })
-                 .when('/Index/Accounts', {
+                .when('/Index/Accounts', {
                      templateUrl: '/Areas/Admin/Scripts/accounts.html',
                      controller: 'AccountsController',
                      controllerAs: 'ac',
@@ -87,7 +87,6 @@
                     },
                     reloadOnSearch: false
                 })
-
                 .when('/Index/Hostel', {
                     templateUrl: '/Areas/Admin/Scripts/hostel-info.html',
                     controller: 'HostelInfoController',
@@ -100,7 +99,7 @@
                     },
                     reloadOnSearch: false
                 })
-                 .when('/Index/Rooms', {
+                .when('/Index/Rooms', {
                      templateUrl: '/Areas/Admin/Scripts/rooms-review.html',
                      controller: 'RoomsReviewController',
                      controllerAs: 'rrc',

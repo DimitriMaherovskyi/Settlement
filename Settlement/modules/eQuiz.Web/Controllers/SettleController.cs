@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Settlement.Web.Controllers
 {
-    [AuthorizeAccess(Roles = "Rector, Dean")]
+    [AuthorizeAccess(Roles = "Dean")]
     public class SettleController : Controller
     {
         #region Fields

@@ -15,7 +15,7 @@ namespace Settlement.Web.Controllers
         Warden = 2,
         Dean = 3
     };
-    [AuthorizeAccess(Roles = "Admin, Rector, Warden")]
+
     public class QuotesReviewController : Controller
     {
         #region Fields
@@ -35,6 +35,7 @@ namespace Settlement.Web.Controllers
 
         #region Web actions
 
+        [AuthorizeAccess(Roles = "Rector, Warden")]
         [HttpGet]
         public JsonResult GetQuotes()
         {
@@ -67,6 +68,7 @@ namespace Settlement.Web.Controllers
 
         #region Post methods
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpPost]
         public void ChangeQuote(int userId, int newValue)
         {

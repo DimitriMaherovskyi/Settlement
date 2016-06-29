@@ -28,6 +28,7 @@ namespace Settlement.Web.Controllers
 
         #region Web Actions
 
+        [AuthorizeAccess(Roles = "Rector, Warden")]
         [HttpGet]
         public JsonResult GetStudentInfo(int id)
         {
@@ -65,6 +66,7 @@ namespace Settlement.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpGet]
         public JsonResult GetViolationsList()
         {
@@ -79,7 +81,7 @@ namespace Settlement.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpGet]
         public JsonResult GetHostels()
         {
@@ -95,6 +97,7 @@ namespace Settlement.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpGet]
         public JsonResult GetRooms()
         {
@@ -134,19 +137,20 @@ namespace Settlement.Web.Controllers
 
         #region Post methods
 
-        [HttpPost]
-        public void SaveStudentProfileInfo(int id, string name, string surname, string studyGroup, string institute)
-        {
-            var student = _repository.GetSingle<tblStudent>(s => s.Id == id);
+        //[HttpPost]
+        //public void SaveStudentProfileInfo(int id, string name, string surname, string studyGroup, string institute)
+        //{
+        //    var student = _repository.GetSingle<tblStudent>(s => s.Id == id);
 
-            student.Firstname = name;
-            student.Surname = surname;
-            student.StudyGroup = studyGroup;
-            student.Insitute = institute;
+        //    student.Firstname = name;
+        //    student.Surname = surname;
+        //    student.StudyGroup = studyGroup;
+        //    student.Insitute = institute;
 
-            _repository.Update<tblStudent>(student);
-        }
+        //    _repository.Update<tblStudent>(student);
+        //}
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpPost]
         public void AddViolation(int studentId, int violationId)
         {
@@ -158,6 +162,7 @@ namespace Settlement.Web.Controllers
             _repository.Insert<tblStudentViolation>(violation);
         }
 
+        [AuthorizeAccess(Roles = "Warden")]
         //To do tomorrow
         [HttpPost]
         public void AddPayment(int sum, int studentId, int hostelId, string dateTill)
@@ -174,6 +179,7 @@ namespace Settlement.Web.Controllers
             _repository.Update<tblStudentRoom>(studentRoom);
         }
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpPost]
         public void AddSettleRequest(int studentId)
         {
@@ -192,6 +198,7 @@ namespace Settlement.Web.Controllers
             _repository.Insert<tblSettleRequest>(settleRequest);
         }
 
+        [AuthorizeAccess(Roles = "Dean")]
         [HttpPost]
         public void CheckIn(int studentId, int roomId)
         {
@@ -213,6 +220,7 @@ namespace Settlement.Web.Controllers
             _repository.Insert<tblStudentRoom>(studentRoom);
         }
 
+        [AuthorizeAccess(Roles = "Dean")]
         [HttpPost]
         public void CheckInInstitute(int studentId, int roomId, int userId)
         {
@@ -226,6 +234,7 @@ namespace Settlement.Web.Controllers
             }
         }
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpPost]
         public void CheckOut(int studentId)
         {

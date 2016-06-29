@@ -28,6 +28,7 @@ namespace Settlement.Web.Controllers
 
         #region Web Actions
 
+        [AuthorizeAccess(Roles = "Rector, Warden")]
         [HttpGet]
         public JsonResult GetHostelsList()
         {
@@ -46,6 +47,7 @@ namespace Settlement.Web.Controllers
 
         #region Post methods
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpPost]
         public void AddHostel(int number, string address, int monthPaymentSum)
         {
@@ -55,6 +57,7 @@ namespace Settlement.Web.Controllers
             hostel.MonthPaymentSum = monthPaymentSum;
         }
 
+        [AuthorizeAccess(Roles = "Warden")]
         [HttpPost]
         public void UpdateHostel(int hostelId, int number, string address, int monthPaymentSum)
         {

@@ -28,17 +28,13 @@ namespace Settlement.Web.Controllers
             this._repository = repository;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
-        //[HttpGet]
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
         [AllowAnonymous]
         public ActionResult Index(LoginViewModel model, string returnUrl = "")
         {
@@ -91,7 +87,7 @@ namespace Settlement.Web.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [AuthorizeAccess(Roles = "Admin, Dean, Rector, Warden")]
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();

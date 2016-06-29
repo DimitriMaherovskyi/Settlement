@@ -30,7 +30,7 @@ namespace Settlement.Web.Controllers
 
         #region Web actions
 
-        // admin method
+        [AuthorizeAccess(Roles = "Admin, Rector")]
         [HttpGet]
         public JsonResult GetUsers()
         {
@@ -72,6 +72,7 @@ namespace Settlement.Web.Controllers
         //    return Json(result, JsonRequestBehavior.AllowGet);
         //}
 
+        [AuthorizeAccess(Roles = "Admin, Rector")]
         [HttpGet]
         public JsonResult GetRoles()
         {
@@ -90,6 +91,7 @@ namespace Settlement.Web.Controllers
 
         #region Post methods
 
+        [AuthorizeAccess(Roles = "Admin")]
         [HttpPost]
         public void AddUser(string Username, string Email, string Institute, int RoleId, int Quote, string FirstName, string LastName, string Password)
         {
@@ -137,6 +139,7 @@ namespace Settlement.Web.Controllers
             _repository.Insert<tblUsers>(user);
         }
 
+        [AuthorizeAccess(Roles = "Admin")]
         [HttpPost]
         public void UpdateUserInfo(int UserId, string Username, string Email, string Institute, int RoleId, int Quote, string FirstName, string LastName)
         {
@@ -153,6 +156,7 @@ namespace Settlement.Web.Controllers
             _repository.Update<tblUsers>(user);
         }
 
+        [AuthorizeAccess(Roles = "Admin")]
         [HttpPost]
         public void DeleteUser(int id)
         {
@@ -160,7 +164,5 @@ namespace Settlement.Web.Controllers
             _repository.Delete<int, tblUsers>("UserId", id);
         }
     }
-
-
     #endregion
 }
