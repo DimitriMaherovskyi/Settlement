@@ -28,7 +28,7 @@ namespace Settlement.Web.Controllers
 
         #region Web actions
 
-        [AuthorizeAccess(Roles = "Rector, Warden")]
+        [AuthorizeAccess(Roles = "Rector,Warden")]
         // Overall method
         [HttpGet]
         public JsonResult GetStudentsList()

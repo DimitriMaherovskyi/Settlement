@@ -28,7 +28,7 @@ namespace Settlement.Web.Controllers
 
         #region Web actions
 
-        [AuthorizeAccess(Roles = "Rector, Warden")]
+        [AuthorizeAccess(Roles = "Rector,Warden")]
         [HttpGet]
         public JsonResult GetHostelInfo(int id)
         {
@@ -39,7 +39,7 @@ namespace Settlement.Web.Controllers
             return Json(hostel, JsonRequestBehavior.AllowGet);
         }
 
-        [AuthorizeAccess(Roles = "Rector, Warden")]
+        [AuthorizeAccess(Roles = "Rector,Warden")]
         [HttpGet]
         public JsonResult GetHostelRooms(int hostelId)
         {

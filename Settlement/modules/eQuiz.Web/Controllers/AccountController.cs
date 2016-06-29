@@ -45,14 +45,15 @@ namespace Settlement.Web.Controllers
                 var user = _repository.Get<tblUsers>(u => u.UserName == model.Username && u.PasswordHash == passwordHash).FirstOrDefault();
                 if (user != null)
                 {
-                    var role = _repository.Get<tblRoles>(r => r.RoleId == user.RoleId).FirstOrDefault();
+                    var roles = _repository.Get<tblRoles>(r => r.RoleId == user.RoleId).FirstOrDefault();
                     user.LastLoginDate = DateTime.Now;
                     _repository.Update<tblUsers>(user);
                     CustomPrincipalSerializeModel serializeModel = new CustomPrincipalSerializeModel();
                     serializeModel.UserId = user.UserId;
                     serializeModel.FirstName = user.FirstName;
                     serializeModel.LastName = user.LastName;
-                    serializeModel.userRole = role.RoleName;
+                    serializeModel.RoleName = roles.RoleName;
+
 
                     string userData = JsonConvert.SerializeObject(serializeModel);
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
@@ -67,11 +68,11 @@ namespace Settlement.Web.Controllers
                     HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
                     Response.Cookies.Add(faCookie);
 
-                    if (role.RoleName == "Admin")
+                    if (roles.RoleName == "Admin")
                     {
                         return RedirectToAction("Index", "Default", new { area = "Admin" });
                     }
-                    else if (role.RoleName.Contains("Warden"))
+                    else if (roles.RoleName.Contains("Warden"))
                     {
                         return RedirectToAction("Index", "Default", new { area = "Warden" });
                     }
@@ -87,7 +88,7 @@ namespace Settlement.Web.Controllers
             return View(model);
         }
 
-        [AuthorizeAccess(Roles = "Admin, Dean, Rector, Warden")]
+        [AuthorizeAccess(Roles = "Admin,Dean,Rector,Warden")]
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();

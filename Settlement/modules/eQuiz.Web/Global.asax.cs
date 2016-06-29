@@ -34,7 +34,7 @@ namespace Settlement.Web
                 newUser.UserId = serializeModel.UserId;
                 newUser.FirstName = serializeModel.FirstName;
                 newUser.LastName = serializeModel.LastName;
-                newUser.userRole = serializeModel.userRole;
+                newUser.RoleName = serializeModel.RoleName;
 
                 HttpContext.Current.User = newUser;
             }

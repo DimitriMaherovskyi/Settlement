@@ -1,4 +1,6 @@
 ﻿using System.Security.Principal;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Settlement.Web.Models
 {
@@ -7,7 +9,8 @@ namespace Settlement.Web.Models
         public IIdentity Identity { get; private set; }
         public bool IsInRole(string role)
         {
-            if(role == userRole)
+            List<string> roles = role.Split(',').ToList<string>();
+            if (roles.Contains(RoleName))
             {
                 return true;
             }
@@ -25,6 +28,6 @@ namespace Settlement.Web.Models
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string userRole { get; set; }
+        public string RoleName { get; set; }
     }
 }

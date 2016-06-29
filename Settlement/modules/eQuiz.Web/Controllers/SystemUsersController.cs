@@ -30,7 +30,7 @@ namespace Settlement.Web.Controllers
 
         #region Web actions
 
-        [AuthorizeAccess(Roles = "Admin, Rector")]
+        [AuthorizeAccess(Roles = "Admin,Rector")]
         [HttpGet]
         public JsonResult GetUsers()
         {
@@ -72,7 +72,7 @@ namespace Settlement.Web.Controllers
         //    return Json(result, JsonRequestBehavior.AllowGet);
         //}
 
-        [AuthorizeAccess(Roles = "Admin, Rector")]
+        [AuthorizeAccess(Roles = "Admin,Rector")]
         [HttpGet]
         public JsonResult GetRoles()
         {
