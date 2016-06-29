@@ -4,7 +4,7 @@
         .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: '/Areas/Admin/Scripts/review.html',
+                    templateUrl: '/Areas/Dean/Scripts/review.html',
                     controller: 'ReviewController',
                     controllerAs: 'rc',
                     resolve: {
@@ -16,7 +16,7 @@
                }
                 })
                 .when('/Index/Settlement', {
-                    templateUrl: '/Areas/Admin/Scripts/auto-settlement.html',
+                    templateUrl: '/Areas/Dean/Scripts/auto-settlement.html',
                     controller: 'AutoSettlementController',
                     controllerAs: 'asc',
                     resolve: {
@@ -28,7 +28,7 @@
                     }
                 })
                 .when('/Index/Student', {
-                    templateUrl: '/Areas/Admin/Scripts/student.html',
+                    templateUrl: '/Areas/Dean/Scripts/student.html',
                     controller: 'StudentController',
                     controllerAs: 'sc',
                     resolve: {

@@ -4,7 +4,7 @@
         .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: '/Areas/Admin/Scripts/review.html',
+                    templateUrl: '/Areas/Rector/Scripts/review.html',
                     controller: 'ReviewController',
                     controllerAs: 'rc',
                     resolve: {
@@ -16,7 +16,7 @@
                }
                 })
                  .when('/Index/Accounts', {
-                     templateUrl: '/Areas/Admin/Scripts/accounts.html',
+                     templateUrl: '/Areas/Rector/Scripts/accounts.html',
                      controller: 'AccountsController',
                      controllerAs: 'ac',
                      resolve: {
@@ -33,7 +33,7 @@
                      }
                  })
                 .when('/Index/Student', {
-                    templateUrl: '/Areas/Admin/Scripts/student.html',
+                    templateUrl: '/Areas/Rector/Scripts/student.html',
                     controller: 'StudentController',
                     controllerAs: 'sc',
                     resolve: {
@@ -63,7 +63,7 @@
                     reloadOnSearch: false
                 })
                 .when('/Index/Quotes', {
-                    templateUrl: '/Areas/Admin/Scripts/quote-review.html',
+                    templateUrl: '/Areas/Rector/Scripts/quote-review.html',
                     controller: 'QuotesReviewController',
                     controllerAs: 'qrc',
                     resolve: {
@@ -77,7 +77,7 @@
                 })
 
                 .when('/Index/Hostel', {
-                    templateUrl: '/Areas/Admin/Scripts/hostel-info.html',
+                    templateUrl: '/Areas/Rector/Scripts/hostel-info.html',
                     controller: 'HostelInfoController',
                     controllerAs: 'hc',
                     resolve: {
@@ -89,7 +89,7 @@
                     reloadOnSearch: false
                 })
                  .when('/Index/Rooms', {
-                     templateUrl: '/Areas/Admin/Scripts/rooms-review.html',
+                     templateUrl: '/Areas/Rector/Scripts/rooms-review.html',
                      controller: 'RoomsReviewController',
                      controllerAs: 'rrc',
                      resolve: {
