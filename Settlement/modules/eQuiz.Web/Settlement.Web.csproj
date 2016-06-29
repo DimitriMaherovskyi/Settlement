@@ -165,9 +165,6 @@
     <Content Include="Areas\Rector\Scripts\accounts.html" />
     <Content Include="Areas\Rector\Scripts\accounts\accounts-data.service.js" />
     <Content Include="Areas\Rector\Scripts\accounts\accounts.controller.js" />
-    <Content Include="Areas\Rector\Scripts\auto-settlement.html" />
-    <Content Include="Areas\Rector\Scripts\autoSettlement\auto-settlement-data.service.js" />
-    <Content Include="Areas\Rector\Scripts\autoSettlement\auto-settlement.controller.js" />
     <Content Include="Areas\Rector\Scripts\hostel-info.html" />
     <Content Include="Areas\Rector\Scripts\hostel-review.html" />
     <Content Include="Areas\Rector\Scripts\hostelInfo\hostelInfo-data.service.js" />
@@ -261,7 +258,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Dean\Controllers\DefaultController.cs" />
-    <Compile Include="Areas\Rector\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Rector\RectorAreaRegistration.cs" />
     <Compile Include="Areas\Rector\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Warden\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Warden\WardenAreaRegistration.cs" />
