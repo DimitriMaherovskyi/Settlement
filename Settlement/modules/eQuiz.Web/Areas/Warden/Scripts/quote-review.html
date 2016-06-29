@@ -1,0 +1,57 @@
+﻿<div>
+    <br />
+    <br />
+    <div pop-up-window></div>
+    <div style="display:inline; margin:8px">
+        <label>Search</label>
+        <input type="text" ng-model="qrc.seaqrch" style="width:15em">
+    </div>
+
+    <div style="overflow-x:auto; margin:8px">
+        <table class="reviewTable table-condensed" style="width:100%">
+            <thead>
+                <tr>
+                    <th ng-repeat="h in qrc.headers">
+                        <a class="link" href="#" ng-click="qrc.refreshPredicate(h.predicateIndex); qrc.order(qrc.myPredicate[h.predicateIndex], null)">
+                            <span class="sortorder" ng-show="qrc.direction(h.predicateIndex) !== null" ng-class="{direction:qrc.direction(h.predicateIndex)}"></span>
+                            {{h.name}}
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in qrc.contents = ((qrc.searchFiltered = (qrc.quotes | filter: {Name:qrc.search})) | startFrom: qrc.tablePage*qrc.resultsPerPage | limitTo:qrc.resultsPerPage)" style="height: 50px">
+                    <td><a ng-bind-html="c.Name | highlight: qrc.seaqrch">{{c.Name}}</a></td>
+                    <td>{{c.Status}}</td>
+                    <td>{{c.Institute}}</td>
+                    <td>{{c.Quote}}</td>
+                    <td>
+                        <button class="btn btn-info" ng-click="qrc.toggleChangeQuote(c.UserId)">Change quote</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="z-index:5;" class="panel panel-default centered" ng-show="qrc.changeQuoteBoxOpened">
+            <div class="panel-body">
+                <input type="number" class="profileField input-group" ng-model="qrc.newQuoteValue" /> <br />
+                <button class="btn btn-success" ng-disabled="!(qrc.newQuoteValue && 1)" ng-click="qrc.saveQuote(c.UserId)">Save new quote</button>
+                <button class="btn btn-info" ng-click="qrc.toggleChangeQuote(c.UserId)">Cancel</button>
+            </div>
+        </div>
+
+        <div layout="row">
+            <span>
+                Rows on the page:
+                <select style="margin:5px" ng-model="qrc.resultsPerPage" ng-change="qrc.tablePage=0" ng-options="p for p in qrc.resultsCount"></select>
+                <span ng-show="qrc.numberOfPages() &gt; 1">
+                    <button ng-disabled="qrc.tablePage==0" ng-click="qrc.tablePage=qrc.tablePage-1">Previous page</button>
+                    <span ng-repeat="i in qrc.getNumber(qrc.numberOfPages()) track by $index">
+                        <button ng-click="qrc.goToPage($index)"><span ng-class="{ 'table-active-page' : qrc.tablePage==$index}">{{$index+1}}</span></button>
+                    </span>
+                    <button ng-disabled="qrc.tablePage==qrc.numberOfPages()-1" ng-click="qrc.tablePage=qrc.tablePage+1">Next page</button>
+                </span>
+                Total: {{qrc.seaqrchFiltered.length}}
+            </span>
+        </div>
+    </div>
+</div>

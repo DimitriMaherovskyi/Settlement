@@ -1,36 +1,35 @@
 ﻿(function (angular) {
-    angular.module('settlementModule').controller('ReviewController', ReviewController);
+    angular.module('settlementModule').controller('AutoSettlementController', AutoSettlementController);
 
-    ReviewController.$inject = ['$scope', '$filter', 'reviewDataService', 'studentsList'];
+    AutoSettlementController.$inject = ['$scope', '$filter', 'autoSettlementDataService', 'studentsList', '$timeout'];
 
-    function ReviewController($scope, $filter, reviewDataService, studentsList) {
+    function AutoSettlementController($scope, $filter, autoSettlementDataService, studentsList, $timeout) {
         var vm = this;
 
         var orderBy = $filter('orderBy');
-        vm.groupListOpened = false;
         vm.search = ''; // Represents search field on the form
         vm.myPredicate = null;
         vm.tablePage = 0; // Current table page
         vm.resultsPerPage = 10;
         vm.resultsCount = [10, 25, 50, 100]; // Possible numbers of results per page
-        vm.selectedGroup = [];
-
+        vm.studentsWereSettled = false;
+        vm.changesWereSaved = false;
         vm.headers = [
     {
         name: 'Name',
         field: 'Name',
         predicateIndex: 0
     }, {
-        name: 'Hostel',
-        field: 'HostelNum',
+        name: 'Rating',
+        field: 'Rating',
         predicateIndex: 1
+    }, {
+        name: 'Hostel',
+        field: 'Hostel',
+        predicateIndex: 2
     }, {
         name: 'Room',
         field: 'Room',
-        predicateIndex: 2
-    }, {
-        name: 'Institute',
-        field: 'Institute',
         predicateIndex: 3
     },
         ];
@@ -41,11 +40,7 @@
             vm.students.forEach(function (currVal, index, array) {
                 currVal.Id = currVal.Id.toString();
                 currVal.Name = currVal.Name.toString();
-             //   currVal.HostelNum = currVal.HostelNum.toString();
-             //   currVal.Room = currVal.Room.toString();
-                currVal.Institute = currVal.Institute.toString();
             }); // Converts received data to string values
-            vm.groupList = GetUniquePropertyValues(vm.students, 'Institute'); // Property user group needs to be changed manualy    
             generatePredicate();
         };
 
@@ -69,13 +64,13 @@
                         item = '+Name';
                         break;
                     case 1:
-                        item = '+HostelNum';
+                        item = '+Rating';
                         break;
                     case 2:
-                        item = '+Room';
+                        item = '+Hostel';
                         break;
                     case 3:
-                        item = '+Institute';
+                        item = '+Room';
                         break;
                 }
                 vm.myPredicate[index] = item;
@@ -119,54 +114,43 @@
             vm.tablePage = page;
         };
 
-        $scope.setSelectedGroup = function () { // DONT PUT THIS FUNCTION INTO VM! let it be in scope (because of 'this' in function)
-            var id = this.group;
-
-            if (vm.selectedGroup.toString().indexOf(id.toString()) > -1) {
-                for (var i = 0; i < vm.selectedGroup.length; i++) {
-                    if (vm.selectedGroup[i] === id) {
-                        vm.selectedGroup.splice(i, 1);
-                    }
-                }
-            } else {
-                vm.selectedGroup.push(id);
-            }
-            return false;
-        };
-
-        vm.checkAll = function () {
-            vm.selectedGroup = [];
-            for (var i = 0; i < vm.groupList.length; i++) {
-                vm.selectedGroup.push(vm.groupList[i]);
-            }
-
-        };
-
-        vm.unCheckAll = function () {
-            vm.selectedGroup = [];
-        };
-
-        function GetUniquePropertyValues(arrayToCheck, propertyName) {
-            var flags = [];
-            var output = [];
-            for (var i = 0; i < arrayToCheck.length; i++) {
-                if (flags[arrayToCheck[i][propertyName]]) {
-                    continue;
-                }
-
-                flags[arrayToCheck[i][propertyName]] = true;
-                output.push(arrayToCheck[i][propertyName]);
-            }
-
-            return output;
+        vm.settleStudents = function () {
+            autoSettlementDataService.settleStudents().success(function (res) {
+                autoSettlementDataService.getSettleResult().then(function (result) {
+                    studentList = result.data;
+                });
+                $scope.showNotifyPopUp('Students were successfully settled!')
+                $timeout($scope.closePopUp, 5000);
+                vm.studentsWereSettled = true;
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: students were not settled!')
+                $timeout($scope.closePopUp, 5000);
+            });
         }
-                       
-        vm.checkSymbol = "&#x2714";        
-        vm.toggleDropDownElem = function (group) {            
-            if (vm.selectedGroup.toString().indexOf(group.toString()) > -1) {
-                return false;
-            }
-            return true;        
+
+        vm.saveChanges = function () {
+            autoSettlementDataService.saveChanges().success(function (res) {
+                $scope.showNotifyPopUp('Changes were sucessfully saved!')
+                $timeout($scope.closePopUp, 5000);
+                vm.changesWereSaved = true;
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: changes were not saved!')
+                $timeout($scope.closePopUp, 5000);
+            });
+        }
+        vm.discardChanges = function () {
+            autoSettlementDataService.discardChanges().success(function (res) {
+                $scope.showNotifyPopUp('Changes discarded!');
+                activate();
+                $timeout($scope.closePopUp, 5000);
+                vm.studentsWereSettled = false;
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: changes was not discarded!')
+                $timeout($scope.closePopUp, 5000);
+            });
         }
     };
 

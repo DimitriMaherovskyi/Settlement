@@ -12,7 +12,8 @@ SET IDENTITY_INSERT [tblRoles] ON;
 INSERT INTO [tblRoles]([RoleId], [RoleName])
 VALUES (1, 'Admin'),
 		(2, 'Warden'),
-		(3, 'Dean');
+		(3, 'Dean'),
+		(4, 'Rector');
 SET IDENTITY_INSERT [tblRoles] OFF;
 
 SET IDENTITY_INSERT [tblUsers] ON;

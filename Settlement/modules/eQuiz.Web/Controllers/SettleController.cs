@@ -7,8 +7,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Settlement.Web.Controllers
 {
+    [AuthorizeAccess(Roles = "Rector, Dean")]
     public class SettleController : Controller
     {
         #region Fields

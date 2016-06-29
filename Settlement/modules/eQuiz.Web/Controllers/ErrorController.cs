@@ -8,7 +8,7 @@ namespace Settlement.Web.Controllers
 {
     public class ErrorController : Controller
     {
-        // GET: Error
+        [AllowAnonymous]
         public ActionResult AccessDenied()
         {
             return View();

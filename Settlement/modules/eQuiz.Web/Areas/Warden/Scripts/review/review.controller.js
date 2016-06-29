@@ -18,21 +18,21 @@
         vm.headers = [
     {
         name: 'Name',
-        field: 'name',
+        field: 'Name',
         predicateIndex: 0
     }, {
         name: 'Hostel',
-        field: 'hostel',
+        field: 'HostelNum',
         predicateIndex: 1
     }, {
         name: 'Room',
-        field: 'room',
+        field: 'Room',
         predicateIndex: 2
     }, {
         name: 'Institute',
-        field: 'institute',
+        field: 'Institute',
         predicateIndex: 3
-    }
+    },
         ];
         vm.students = [];
 
@@ -66,16 +66,16 @@
                 var item = null;
                 switch (index) {
                     case 0:
-                        item = '+firstName';
+                        item = '+Name';
                         break;
                     case 1:
-                        item = '+surname';
+                        item = '+HostelNum';
                         break;
                     case 2:
-                        item = '+hostel';
+                        item = '+Room';
                         break;
                     case 3:
-                        item = '+institute';
+                        item = '+Institute';
                         break;
                 }
                 vm.myPredicate[index] = item;

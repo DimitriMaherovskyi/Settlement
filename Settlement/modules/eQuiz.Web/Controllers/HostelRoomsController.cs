@@ -28,6 +28,7 @@ namespace Settlement.Web.Controllers
 
         #region Web actions
 
+        [AuthorizeAccess(Roles = "Rector, Warden")]
         [HttpGet]
         public JsonResult GetHostelInfo(int id)
         {
@@ -38,6 +39,8 @@ namespace Settlement.Web.Controllers
             return Json(hostel, JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizeAccess(Roles = "Rector, Warden")]
+        [HttpGet]
         public JsonResult GetHostelRooms(int hostelId)
         {
             var setteledStudents = new List<StudentsReview>();
@@ -91,7 +94,8 @@ namespace Settlement.Web.Controllers
         #endregion
 
         #region Post methods
-
+        [AuthorizeAccess(Roles = "Rector, Warden")]
+        [HttpPost]
         public void UpdateHostelInfo(int id, int number, string address, int monthPayment)
         {
             var h = _repository.GetSingle<tblHostel>(hh => hh.Id == id);

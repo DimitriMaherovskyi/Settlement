@@ -1,19 +1,21 @@
 ﻿(function (angular) {
-    angular.module('settlementModule').controller('ReviewController', ReviewController);
+    angular.module('settlementModule').controller('QuotesReviewController', QuotesReviewController);
 
-    ReviewController.$inject = ['$scope', '$filter', 'reviewDataService', 'studentsList'];
+    QuotesReviewController.$inject = ['$scope', '$filter', 'quoteReviewDataService', 'quotesList', '$timeout'];
 
-    function ReviewController($scope, $filter, reviewDataService, studentsList) {
+    function QuotesReviewController($scope, $filter, quoteReviewDataService, quotesList, $timeout) {
         var vm = this;
-
         var orderBy = $filter('orderBy');
-        vm.groupListOpened = false;
         vm.search = ''; // Represents search field on the form
         vm.myPredicate = null;
         vm.tablePage = 0; // Current table page
         vm.resultsPerPage = 10;
         vm.resultsCount = [10, 25, 50, 100]; // Possible numbers of results per page
         vm.selectedGroup = [];
+        vm.newQuoteValue;
+        vm.userId;
+        vm.changeQuoteBoxOpened = false;
+        vm.quotes = quotesList;
 
         vm.headers = [
     {
@@ -21,35 +23,27 @@
         field: 'Name',
         predicateIndex: 0
     }, {
-        name: 'Hostel',
-        field: 'HostelNum',
+        name: 'Status',
+        field: 'Status',
         predicateIndex: 1
-    }, {
-        name: 'Room',
-        field: 'Room',
-        predicateIndex: 2
     }, {
         name: 'Institute',
         field: 'Institute',
+        predicateIndex: 2
+    }, {
+        name: 'Quote',
+        field: 'Quote',
         predicateIndex: 3
     },
         ];
-        vm.students = [];
 
         function activate() {
-            vm.students = studentsList;
-            vm.students.forEach(function (currVal, index, array) {
-                currVal.Id = currVal.Id.toString();
-                currVal.Name = currVal.Name.toString();
-             //   currVal.HostelNum = currVal.HostelNum.toString();
-             //   currVal.Room = currVal.Room.toString();
-                currVal.Institute = currVal.Institute.toString();
-            }); // Converts received data to string values
-            vm.groupList = GetUniquePropertyValues(vm.students, 'Institute'); // Property user group needs to be changed manualy    
+                quoteReviewDataService.getQuotes().then(function (respond) {
+                 vm.quotes = respond.data;
+                })
             generatePredicate();
         };
-
-        activate();
+        generatePredicate();
 
         function generatePredicate() {
             vm.myPredicate = [null, null, null, null];
@@ -69,13 +63,13 @@
                         item = '+Name';
                         break;
                     case 1:
-                        item = '+HostelNum';
+                        item = '+Status';
                         break;
                     case 2:
-                        item = '+Room';
+                        item = '+Institute';
                         break;
                     case 3:
-                        item = '+Institute';
+                        item = '+Quote';
                         break;
                 }
                 vm.myPredicate[index] = item;
@@ -103,7 +97,7 @@
         }; // Gets the order direction of the predicate with specified index
 
         vm.order = function (predicate, reverse) {
-            vm.students = orderBy(vm.students, predicate, reverse);
+            vm.quotes = orderBy(vm.quotes, predicate, reverse);
             vm.predicate = predicate;
         }; // Orders the data based on the specified predicate
 
@@ -119,54 +113,27 @@
             vm.tablePage = page;
         };
 
-        $scope.setSelectedGroup = function () { // DONT PUT THIS FUNCTION INTO VM! let it be in scope (because of 'this' in function)
-            var id = this.group;
-
-            if (vm.selectedGroup.toString().indexOf(id.toString()) > -1) {
-                for (var i = 0; i < vm.selectedGroup.length; i++) {
-                    if (vm.selectedGroup[i] === id) {
-                        vm.selectedGroup.splice(i, 1);
-                    }
-                }
-            } else {
-                vm.selectedGroup.push(id);
-            }
-            return false;
+        vm.toggleChangeQuote = function(id) {
+            vm.changeQuoteBoxOpened = !vm.changeQuoteBoxOpened;
+            vm.userId = id;
+            var result = vm.quotes.filter(function(v) {
+                return v.UserId === id;
+            })[0].Quote;
+            vm.newQuoteValue = result;
+            
         };
 
-        vm.checkAll = function () {
-            vm.selectedGroup = [];
-            for (var i = 0; i < vm.groupList.length; i++) {
-                vm.selectedGroup.push(vm.groupList[i]);
-            }
-
-        };
-
-        vm.unCheckAll = function () {
-            vm.selectedGroup = [];
-        };
-
-        function GetUniquePropertyValues(arrayToCheck, propertyName) {
-            var flags = [];
-            var output = [];
-            for (var i = 0; i < arrayToCheck.length; i++) {
-                if (flags[arrayToCheck[i][propertyName]]) {
-                    continue;
-                }
-
-                flags[arrayToCheck[i][propertyName]] = true;
-                output.push(arrayToCheck[i][propertyName]);
-            }
-
-            return output;
-        }
-                       
-        vm.checkSymbol = "&#x2714";        
-        vm.toggleDropDownElem = function (group) {            
-            if (vm.selectedGroup.toString().indexOf(group.toString()) > -1) {
-                return false;
-            }
-            return true;        
+        vm.saveQuote = function () {
+            quoteReviewDataService.changeQuote(vm.userId, vm.newQuoteValue).success(function (res) {
+                activate();
+                vm.changeQuoteBoxOpened = false;
+                $scope.showNotifyPopUp('New quote was successfully saved!')
+                $timeout($scope.closePopUp, 5000);
+            })
+            .error(function (res) {
+                $scope.showNotifyPopUp('Error: new quote was not saved!')
+                $timeout($scope.closePopUp, 5000);
+            });;
         }
     };
 
