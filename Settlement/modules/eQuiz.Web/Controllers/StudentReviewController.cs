@@ -41,8 +41,12 @@ namespace Settlement.Web.Controllers
         [AuthorizeAccess(Roles = "Dean")]
         // Institute mentor method
         [HttpGet]
-        public JsonResult GetStudentsByInstitute(string institute)
+        public JsonResult GetStudentsByInstitute()
         {
+            string currentUserName = HttpContext.User.Identity.Name;
+            var user = _repository.Get<tblUsers>(u => u.UserName == currentUserName).FirstOrDefault();
+            string institute = user.Institute;
+
             var all = GetStudents();
             var result = new List<StudentsReview>();
 

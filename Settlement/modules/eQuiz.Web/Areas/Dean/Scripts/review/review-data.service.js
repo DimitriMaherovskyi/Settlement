@@ -15,7 +15,10 @@
         return service;
 
         function getStudentsAjax() {
-            var promise = $http.get('/StudentReview/GetStudentsList');          
+            var promise = $http({
+                url: '/StudentReview/GetStudentsByInstitute',
+                method: "GET",
+            });
             return promise;
         }
     }

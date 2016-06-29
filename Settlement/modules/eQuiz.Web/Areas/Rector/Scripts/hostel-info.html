@@ -12,11 +12,11 @@
             <div name='profileInfo' style="width:auto; max-width:600px" novalidate>
                 <div style="margin-right:40px;">
                     <label class="profileLabel">Number:</label>
-                    <input type="text" name="number" class="profileField showValidation" ng-model="hc.hostelInfo.Name" ng-change="hc.modelChanged = true;" required /><br /><br />
+                    <input type="text" name="number" class="profileField showValidation" ng-model="hc.hostelInfo.Name" ng-change="hc.modelChanged = true;" readonly /><br /><br />
                     <label class="profileLabel">Address:</label>
-                    <input type="text" name="address" class="profileField showValidation" ng-model="hc.hostelInfo.Address" ng-change="hc.modelChanged = true;"  required /><br /><br />
+                    <input type="text" name="address" class="profileField showValidation" ng-model="hc.hostelInfo.Address" ng-change="hc.modelChanged = true;"  readonly /><br /><br />
                     <label class="profileLabel">Month payment sum:</label>
-                    <input type="text" name="monthPaymentSum" class="profileField showValidation" ng-model="hc.hostelInfo.MonthPaymentSum" ng-change="hc.modelChanged = true;"  required /><br /><br />
+                    <input type="text" name="monthPaymentSum" class="profileField showValidation" ng-model="hc.hostelInfo.MonthPaymentSum" ng-change="hc.modelChanged = true;"  readonly /><br /><br />
                 </div>
             </div>
         </div>
@@ -24,8 +24,3 @@
 </div>
 
 <br />
-<div class="footerButtons" layout="row">
-    <button class="profileButton" ng-click="hc.saveHostelProfile()" ng-disabled="!hc.validationCheck()">Save</button>
-    <div></div>
-    <button class="profileButton" ng-click="hc.cancelHostelProfile()">Cancel</button>
-</div>

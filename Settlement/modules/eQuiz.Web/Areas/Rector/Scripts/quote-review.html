@@ -25,19 +25,9 @@
                     <td>{{c.Status}}</td>
                     <td>{{c.Institute}}</td>
                     <td>{{c.Quote}}</td>
-                    <td>
-                        <button class="btn btn-info" ng-click="qrc.toggleChangeQuote(c.UserId)">Change quote</button>
-                    </td>
                 </tr>
             </tbody>
         </table>
-        <div style="z-index:5;" class="panel panel-default centered" ng-show="qrc.changeQuoteBoxOpened">
-            <div class="panel-body">
-                <input type="number" class="profileField input-group" ng-model="qrc.newQuoteValue" /> <br />
-                <button class="btn btn-success" ng-disabled="!(qrc.newQuoteValue && 1)" ng-click="qrc.saveQuote(c.UserId)">Save new quote</button>
-                <button class="btn btn-info" ng-click="qrc.toggleChangeQuote(c.UserId)">Cancel</button>
-            </div>
-        </div>
 
         <div layout="row">
             <span>

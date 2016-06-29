@@ -57,7 +57,7 @@ namespace Settlement.Web.Controllers
                     string userData = JsonConvert.SerializeObject(serializeModel);
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                     1,
-                    user.FirstName + " " + user.LastName,
+                    user.UserName,
                     DateTime.Now,
                     DateTime.Now.AddMinutes(15),
                     false, //pass here true, if you want to implement remember me functionality

@@ -14,13 +14,13 @@
             <div name='profileInfo' style="width:auto; max-width:600px" novalidate>
                 <div style="margin-right:40px;">
                     <label class="profileLabel">Name:</label>
-                    <input type="text" name="firstName" class="profileField" ng-model="sc.studentInfo.Name" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="firstName" class="profileField" ng-model="sc.studentInfo.Name" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
                     <label class="profileLabel">Surname:</label>
-                    <input type="text" name="lastName" class="profileField" ng-model="sc.studentInfo.Surname" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="lastName" class="profileField" ng-model="sc.studentInfo.Surname" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
                     <label class="profileLabel">Institute:</label>
-                    <input type="text" name="institute" class="profileField" ng-model="sc.studentInfo.Institute" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="institute" class="profileField" ng-model="sc.studentInfo.Institute" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
                     <label class="profileLabel">Study Group:</label>
-                    <input type="text" name="studyGroup" class="profileField" ng-model="sc.studentInfo.Group" ng-change="sc.modelChanged = true;" class="showValidation" required /><br /><br />
+                    <input type="text" name="studyGroup" class="profileField" ng-model="sc.studentInfo.Group" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
                     <label class="profileLabel">Payment till:</label>
                     <input type="text" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
                 </div>
@@ -35,8 +35,6 @@
             <label class="profileLabel">Paid till:</label>
             <input type="text" name="paidTill" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
             <button class="profileButton btn btn-primary" ng-click="sc.checkInBoxOpened = !sc.checkInBoxOpened">Check in</button>
-            <button class="profileButton btn btn-primary" ng-click="sc.checkOut()">Check out</button>
-            <button class="profileButton btn btn-primary" ng-click="sc.addPayBoxOpened = !sc.addPayBoxOpened">Add pay</button>
             <button class="profileButton btn btn-primary" ng-click="sc.addSettleRequest()">Confirm settle request</button>
 
             <div id="checkInBox" class="panel panel-default centered" style="z-index:5; width:250px" ng-show="sc.checkInBoxOpened == true">
@@ -50,18 +48,6 @@
                 </div>
             </div>
 
-            <div id="addPayBox" class="panel panel-default centered" style="z-index:5" ng-show="sc.addPayBoxOpened == true">
-                <div class="panel panel-body">
-                    <label class="profileLabel">Enter end date:</label> <br />
-                    <input type="date" class="input-group" ng-model="sc.payTillDate" /><br />
-                    <label class="profileLabel">Pay per month:{{sc.getHostelPayment()}}</label>
-                    <label class="profileLabel">Enter sum:</label> <br />
-                    <input type="number" class="input-group" ng-model="sc.paySum" />
-                    <br />
-                    <button class="btn btn-primary" ng-disabled="!sc.addPayValidation()" ng-click="sc.addPay()">Add pay</button>
-                    <button class="btn btn-default" ng-click="sc.addPayBoxOpened = false">Close</button>
-                </div>
-            </div>
         </div>
 
         <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
@@ -72,20 +58,8 @@
                     Time: {{v.Time}} 
                 </div>
             <br />
-                <div class="panel panel-default">
-                    <div class="panel-body" style="margin:10px">
-                        <label class="profileLabel">Select violation:</label>
-                        <select class="input-group" style="margin:15px; font-size:17px" ng-model="sc.currentViolation" ng-options="v.Name for v in sc.violationsList"></select>
-                        <button class="profileButton btn btn-primary" style="margin:15px" ng-disabled="sc.currentViolation == undefined" ng-click="sc.addViolation()">Add violation</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
     <br />
-    <div class="footerButtons" ng-show="sc.currentTab == 'Student'" layout="row">
-        <button class="profileButton btn btn-success" ng-click="sc.saveProfile()" ng-disabled="!sc.validationCheck()">Save</button>
-        <div></div>
-        <button class="profileButton btn btn-default" ng-click="sc.cancelProfile()">Cancel</button>
-    </div>

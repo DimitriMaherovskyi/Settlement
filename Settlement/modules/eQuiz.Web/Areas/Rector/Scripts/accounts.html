@@ -30,57 +30,9 @@
                     <td>{{c.Quote}}</td>
                     <td>{{c.FirstName}}</td>
                     <td>{{c.LastName}}</td>
-                    <td>
-                        <button class="btn btn-info" ng-click="ac.toggleChangeAccount(c.UserId)">Change account info</button>
-                        <button class="btn btn-danger" ng-click="ac.deleteAccount(c.UserId)">Delete</button>
-                    </td>
                 </tr>
             </tbody>
         </table>
-        <div style="z-index:5;" class="panel panel-default centered" ng-show="ac.changeAccountBoxOpened">
-            <div class="panel-body" style="margin:20px">
-                Username:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Username" /> <br />
-                Email:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Email" /> <br />
-                Institute:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Institute" /> <br />
-                User role:
-                <select class="profileField input-group" ng-model="ac.chosenRole" ng-options="r.RoleName for r in ac.roles"></select> <br />
-                Quote:
-                <input type="number" class="profileField input-group" ng-model="ac.changedAccount.Quote" /> <br />
-                First name:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.FirstName" /> <br />
-                Last name:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.LastName" /> <br />
-                <button class="btn btn-success" ng-disabled="!ac.validateChangeAccountForm()" ng-click="ac.saveAccount()">Save account Info</button>
-                <button class="btn btn-info" ng-click="ac.changeAccountBoxOpened = false">Cancel</button>
-            </div>
-        </div>
-
-        <div style="z-index:5;" class="panel panel-default centered" ng-show="ac.newAccountBoxOpened">
-            <div class="panel-body" style="margin:20px">
-                Username:
-                <input type="text" class="profileField input-group" ng-model="ac.newAccount.UserName" /> <br />
-                Email:
-                <input type="text" class="profileField input-group" ng-model="ac.newAccount.Email" /> <br />
-                Institute:
-                <input type="text" class="profileField input-group" ng-model="ac.newAccount.Institute" /> <br />
-                User role:
-                <select class="profileField input-group" ng-model="ac.chosenRole" ng-options="r.RoleName for r in ac.roles"></select> <br />
-                Quote:
-                <input type="number" class="profileField input-group" ng-model="ac.newAccount.Quote" /> <br />
-                First name:
-                <input type="text" class="profileField input-group" ng-model="ac.newAccount.FirstName" /> <br />
-                Last name:
-                <input type="text" class="profileField input-group" ng-model="ac.newAccount.LastName" /> <br />
-                Password:
-                <input type="text" class="profileField input-group" ng-model="ac.newAccount.Password" /> <br />
-
-                <button class="btn btn-success" ng-disabled="!ac.validateNewAccountForm()" ng-click="ac.addAccount(c.UserId)">Add account</button>
-                <button class="btn btn-info" ng-click="ac.newAccountBoxOpened = false">Cancel</button>
-            </div>
-        </div>
 
         <div layout="row">
             <span>
@@ -94,11 +46,6 @@
                     <button ng-disabled="ac.tablePage==ac.numberOfPages()-1" ng-click="ac.tablePage=ac.tablePage+1">Next page</button>
                 </span>
                 Total: {{ac.searchFiltered.length}}
-            </span>
-        </div>
-        <div layout="row">
-            <span>
-                <button class="btn btn-primary" ng-click="ac.newAccountBoxOpened = true">Add new account</button>
             </span>
         </div>
     </div>
