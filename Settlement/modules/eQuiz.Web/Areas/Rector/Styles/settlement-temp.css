@@ -1,0 +1,478 @@
+﻿.student-with-problems {
+    background-color:pink;
+}
+
+.profileButton
+{
+    font-size:17px;
+    margin:20px;
+}
+
+.profileField {
+    font-size:17px; 
+    width:200px
+}
+
+.violation {
+    font-size:17px;
+    color:black;
+    border-color:red;
+    border-width:1px;
+    border-style:inset; 
+    width:500px; 
+    margin:10px;
+}
+
+.profileLabel {
+    display:block;
+    width:200px;
+    font-size:17px;
+}
+
+.hostelsList {
+    text-decoration:solid;
+    font-size:20px;
+    border-style:groove;
+    border-width:2px;
+    width:auto;
+    min-width:100px;
+    align-content:center;
+    padding:3px;
+    margin:10px;
+    border-color:black;
+}
+
+.notifyPopUpMessage {
+    border:solid;
+    border-color:forestgreen;
+    background-color:lightgreen;
+    width:auto;
+    min-height:60px;
+    margin:10px;
+}
+
+.closePopUp {
+    float:right;
+    border:medium;
+    border-color:darkgreen;
+    font:300;
+    font-family:Arial;
+}
+
+.confirmPopUp {
+    display:block;
+    width:inherit;
+    margin:5px;
+    text-align:center;
+    border:medium;
+    background-color:lightgreen;
+    font-family:Arial;
+    align-content:center;
+}
+
+.buttonPopUp {
+    background-color:lightgreen;
+    border:medium;
+    border-color:darkmagenta;
+    font-size:80%;
+    color:black;
+    font-family:Arial;
+    margin-top:15px;
+    width:30px;
+}
+
+.ConfirmPopUpText {
+    display:block;
+    font:700;
+    font-family:Arial;
+    margin:5px;
+    text-align:center;
+    width:inherit;
+    height:auto;
+}
+
+.NotifyPopUpText {
+    display:block;
+    font:700;
+    font-family:Arial;
+    margin:20px;
+    text-align:center;
+    width:inherit;
+    height:auto;
+}
+
+.highlightedText  {
+    background: lightblue;
+}
+
+.sortorder:after {
+    content: '\25b2';
+}
+
+.sortorder.direction:after {
+    content: '\25bc';
+}
+
+.reviewTable {
+        width: 100%;
+        height: auto;
+        text-align: left;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+.table-active-page {
+    font-weight: bold;
+}
+
+.groupBtn {
+    float:right;
+}
+
+.tabLabels {
+    margin: 0;
+    padding: 0 5px 0 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    width: auto;
+}
+
+#tabContainer {
+    height:300px;
+    border:1px solid gray;
+    padding:40px;
+    width:90em;
+}
+
+.tabLabels li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #999;
+    border-left: none;
+    margin-bottom: -1px;
+    background: #F0F0F0;
+    overflow: hidden;
+    position: relative;
+}
+
+.tabLabels li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    font-size: 1.2em;
+    padding: 0 20px;
+    border: 1px solid #fff;
+    outline: none;
+}
+
+.tabLabels li a:hover {
+    background: #ccc;
+    cursor:pointer;
+}   
+
+html .tabLabels li.active, html .tabLabels li.active a:hover  {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.tabLabels li a.selected
+{
+    color: #000;
+    font-weight:bold;
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.footerButtons {
+    
+    text-align:center;
+    font:14px
+}
+
+.link
+{
+    cursor:pointer;
+}
+
+.commentTextBox
+{
+    resize: none;
+    width: 300px;
+    height: 170px;
+}
+
+.authorTextBox
+{
+    width: 300px;
+}
+
+.footerButtons button {
+    width:170px; 
+    height:40px
+}
+
+.footerButtons div {
+    width:200px;
+    height:auto;
+    display:inline-block;
+}
+
+.ng-invalid.ng-dirty.showValidation {
+border: 1px solid red;
+}
+
+.ng-valid.ng-dirty.showValidation {
+border: 1px solid green;
+}
+
+/* Next are quizReview styles */
+
+div.confirm_btns_section {    
+    text-align: center;    
+    padding: 10px 50px 10px 50px;
+    margin: 10px;    
+}
+
+button.btn-lightgreen-hover:hover {
+    background: lightgreen;   
+    color: black;
+}
+
+button.btn-lightgrey-hover:hover {
+    background: lightgrey;    
+    color: black;
+}
+button.btn-lightcoral-hover:hover {
+    background: lightcoral;      
+    color: black;
+}
+
+button.btn-standart {
+    background: white;
+    color: black;
+}
+
+button.btn-lightgreen {
+    background: lightgreen;    
+}
+
+button.btn-lightgrey {
+    background: lightgrey;    
+}
+button.btn-lightcoral {
+    background: lightcoral;      
+}
+
+.btn_spacing {
+    margin: 0px 5px 0px 5px;
+}
+
+.btn_length {
+    width: 140px;
+    height: 40px;
+    font-size:initial;
+    font-weight:200;
+}
+
+.display_inline {
+    display: inline-block;         
+    margin: 5px 30px 0px 5px;
+}
+
+.spacing {
+    margin: 10px 30px;
+    padding: 0px 5px 0px 5px;
+}
+
+.btn_finalized {
+    border-width: medium;
+    border-color: green;
+}
+
+.textarea {
+    width: 95%;
+    height: 100px;   
+}
+
+.showRightAnswer:hover + textarea{
+    display: block;
+}
+
+.adminHintAnswer {
+    display: none;
+}
+
+.adminHintAnswer:hover  {
+    display: block;
+}
+
+/* quizReview Styles END */
+
+
+/*Loading animation spinner START*/
+.cssload-container {
+	width: 100%;
+	height: 100px;
+	text-align: center;
+}
+
+.cssload-speeding-wheel {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	border: 6px solid rgba(138,138,138,0.98);
+	border-radius: 50%;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	animation: cssload-spin 575ms infinite linear;
+		-o-animation: cssload-spin 575ms infinite linear;
+		-ms-animation: cssload-spin 575ms infinite linear;
+		-webkit-animation: cssload-spin 575ms infinite linear;
+		-moz-animation: cssload-spin 575ms infinite linear;
+}
+
+
+
+@keyframes cssload-spin {
+	100%{ transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-o-keyframes cssload-spin {
+	100%{ -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-ms-keyframes cssload-spin {
+	100%{ -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-webkit-keyframes cssload-spin {
+	100%{ -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+@-moz-keyframes cssload-spin {
+	100%{ -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+/*Loading animation spinner END*/
+
+/* Drop-down list styles START */
+
+.dropbtn {
+    background-color: white;
+    color: black;
+    padding: 4px;    
+    border-style: groove;
+    height: 2em;
+    width: 10em;
+}
+
+.dropdown {    
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 10em;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    height: 225px;
+    min-height: 100px;
+    overflow-y: auto;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #F7F7F7;
+}
+
+.dropdownContentElemChecked {
+    display: none;        
+}
+
+/* multilevel drop down */
+
+.multileveldropdown {
+    position:relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.multileveldropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.multileveldropdown-content a {
+    color: black;
+    padding: 8px 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.multileveldropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.multileveldropdown:hover .multileveldropdown-content{
+    background-color: #F7F7F7;
+    display: block;
+}
+
+.multileveldropdown-content div div {
+    display: none;
+}
+
+.multileveldropdown-content div a:hover + div{
+    display: block;    
+}
+
+.multileveldropdown-content div div {
+  left: 100%;
+  min-width: 10em;  
+  width: 100%;
+  height: 225px;
+  top: 0;
+  position: absolute;
+  background-color: #f9f9f9; 
+  overflow-y: auto; 
+}
+
+.multileveldropdown-content div div:hover {
+    display:block; 
+}
+/* Drop-down list styles END */
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

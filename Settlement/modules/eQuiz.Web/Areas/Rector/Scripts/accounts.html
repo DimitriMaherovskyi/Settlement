@@ -1,0 +1,105 @@
+﻿<div>
+    <br />
+    <br />
+    <div pop-up-window></div>
+    <div style="display:inline; margin:5px">
+        <label>Search</label>
+        <input type="text" ng-model="ac.search" style="width:15em">
+    </div>
+    <br />
+    <div style="overflow-x:auto; margin:20px">
+        <table style="width:100%" class="reviewTable table-condensed">
+            <thead>
+                <tr>
+                    <th ng-repeat="h in ac.headers">
+                        <a class="link" href="#" ng-click="ac.refreshPredicate(h.predicateIndex); ac.order(ac.myPredicate[h.predicateIndex], null)">
+                            <span class="sortorder" ng-show="ac.direction(h.predicateIndex) !== null" ng-class="{direction:ac.direction(h.predicateIndex)}"></span>
+                            {{h.name}}
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in ac.contents = ((ac.searchFiltered = (ac.accounts | filter: {Username: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
+                    <td><a ng-bind-html="c.Username | highlight: ac.search">{{c.Username}}</a></td>
+                    <td>{{c.Email}}</td>
+                    <td>{{c.Institute}}</td>
+                    <td>{{c.CreatedDate}}</td>
+                    <td>{{c.LastLoginDate}}</td>
+                    <td>{{ac.getRoleName(c.RoleId)}}</td>
+                    <td>{{c.Quote}}</td>
+                    <td>{{c.FirstName}}</td>
+                    <td>{{c.LastName}}</td>
+                    <td>
+                        <button class="btn btn-info" ng-click="ac.toggleChangeAccount(c.UserId)">Change account info</button>
+                        <button class="btn btn-danger" ng-click="ac.deleteAccount(c.UserId)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="z-index:5;" class="panel panel-default centered" ng-show="ac.changeAccountBoxOpened">
+            <div class="panel-body" style="margin:20px">
+                Username:
+                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Username" /> <br />
+                Email:
+                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Email" /> <br />
+                Institute:
+                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Institute" /> <br />
+                User role:
+                <select class="profileField input-group" ng-model="ac.chosenRole" ng-options="r.RoleName for r in ac.roles"></select> <br />
+                Quote:
+                <input type="number" class="profileField input-group" ng-model="ac.changedAccount.Quote" /> <br />
+                First name:
+                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.FirstName" /> <br />
+                Last name:
+                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.LastName" /> <br />
+                <button class="btn btn-success" ng-disabled="!ac.validateChangeAccountForm()" ng-click="ac.saveAccount()">Save account Info</button>
+                <button class="btn btn-info" ng-click="ac.changeAccountBoxOpened = false">Cancel</button>
+            </div>
+        </div>
+
+        <div style="z-index:5;" class="panel panel-default centered" ng-show="ac.newAccountBoxOpened">
+            <div class="panel-body" style="margin:20px">
+                Username:
+                <input type="text" class="profileField input-group" ng-model="ac.newAccount.UserName" /> <br />
+                Email:
+                <input type="text" class="profileField input-group" ng-model="ac.newAccount.Email" /> <br />
+                Institute:
+                <input type="text" class="profileField input-group" ng-model="ac.newAccount.Institute" /> <br />
+                User role:
+                <select class="profileField input-group" ng-model="ac.chosenRole" ng-options="r.RoleName for r in ac.roles"></select> <br />
+                Quote:
+                <input type="number" class="profileField input-group" ng-model="ac.newAccount.Quote" /> <br />
+                First name:
+                <input type="text" class="profileField input-group" ng-model="ac.newAccount.FirstName" /> <br />
+                Last name:
+                <input type="text" class="profileField input-group" ng-model="ac.newAccount.LastName" /> <br />
+                Password:
+                <input type="text" class="profileField input-group" ng-model="ac.newAccount.Password" /> <br />
+
+                <button class="btn btn-success" ng-disabled="!ac.validateNewAccountForm()" ng-click="ac.addAccount(c.UserId)">Add account</button>
+                <button class="btn btn-info" ng-click="ac.newAccountBoxOpened = false">Cancel</button>
+            </div>
+        </div>
+
+        <div layout="row">
+            <span>
+                Rows on the page:
+                <select style="margin:5px" ng-model="ac.resultsPerPage" ng-change="ac.tablePage=0" ng-options="p for p in ac.resultsCount"></select>
+                <span ng-show="ac.numberOfPages() &gt; 1">
+                    <button ng-disabled="ac.tablePage==0" ng-click="ac.tablePage=ac.tablePage-1">Previous page</button>
+                    <span ng-repeat="i in ac.getNumber(ac.numberOfPages()) track by $index">
+                        <button ng-click="ac.goToPage($index)"><span ng-class="{ 'table-active-page' : ac.tablePage==$index}">{{$index+1}}</span></button>
+                    </span>
+                    <button ng-disabled="ac.tablePage==ac.numberOfPages()-1" ng-click="ac.tablePage=ac.tablePage+1">Next page</button>
+                </span>
+                Total: {{ac.searchFiltered.length}}
+            </span>
+        </div>
+        <div layout="row">
+            <span>
+                <button class="btn btn-primary" ng-click="ac.newAccountBoxOpened = true">Add new account</button>
+            </span>
+        </div>
+    </div>
+</div>

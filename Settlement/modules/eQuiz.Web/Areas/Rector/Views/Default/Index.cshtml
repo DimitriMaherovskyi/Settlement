@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@using Settlement.Web.Models;
+@section HeadScripts
+{
+    <base href="/Warden/Default/" />
+}
+@section PageHeader
+{
+<div ng-app="settlementModule">
+    <div layout="row" style="padding:10px">
+        <div>
+            <button class="btn btn-default" onclick="location.href='/Admin/Default/Index/Rooms'" style="text-decoration:solid; font-size:20px">
+                Settlements
+            </button>
+            <button class="btn btn-default" onclick="location.href='/Admin/Default/Index/Review'"; style="text-decoration:solid; font-size:20px" ng-click="lc.GoToReview()">
+                Students
+            </button>
+            <button class="btn btn-default" onclick="location.href='/Admin/Default/Index/Quotes'" style="text-decoration:solid; font-size:20px">
+                Quotes
+            </button>
+            <button class="btn btn-default" onclick="location.href='/Admin/Default/Index/Accounts'" style="text-decoration:solid; font-size:20px">
+                Accounts
+            </button>
+            <a style="float:right" class="btn btn-default" href="/Account/LogOut">
+                Logout
+            </a>
+            <label class="btn" style="float:right; font-size:17px">
+                @User.Identity.Name
+            </label>
+        </div>
+        }
+        <div style="z-index: 5" data-loading class="cssload-container centered">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
+        <div style="z-index: 2" ng-view> </div>
+    </div>
+</div>
+@section FootScripts
+{
+    <script src="~/Areas/Admin/Scripts/shared/routing.js"></script>
+
+    <script src="~/Areas/Admin/Scripts/shared/loading-screen.directive.js"></script>
+    <script src="~/Areas/Admin/Scripts/review/table-height.directive.js"></script>
+    <script src="~/Areas/Admin/Scripts/shared/pop-up-window.directive.js"></script>
+
+    <script src="~/Areas/Admin/Scripts/review/group.filter.js"></script>
+    <script src="~/Areas/Admin/Scripts/review/highlight.filter.js"></script>
+    <script src="~/Areas/Admin/Scripts/review/start-from.filter.js"></script>
+    <script src="~/Areas/Admin/Scripts/review/trustAsHtml.filter.js"></script>
+    <script src="~/Areas/Admin/Scripts/student/hostel-room.filter.js"></script>
+
+    <script src="~/Areas/Admin/Scripts/review/review-data.service.js"></script>
+    <script src="~/Areas/Admin/Scripts/student/student-data.service.js"></script>
+    <script src="~/Areas/Admin/Scripts/roomsReview/rooms-review-data.service.js"></script>
+    <script src="~/Areas/Admin/Scripts/quoteReview/quoteReview-data.service.js"></script>
+    <script src="~/Areas/Admin/Scripts/hostelInfo/hostelInfo-data.service.js"></script>
+    <script src="~/Areas/Admin/Scripts/accounts/accounts-data.service.js"></script>  
+    <script src="~/Areas/Admin/Scripts/autoSettlement/auto-settlement-data.service.js"></script>
+
+    <script src="~/Areas/Admin/Scripts/autoSettlement/auto-settlement.controller.js"></script>
+    <script src="~/Areas/Admin/Scripts/hostelInfo/hostelInfo.controller.js"></script>
+    <script src="~/Areas/Admin/Scripts/quoteReview/quoteReview.controller.js"></script>
+    <script src="~/Areas/Admin/Scripts/review/review.controller.js"></script>
+    <script src="~/Areas/Admin/Scripts/student/student.controller.js"></script>
+    <script src="~/Areas/Admin/Scripts/roomsReview/rooms-review.controller.js"></script>
+    <script src="~/Areas/Admin/Scripts/accounts/accounts.controller.js"></script>
+}

@@ -1,0 +1,60 @@
+﻿<div>
+    <br />
+    <br />
+
+    <div style="display:inline; margin:8px">
+        <label>Search</label>
+        <input type="text" ng-model="rc.search" style="width:15em">
+
+        <div class="dropdown">
+            <button class="dropbtn"> Group Filter &#x25BC </button>
+            <div class="dropdown-content">
+                <a ng-click="rc.checkAll()" class="link">&#x2714 Check All</a>
+                <a ng-click="rc.unCheckAll()" class="link">&#x2716 Uncheck All</a>
+                <div ng-repeat="group in rc.groupList">
+                    <a ng-click="setSelectedGroup()" ng-model="group" class="link"> {{group}} <b ng-class="{dropdownContentElemChecked: rc.toggleDropDownElem(group)}" ng-bind-html="' ' + rc.checkSymbol | trustAsHtml"> </b></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="overflow-x:auto; margin:8px">
+        <table class="reviewTable" auto-height="{{rc.groupList.length}}">
+            <thead>
+                <tr>
+                    <th ng-repeat="h in rc.headers">
+                        <a class="link" href="#" ng-click="rc.refreshPredicate(h.predicateIndex); rc.order(rc.myPredicate[h.predicateIndex], null)">
+                            <span class="sortorder" ng-show="rc.direction(h.predicateIndex) !== null" ng-class="{direction:rc.direction(h.predicateIndex)}"></span>
+                            {{h.name}}
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in rc.contents = ((rc.searchFiltered = (rc.students | groupFilter: rc.selectedGroup:'Institute' | filter: {Name:rc.search})) | startFrom: rc.tablePage*rc.resultsPerPage | limitTo:rc.resultsPerPage)" ng-class="{ 'student-with-problems' : c.HasProblem}" style="height: 50px">
+                    <td><a href="Index/Student?Id={{c.Id}}#Student" class="link" ng-bind-html="c.Name | highlight: rc.search">{{c.Name}}</a></td>
+                    <td>{{c.HostelNum}}</td>
+                    <td>{{c.Room}}</td>
+                    <td>{{c.Institute}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div layout="row">
+            <span>
+                Rows on the page:
+                <select style="margin:5px" ng-model="rc.resultsPerPage" ng-change="rc.tablePage=0" ng-options="p for p in rc.resultsCount"></select>
+                <span ng-show="rc.numberOfPages() &gt; 1">
+                    <button ng-disabled="rc.tablePage==0" ng-click="rc.tablePage=rc.tablePage-1">Previous page</button>
+                    <span ng-repeat="i in rc.getNumber(rc.numberOfPages()) track by $index">
+                        <button ng-click="rc.goToPage($index)"><span ng-class="{ 'table-active-page' : rc.tablePage==$index}">{{$index+1}}</span></button>
+                    </span>
+                    <button ng-disabled="rc.tablePage==rc.numberOfPages()-1" ng-click="rc.tablePage=rc.tablePage+1">Next page</button>
+                </span>
+                Total: {{rc.searchFiltered.length}}
+            </span>
+        </div>
+        <button class="btn btn-primary" onclick="location.href='/Admin/Default/Index/Settlement'">Settle students</button>
+    </div>
+</div>

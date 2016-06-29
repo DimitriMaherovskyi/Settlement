@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Settlement.Web.Models;
 
-namespace Settlement.Web.Areas.Warden.Controllers
+namespace Settlement.Web.Areas.Rector.Controllers
 {
     [AuthorizeAccess(Roles= "Admin")]
     public class DefaultController : BaseController
