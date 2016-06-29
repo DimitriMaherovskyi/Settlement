@@ -39,6 +39,7 @@ namespace Settlement.Web.Models
 
         public static void SettleStudents()
         {
+            GetFreeRooms();
             SetRatings();
             OrderStudentsByRating();
             SetRoomGenders();

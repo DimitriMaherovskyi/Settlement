@@ -31,8 +31,22 @@ namespace Settlement.Web.Controllers
         [HttpGet]
         public JsonResult GetStudentsToSettle()
         {
-            AutoSettle.Students = new List<SettleStudent>();
             var result = new List<ShowStudent>();
+
+            GetStudents();
+            GetRooms();
+
+            foreach (var item in AutoSettle.Students)
+            {
+                result.Add(new ShowStudent(item.Id, item.Name, item.Rating));
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private void GetStudents()
+        {
+            AutoSettle.Students = new List<SettleStudent>();
             var noBen = new List<SettleStudent>();
             var ben = new List<SettleStudent>();
 
@@ -97,13 +111,76 @@ namespace Settlement.Web.Controllers
 
             AutoSettle.SetRatings();
             AutoSettle.OrderStudentsByRating();
+        }
 
-            foreach (var item in AutoSettle.Students)
+        private void GetRooms()
+        {
+            AutoSettle.FreeRooms = new List<SettleRoom>();
+
+            var allRooms = new List<SettleRoom>();
+            var settledRooms = new List<SettleRoom>();
+            var settleStudents = new List<SettleStudent>();
+
+            var rooms = _repository.Get<tblRoom>();
+            var studentRooms = _repository.Get<tblStudentRoom>();
+            var hostels = _repository.Get<tblHostel>();
+            var students = _repository.Get<tblStudent>();
+
+            var all = from r in rooms
+                      join h in hostels on r.HostelId equals h.Id
+                      select new SettleRoom(r.Id, r.Number, h.Number, r.AmountPlaces, new List<SettleStudent>());
+
+            var studs = from sr in studentRooms
+                        join s in students on sr.StudentId equals s.Id
+                        select new SettleStudent(s.Id, s.GenderType);
+
+            var settled = from r in rooms
+                          join sr in studentRooms on r.Id equals sr.RoomId
+                          join s in settleStudents on sr.StudentId equals s.Id
+                          join h in hostels on r.HostelId equals h.Id
+                          group new { r, s, h } by r.Id into grouped
+                          select new SettleRoom(
+                              grouped.Key,
+                              grouped.Select(g => g.r.Number).FirstOrDefault(),
+                              grouped.Select(g => g.h.Number).FirstOrDefault(),
+                              grouped.Select(g => g.r.AmountPlaces).FirstOrDefault(),
+                              grouped.Select(g => g.s).ToList()
+                              //new List<SettleStudent>()
+                              );
+ 
+            foreach (var item in studs)
             {
-                result.Add(new ShowStudent(item.Id, item.Name, item.Rating));
+                settleStudents.Add(item);
             }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            foreach (var item in settled)
+            {
+                settledRooms.Add(item);
+            }
+
+            foreach (var item in all)
+            {
+                allRooms.Add(item);
+            }
+
+            //foreach (var item in settled)
+            //{
+            //    settledRooms.Add(item);
+            //}
+
+            for (var i = 0; i < settledRooms.Count; i++)
+            {
+                for (var j = 0; j < allRooms.Count; j++)
+                {
+                    if (settledRooms[i].Id == allRooms[j].Id)
+                    {
+                        allRooms[j] = settledRooms[i];
+                        break;
+                    }
+                }
+            }
+
+            AutoSettle.FreeRooms = allRooms;
         }
 
         [HttpGet]

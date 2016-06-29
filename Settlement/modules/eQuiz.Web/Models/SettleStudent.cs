@@ -24,6 +24,13 @@ namespace Settlement.Web.Models
         public int Rating { get; set; }
         public int? RoomId { get; set; }
         public int RequestId { get; set; }
+
+        public SettleStudent (int id, bool gender)
+        {
+            Id = id;
+            Gender = SetGender(gender);
+        }
+
         public SettleStudent (int id, string name, string institute, bool gender, string livingPlace, int distance, int benefitPoints, int requestId)
         {
             Id = id;
