@@ -8,35 +8,35 @@
 }
 @section PageHeader
 {
-<div ng-app="settlementModule">
-    <div layout="row" style="padding:10px">
-        <div>
-            <button class="btn btn-default" onclick="location.href='/Warden/Default/Index/Rooms'" style="text-decoration:solid; font-size:20px">
-                Settlements
-            </button>
-            <button class="btn btn-default" onclick="location.href = '/Warden/Default/Index/Review'"; style="text-decoration:solid; font-size:20px" ng-click="lc.GoToReview()">
-                Students
-            </button>
-            <button class="btn btn-default" onclick="location.href = '/Warden/Default/Index/Quotes'" style="text-decoration:solid; font-size:20px">
-                Quotes
-            </button>
-            <a style="float:right" class="btn btn-default" href="/Account/LogOut">
-                Logout
-            </a>
-            <label class="btn" style="float:right; font-size:17px">
-                @User.Identity.Name
-            </label>
-        </div>
-        }
-        <div style="z-index: 5" data-loading class="cssload-container centered">
-            <div class="cssload-speeding-wheel"></div>
-        </div>
-        <div style="z-index: 2" ng-view> </div>
-    </div>
+    <div ng-app="settlementModule">
+        <div layout="row" style="padding:10px">
+            <div>
+                <button class="btn btn-default" onclick="location.href='/Warden/Default/Index/Hostels'" style="text-decoration:solid; font-size:20px">
+                    Гуртожитки
+                </button>
+                <button class="btn btn-default" onclick="location.href = '/Warden/Default/Index/Review'" ; style="text-decoration:solid; font-size:20px" ng-click="lc.GoToReview()">
+                    Студенти
+                </button>
+                <button class="btn btn-default" onclick="location.href = '/Warden/Default/Index/Quotes'" style="text-decoration:solid; font-size:20px">
+                    Квоти
+                </button>
+                <a style="float:right" class="btn btn-default" href="/Account/LogOut">
+                    Вихід
+                </a>
+                <label class="btn" style="float:right; font-size:17px">
+                    @User.Identity.Name
+                </label>
+            </div>
+}
+<div style="z-index: 5" data-loading class="cssload-container centered">
+    <div class="cssload-speeding-wheel"></div>
+</div>
+<div style="z-index: 2" ng-view> </div>
+</div>
 </div>
 @section FootScripts
 {
-    <script src="~/Areas/Admin/Scripts/shared/routing.js"></script>
+    <script src="~/Areas/Admin/Scripts/shared/routingWarden.js"></script>
 
     <script src="~/Areas/Admin/Scripts/shared/loading-screen.directive.js"></script>
     <script src="~/Areas/Admin/Scripts/review/table-height.directive.js"></script>
@@ -53,8 +53,9 @@
     <script src="~/Areas/Admin/Scripts/roomsReview/rooms-review-data.service.js"></script>
     <script src="~/Areas/Admin/Scripts/quoteReview/quoteReview-data.service.js"></script>
     <script src="~/Areas/Admin/Scripts/hostelInfo/hostelInfo-data.service.js"></script>
-    <script src="~/Areas/Admin/Scripts/accounts/accounts-data.service.js"></script>  
+    <script src="~/Areas/Admin/Scripts/accounts/accounts-data.service.js"></script>
     <script src="~/Areas/Admin/Scripts/autoSettlement/auto-settlement-data.service.js"></script>
+    <script src="~/Areas/Admin/Scripts/hostelsReview/hostels-data.service.js"></script>
 
     <script src="~/Areas/Admin/Scripts/autoSettlement/auto-settlement.controller.js"></script>
     <script src="~/Areas/Admin/Scripts/hostelInfo/hostelInfo.controller.js"></script>
@@ -63,4 +64,5 @@
     <script src="~/Areas/Admin/Scripts/student/student.controller.js"></script>
     <script src="~/Areas/Admin/Scripts/roomsReview/rooms-review.controller.js"></script>
     <script src="~/Areas/Admin/Scripts/accounts/accounts.controller.js"></script>
+    <script src="~/Areas/Admin/Scripts/hostelsReview/hostels-review.controller.js"></script>
 }

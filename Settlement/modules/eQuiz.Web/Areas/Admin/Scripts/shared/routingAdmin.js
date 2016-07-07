@@ -10,10 +10,10 @@
                     resolve: {
                         studentsList: function (reviewDataService) {
                             return reviewDataService.getStudents().then(function (respond) {
-                        return respond.data;
-                    })
-               }
-               }
+                                return respond.data;
+                            })
+                        }
+                    }
                 })
                 .when('/Index/Settlement', {
                     templateUrl: '/Areas/Admin/Scripts/auto-settlement.html',
@@ -28,22 +28,22 @@
                     }
                 })
                 .when('/Index/Accounts', {
-                     templateUrl: '/Areas/Admin/Scripts/accounts.html',
-                     controller: 'AccountsController',
-                     controllerAs: 'ac',
-                     resolve: {
-                         accountsList: function (accountsDataService) {
-                             return accountsDataService.getAccounts().then(function (respond) {
-                                 return respond.data;
-                             })
-                         },
-                         accountRoles: function (accountsDataService) {
+                    templateUrl: '/Areas/Admin/Scripts/accounts.html',
+                    controller: 'AccountsController',
+                    controllerAs: 'ac',
+                    resolve: {
+                        accountsList: function (accountsDataService) {
+                            return accountsDataService.getAccounts().then(function (respond) {
+                                return respond.data;
+                            })
+                        },
+                        accountRoles: function (accountsDataService) {
                             return accountsDataService.getRoles().then(function (respond) {
-                             return respond.data;
-                             })
+                                return respond.data;
+                            })
                         }
-                     }
-                 })
+                    }
+                })
                 .when('/Index/Student', {
                     templateUrl: '/Areas/Admin/Scripts/student.html',
                     controller: 'StudentController',
@@ -81,8 +81,8 @@
                     resolve: {
                         quotesList: function (quoteReviewDataService) {
                             return quoteReviewDataService.getQuotes().then(function (respond) {
-                             return respond.data;
-                         })
+                                return respond.data;
+                            })
                         },
                     },
                     reloadOnSearch: false
@@ -100,18 +100,18 @@
                     reloadOnSearch: false
                 })
                 .when('/Index/Rooms', {
-                     templateUrl: '/Areas/Admin/Scripts/rooms-review.html',
-                     controller: 'RoomsReviewController',
-                     controllerAs: 'rrc',
-                     resolve: {
-                         hostels: function (roomsReviewDataService) {
-                             return roomsReviewDataService.getHostels();//.then(function (respond) {
-                             // return respond.data;
-                             //})
-                         },
-                     },
-                     reloadOnSearch: false
-                 })
+                    templateUrl: '/Areas/Admin/Scripts/rooms-review.html',
+                    controller: 'RoomsReviewController',
+                    controllerAs: 'rrc',
+                    resolve: {
+                        hostels: function (roomsReviewDataService) {
+                            return roomsReviewDataService.getHostels();//.then(function (respond) {
+                            // return respond.data;
+                            //})
+                        },
+                    },
+                    reloadOnSearch: false
+                })
 
                 .otherwise({ redirectTo: '/' });
 

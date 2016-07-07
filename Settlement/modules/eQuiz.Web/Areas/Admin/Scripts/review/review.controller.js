@@ -17,19 +17,19 @@
 
         vm.headers = [
     {
-        name: 'Name',
+        name: 'Студент',
         field: 'Name',
         predicateIndex: 0
     }, {
-        name: 'Hostel',
+        name: 'Гуртожиток',
         field: 'HostelNum',
         predicateIndex: 1
     }, {
-        name: 'Room',
+        name: 'Кімната',
         field: 'Room',
         predicateIndex: 2
     }, {
-        name: 'Institute',
+        name: 'Інститут',
         field: 'Institute',
         predicateIndex: 3
     },

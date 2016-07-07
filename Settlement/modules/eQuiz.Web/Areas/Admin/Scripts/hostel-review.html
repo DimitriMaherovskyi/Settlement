@@ -3,16 +3,16 @@
     <br />
     <div pop-up-window></div>
     <div style="display:inline; margin:5px">
-        <label>Search</label>
-        <input type="text" ng-model="ac.search" style="width:15em">
+        <label>Пошук</label>
+        <input type="text" ng-model="hr.search" style="width:15em">
     </div>
     <br />
     <div style="overflow-x:auto; margin:20px">
         <table style="width:100%" class="reviewTable table-condensed">
             <thead>
                 <tr>
-                    <th ng-repeat="h in ac.headers">
-                        <a class="link" href="#" ng-click="ac.refreshPredicate(h.predicateIndex); ac.order(ac.myPredicate[h.predicateIndex], null)">
+                    <th ng-repeat="h in hr.headers">
+                        <a class="link" href="#" ng-click="hr.refreshPredicate(h.predicateIndex); hr.order(ac.myPredicate[h.predicateIndex], null)">
                             <span class="sortorder" ng-show="ac.direction(h.predicateIndex) !== null" ng-class="{direction:ac.direction(h.predicateIndex)}"></span>
                             {{h.name}}
                         </a>
@@ -20,41 +20,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in ac.contents = ((ac.searchFiltered = (ac.accounts | filter: {Username: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
+                <tr ng-repeat="c in hr.contents = ((ac.searchFiltered = (ac.accounts | filter: {Username: ac.search})) | startFrom: ac.tablePage*ac.resultsPerPage | limitTo:ac.resultsPerPage)" style="height: 50px">
                     <td><a ng-bind-html="c.Username | highlight: ac.search">{{c.Username}}</a></td>
-                    <td>{{c.Email}}</td>
-                    <td>{{c.Institute}}</td>
-                    <td>{{c.CreatedDate}}</td>
-                    <td>{{c.LastLoginDate}}</td>
-                    <td>{{ac.getRoleName(c.RoleId)}}</td>
-                    <td>{{c.Quote}}</td>
-                    <td>{{c.FirstName}}</td>
-                    <td>{{c.LastName}}</td>
+                    <td>{{hr.Number}}</td>
+                    <td>{{hr.Address}}</td>
+                    <td>{{hr.MonthPayment}}</td>
                     <td>
-                        <button class="btn btn-info" ng-click="ac.toggleChangeAccount(c.UserId)">Change account info</button>
-                        <button class="btn btn-danger" ng-click="ac.deleteAccount(c.UserId)">Delete</button>
+                        <button class="btn btn-info" ng-click="hr.toggleChangeAccount(c.UserId)">Редагувати</button>
+                        <button class="btn btn-danger" ng-click="hr.deleteAccount(c.UserId)">Видалити</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div style="z-index:5;" class="panel panel-default centered" ng-show="ac.changeAccountBoxOpened">
+        <div style="z-index:5;" class="panel panel-default centered" ng-show="hr.changeAccountBoxOpened">
             <div class="panel-body" style="margin:20px">
                 Username:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Username" /> <br />
+                <input type="text" class="profileField input-group" ng-model="hr.changedAccount.Username" /> <br />
                 Email:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Email" /> <br />
-                Institute:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.Institute" /> <br />
-                User role:
-                <select class="profileField input-group" ng-model="ac.chosenRole" ng-options="r.RoleName for r in ac.roles"></select> <br />
-                Quote:
-                <input type="number" class="profileField input-group" ng-model="ac.changedAccount.Quote" /> <br />
-                First name:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.FirstName" /> <br />
-                Last name:
-                <input type="text" class="profileField input-group" ng-model="ac.changedAccount.LastName" /> <br />
-                <button class="btn btn-success" ng-disabled="!ac.validateChangeAccountForm()" ng-click="ac.saveAccount()">Save account Info</button>
-                <button class="btn btn-info" ng-click="ac.changeAccountBoxOpened = false">Cancel</button>
+                <input type="text" class="profileField input-group" ng-model="hr.changedAccount.Email" /> <br />
+                <button class="btn btn-success" ng-disabled="!hr.validateChangeAccountForm()" ng-click="hr.saveAccount()">Save account Info</button>
+                <button class="btn btn-info" ng-click="hr.changeAccountBoxOpened = false">Cancel</button>
             </div>
         </div>
         <div style="z-index:5;" class="panel panel-default centered" ng-show="ac.newAccountBoxOpened">

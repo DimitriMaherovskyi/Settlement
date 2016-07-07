@@ -62,6 +62,7 @@ namespace Settlement.Web.Controllers
         }
         #endregion
 
+        [HttpGet]
         List<StudentsReview> GetStudents()
         {
             var result = new List<StudentsReview>();

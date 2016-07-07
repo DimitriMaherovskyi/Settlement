@@ -3,9 +3,9 @@
     <h2>{{sc.studentInfo.firstName + ' ' + sc.studentInfo.lastName}}</h2>
     <div>
         <ul class="tabLabels">
-            <li><a href="#Student" ng-class="sc.currentTab=='Student'&&'selected'" ng-click="sc.currentTab='Student'">Student</a></li>
-            <li><a href="#Payment" ng-class="sc.currentTab=='Payment'&&'selected'" ng-click="sc.currentTab='Payment'">Payment</a></li>
-            <li><a href="#Violations" ng-class="sc.currentTab=='Violations'&&'selected'"ng-click="sc.currentTab='Violations'">Violations</a></li>
+            <li><a href="#Student" ng-class="sc.currentTab=='Student'&&'selected'" ng-click="sc.currentTab='Student'">Студент</a></li>
+            <li><a href="#Payment" ng-class="sc.currentTab=='Payment'&&'selected'" ng-click="sc.currentTab='Payment'">Поселення</a></li>
+            <li><a href="#Violations" ng-class="sc.currentTab=='Violations'&&'selected'"ng-click="sc.currentTab='Violations'">Порушення</a></li>
         </ul>
     </div>
   
@@ -13,37 +13,37 @@
         <div id="studentTab" ng-show="sc.currentTab=='Student'">
             <div name='profileInfo' style="width:auto; max-width:600px" novalidate>
                 <div style="margin-right:40px;">
-                    <label class="profileLabel">Name:</label>
-                    <input type="text" name="firstName" class="profileField" ng-model="sc.studentInfo.Name" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
-                    <label class="profileLabel">Surname:</label>
-                    <input type="text" name="lastName" class="profileField" ng-model="sc.studentInfo.Surname" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
-                    <label class="profileLabel">Institute:</label>
-                    <input type="text" name="institute" class="profileField" ng-model="sc.studentInfo.Institute" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
-                    <label class="profileLabel">Study Group:</label>
-                    <input type="text" name="studyGroup" class="profileField" ng-model="sc.studentInfo.Group" ng-change="sc.modelChanged = true;" class="showValidation" readonly /><br /><br />
-                    <label class="profileLabel">Payment till:</label>
+                    <label class="profileLabel">Ім'я:</label>
+                    <input type="text" name="firstName" class="profileField" ng-model="sc.studentInfo.Name" ng-change="sc.modelChanged = true;" readonly /><br /><br />
+                    <label class="profileLabel">Прізвище:</label>
+                    <input type="text" name="lastName" class="profileField" ng-model="sc.studentInfo.Surname" ng-change="sc.modelChanged = true;"readonly /><br /><br />
+                    <label class="profileLabel">Інститут:</label>
+                    <input type="text" name="institute" class="profileField" ng-model="sc.studentInfo.Institute" ng-change="sc.modelChanged = true;"readonly /><br /><br />
+                    <label class="profileLabel">Навчальна група:</label>
+                    <input type="text" name="studyGroup" class="profileField" ng-model="sc.studentInfo.Group" ng-change="sc.modelChanged = true;"readonly /><br /><br />
+                    <label class="profileLabel">Оплачено до:</label>
                     <input type="text" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
                 </div>
             </div>
         </div>
 
         <div id="paymentTab" ng-show="sc.currentTab=='Payment'">
-            <label class="profileLabel">Hostel:</label>
+            <label class="profileLabel">Гуртожиток:</label>
             <input type="text" name="hostel" class="profileField" ng-model="sc.studentInfo.Hostel" ng-change="sc.modelChanged = true;" class="showValidation" readonly required /><br /><br />
-            <label class="profileLabel">Room:</label>
+            <label class="profileLabel">Кімната:</label>
             <input type="text" name="room" class="profileField" ng-model="sc.studentInfo.Room" ng-change="sc.modelChanged = true;" class="showValidation" readonly required /><br /><br />
-            <label class="profileLabel">Paid till:</label>
+            <label class="profileLabel">Оплачено до:</label>
             <input type="text" name="paidTill" class="profileField" ng-model="sc.studentInfo.LivingTill" readonly /><br /><br />
-            <button class="profileButton btn btn-primary" ng-click="sc.checkOut()">Check out</button>
-            <button class="profileButton btn btn-primary" ng-click="sc.addPayBoxOpened = !sc.addPayBoxOpened">Add pay</button>
-            <button class="profileButton btn btn-primary" ng-click="sc.addSettleRequest()">Confirm settle request</button>
+            <button class="profileButton btn btn-primary" ng-click="sc.checkOut()">Виселити</button>
+            <button class="profileButton btn btn-primary" ng-click="sc.addPayBoxOpened = !sc.addPayBoxOpened">Додати оплату</button>
+            <button class="profileButton btn btn-primary" ng-click="sc.addSettleRequest()">Додати запит на поселення</button>
 
             <div id="addPayBox" class="panel panel-default centered" style="z-index:5" ng-show="sc.addPayBoxOpened == true">
                 <div class="panel panel-body">
-                    <label class="profileLabel">Enter end date:</label> <br />
+                    <label class="profileLabel">Введіть дату кінця дії оплати:</label> <br />
                     <input type="date" class="input-group" ng-model="sc.payTillDate" /><br />
-                    <label class="profileLabel">Pay per month:{{sc.getHostelPayment()}}</label>
-                    <label class="profileLabel">Enter sum:</label> <br />
+                    <label class="profileLabel">Місячна плата за гуртожиток:{{sc.getHostelPayment()}}</label>
+                    <label class="profileLabel">Введіть суму:</label> <br />
                     <input type="number" class="input-group" ng-model="sc.paySum" />
                     <br />
                     <button class="btn btn-primary" ng-disabled="!sc.addPayValidation()" ng-click="sc.addPay()">Add pay</button>
@@ -53,18 +53,18 @@
         </div>
 
             <div id="violationsTab" ng-show="sc.currentTab=='Violations'">
-               <h3>Violations:</h3>
+               <h3>Порушення:</h3>
                 <div class="violation" ng-repeat="v in sc.studentInfo.Violations track by $index">
-                    Violation: {{v.Name}}; 
-                    Penalty: {{v.Penalty}}; 
-                    Time: {{v.Time}} 
+                    Порушення: {{v.Name}}; 
+                    Штраф: {{v.Penalty}}; 
+                    Час: {{v.Time}} 
                 </div>
             <br />
                 <div class="panel panel-default">
                     <div class="panel-body" style="margin:10px">
-                        <label class="profileLabel">Select violation:</label>
+                        <label class="profileLabel">Оберіть порушення:</label>
                         <select class="input-group" style="margin:15px; font-size:17px" ng-model="sc.currentViolation" ng-options="v.Name for v in sc.violationsList"></select>
-                        <button class="profileButton btn btn-primary" style="margin:15px" ng-disabled="sc.currentViolation == undefined" ng-click="sc.addViolation()">Add violation</button>
+                        <button class="profileButton btn btn-primary" style="margin:15px" ng-disabled="sc.currentViolation == undefined" ng-click="sc.addViolation()">Додати порушення</button>
                     </div>
                 </div>
             </div>

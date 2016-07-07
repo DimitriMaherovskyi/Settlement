@@ -136,7 +136,7 @@
     <Content Include="Areas\Admin\Scripts\roomsReview\rooms-review.controller.js" />
     <Content Include="Areas\Admin\Scripts\shared\loading-screen.directive.js" />
     <Content Include="Areas\Admin\Scripts\shared\pop-up-window.directive.js" />
-    <Content Include="Areas\Admin\Scripts\shared\routing.js" />
+    <Content Include="Areas\Admin\Scripts\shared\routingWarden.js" />
     <Content Include="Areas\Admin\Scripts\student\hostel-room.filter.js" />
     <Content Include="Areas\Admin\Scripts\student\student.controller.js" />
     <Content Include="Areas\Admin\Scripts\student\student-data.service.js" />
@@ -156,7 +156,6 @@
     <Content Include="Areas\Dean\Scripts\review\trustAsHtml.filter.js" />
     <Content Include="Areas\Dean\Scripts\shared\loading-screen.directive.js" />
     <Content Include="Areas\Dean\Scripts\shared\pop-up-window.directive.js" />
-    <Content Include="Areas\Dean\Scripts\shared\routing.js" />
     <Content Include="Areas\Dean\Scripts\student.html" />
     <Content Include="Areas\Dean\Scripts\student\hostel-room.filter.js" />
     <Content Include="Areas\Dean\Scripts\student\student-data.service.js" />
@@ -193,6 +192,7 @@
     <Content Include="Areas\Rector\Scripts\student\student-data.service.js" />
     <Content Include="Areas\Rector\Scripts\student\student.controller.js" />
     <Content Include="Areas\Rector\Styles\settlement-temp.css" />
+    <Content Include="Areas\Warden\Default\routingWarden.js" />
     <Content Include="Areas\Warden\Scripts\auto-settlement.html" />
     <Content Include="Areas\Warden\Scripts\autoSettlement\auto-settlement-data.service.js" />
     <Content Include="Areas\Warden\Scripts\autoSettlement\auto-settlement.controller.js" />
@@ -229,6 +229,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Areas\Admin\Scripts\shared\routingAdmin.js" />
     <Content Include="Scripts\app\shared\settlement.module.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

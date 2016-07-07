@@ -4,8 +4,7 @@
         .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: '~/Areas/Warden/Scripts',
-                    //templateUrl: '/Areas/Warden/Scripts/review.html',
+                    templateUrl: '/Areas/Warden/Scripts/review.html',
                     controller: 'ReviewController',
                     controllerAs: 'rc',
                     resolve: {
@@ -15,18 +14,6 @@
                     })
                }
                }
-                })
-                .when('/Index/Settlement', {
-                    templateUrl: '/Areas/Warden/Scripts/auto-settlement.html',
-                    controller: 'AutoSettlementController',
-                    controllerAs: 'asc',
-                    resolve: {
-                        studentsList: function (autoSettlementDataService) {
-                            return autoSettlementDataService.getStudentsToSettle().then(function (respond) {
-                                return respond.data;
-                            })
-                        }
-                    }
                 })
 
                 .when('/Index/Student', {
@@ -59,6 +46,7 @@
                     },
                     reloadOnSearch: false
                 })
+
                 .when('/Index/Quotes', {
                     templateUrl: '/Areas/Warden/Scripts/quote-review.html',
                     controller: 'QuotesReviewController',
@@ -73,12 +61,12 @@
                     reloadOnSearch: false
                 })
 
-                .when('/Index/Hostel', {
-                    templateUrl: '/Areas/Warden/Scripts/hostel-info.html',
-                    controller: 'HostelInfoController',
-                    controllerAs: 'hc',
+                .when('/Index/Hostels', {
+                    templateUrl: '/Areas/Warden/Scripts/hostel-review.html',
+                    controller: 'HostelsReviewController',
+                    controllerAs: 'hr',
                     resolve: {
-                        hostelInfo: function (hostelInfoDataService, $location) {
+                        hostelInfo: function (hostelsReviewDataService, $location) {
                             var Id = $location.search().Id;
                             return hostelInfoDataService.getHostelInfo(Id);
                         },
@@ -86,14 +74,14 @@
                     reloadOnSearch: false
                 })
                  .when('/Index/Rooms', {
-                     templateUrl: '/Areas/Warden/Scripts/rooms-review.html',
+                     templateUrl: '/Areas/Warden/Scripts/hostel-review.html',
                      controller: 'RoomsReviewController',
                      controllerAs: 'rrc',
                      resolve: {
-                         hostels: function (roomsReviewDataService) {
-                             return roomsReviewDataService.getHostels();//.then(function (respond) {
-                             // return respond.data;
-                             //})
+                         hostelsList: function (hostelsReviewDataService) {
+                             return hostelReviewDataService.getHostels().then(function (respond) {
+                                 return respond.data;
+                             })
                          },
                      },
                      reloadOnSearch: false
